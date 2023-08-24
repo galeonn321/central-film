@@ -12,7 +12,7 @@ export default function App() {
       <Box width="100%" justifyContent="center" alignItems="center" flex={1}>
         <Text>Open up App.js to start working on your app!</Text>
         <Button>
-          <Text>queso</Text>
+          <Text color="#fff">queso</Text>
         </Button>
       </Box>
     </GluestackUIProvider>
