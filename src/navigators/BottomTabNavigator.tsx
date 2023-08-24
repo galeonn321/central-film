@@ -6,14 +6,16 @@ import SeriesScreen from "../screens/SeriesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import { LOG } from "../config/logger";
 
-const Tab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   return (
-    <Tab.Navigator
+    <BottomTab.Navigator
       initialRouteName="Home"
-      screenOptions={{
+      screenOptions={({ route }) => ({
         tabBarStyle: {
           backgroundColor: "#040D12",
           position: "absolute",
@@ -25,16 +27,36 @@ const BottomTabNavigator = () => {
             style={StyleSheet.absoluteFill}
           />
         ),
-        // tabBarIcon: ()=>(
-        //     <HomeIcon
-        // )
-      }}
+        tabBarIcon: ({ color, focused, size }) => {
+          let iconName: string = "";
+          LOG.error(route.name);
+          switch (route.name) {
+            case "Home":
+              iconName = focused ? "home" : "home-outline";
+              break;
+
+            case "Films":
+              iconName = focused ? "film" : "film-outline";
+              break;
+
+            case "Series":
+              iconName = focused ? "tv" : "tv-outline";
+              break;
+
+            case "Profile":
+              iconName = focused ? "person" : "person-outline";
+              break;
+          }
+
+          return <Icon name={iconName} size={20} color={"#fff"} />;
+        },
+      })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Films" component={FilmsScreen} />
-      <Tab.Screen name="Series" component={SeriesScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
+      <BottomTab.Screen name="Home" component={HomeScreen} />
+      <BottomTab.Screen name="Films" component={FilmsScreen} />
+      <BottomTab.Screen name="Series" component={SeriesScreen} />
+      <BottomTab.Screen name="Profile" component={ProfileScreen} />
+    </BottomTab.Navigator>
   );
 };
 
