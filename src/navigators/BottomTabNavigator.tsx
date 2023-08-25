@@ -52,7 +52,11 @@ const BottomTabNavigator = () => {
         },
       })}
     >
-      <BottomTab.Screen name="Home" component={HomeScreen} />
+      <BottomTab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
       <BottomTab.Screen name="Films" component={FilmsScreen} />
       <BottomTab.Screen name="Series" component={SeriesScreen} />
       <BottomTab.Screen name="Profile" component={ProfileScreen} />
