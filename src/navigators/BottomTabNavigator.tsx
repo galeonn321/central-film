@@ -29,7 +29,6 @@ const BottomTabNavigator = () => {
         ),
         tabBarIcon: ({ color, focused, size }) => {
           let iconName: string = "";
-          LOG.error(route.name);
           switch (route.name) {
             case "Home":
               iconName = focused ? "home" : "home-outline";
