@@ -6,7 +6,9 @@ import { LOG } from "../config/logger";
 import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import FlashList from "@shopify/flash-list/dist/FlashList";
-// import {APP_LOGGING} from 'react-native-dotenv';
+import { API_KEY_MOVIES_TMDb } from "@env";
+
+const apiKey = process.env.API_KEY_MOVIES_TMDb;
 
 const HomeScreen = () => {
   const navigator = useNavigation();
@@ -58,18 +60,20 @@ const HomeScreen = () => {
         "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80",
     },
   ];
-  // LOG.info("api", API_KEY_MOVIES_TMDb);
 
-  // useEffect(() => {
-  //   const getMovies = async () => {
-  //     const data = await fetch(
-  //       `https://api.themoviedb.org/3/movie/5?api_key=${API_KEY_MOVIES_TMDb}`
-  //     );
-  //   };
-  // }, []);
+  useEffect(() => {
+    const getMovies = async () => {
+      const data = await fetch(
+        `https://api.themoviedb.org/3/movie/157336/videos?api_key=${apiKey}`
+      );
+      LOG.error(data);
+      // setFilms(data);
+    };
+    getMovies();
+  }, []);
 
   const renderItem = (item, index) => {
-    LOG.info(item.item.image);
+    // LOG.info(item.item.image);
     return (
       <Box>
         <Image
