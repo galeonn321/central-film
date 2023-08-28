@@ -1,10 +1,8 @@
 import { SafeAreaView, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Box, Button, Image, Pressable, Text } from "@gluestack-ui/themed";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Box, Image, Text } from "@gluestack-ui/themed";
 import { LOG } from "../config/logger";
 import { useNavigation } from "@react-navigation/native";
-import { BlurView } from "expo-blur";
 import FlashList from "@shopify/flash-list/dist/FlashList";
 import { API_KEY_MOVIES_TMDb } from "@env";
 
@@ -61,19 +59,7 @@ const HomeScreen = () => {
     },
   ];
 
-  useEffect(() => {
-    const getMovies = async () => {
-      const data = await fetch(
-        `https://api.themoviedb.org/3/movie/157336/videos?api_key=${apiKey}`
-      );
-      LOG.error(data);
-      // setFilms(data);
-    };
-    getMovies();
-  }, []);
-
   const renderItem = (item, index) => {
-    // LOG.info(item.item.image);
     return (
       <Box>
         <Image
