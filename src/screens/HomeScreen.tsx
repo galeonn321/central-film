@@ -5,72 +5,54 @@ import { LOG } from "../config/logger";
 import { useNavigation } from "@react-navigation/native";
 import FlashList from "@shopify/flash-list/dist/FlashList";
 import { API_KEY_MOVIES_TMDb } from "@env";
+import movieDB from "../api/movieDB";
 
 const apiKey = process.env.API_KEY_MOVIES_TMDb;
 
 const HomeScreen = () => {
   const navigator = useNavigation();
-  const [films, setFilms] = useState();
+  const [films, setFilms] = useState<Object>({});
   useEffect(() => {
     navigator.setOptions({
       title: "Home",
     });
   }, []);
-  const DATA = [
-    {
-      title: "First Item",
-      image:
-        "https://images.unsplash.com/photo-1623820919239-0d0ff10797a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3774&q=80",
-    },
-    {
-      title: "Second Item",
-      image:
-        "https://images.unsplash.com/photo-1649459666789-ad3b5181d20c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80",
-    },
-    {
-      title: "Third Item",
-      image:
-        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3730&q=80",
-    },
-    {
-      title: "Third Item",
-      image:
-        "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80",
-    },
-    {
-      title: "Third Item",
-      image:
-        "https://images.unsplash.com/photo-1548484352-ea579e5233a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80",
-    },
-    {
-      title: "Third Item",
-      image:
-        "https://images.unsplash.com/photo-1586182987320-4f376d39d787?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3774&q=80",
-    },
-    {
-      title: "Third Item",
-      image:
-        "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3812&q=80",
-    },
-    {
-      title: "Third Item",
-      image:
-        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80",
-    },
-  ];
+  useEffect(() => {
+    movieDB({ params: { api_key: API_KEY_MOVIES_TMDb, query: "titanic" } })
+      .then((response) => {
+        // LOG.info(response);
+        setFilms(response.data.results);
+      })
+      .catch((error) => {
+        LOG.error(error);
+      })
+      .finally(() => {
+        LOG.info("finally");
+      });
+
+    LOG.info(movieDB);
+  }, []);
+
+  useEffect(() => {
+    // LOG.warn(films);
+  }, [films]);
 
   const renderItem = (item, index) => {
+    LOG.info(item.item.poster_path, item.item.title, item.item.overview);
     return (
       <Box>
         <Image
           size="2xl"
           borderRadius={32}
-          source={{ uri: item.item.image }}
+          source={{ uri: item.item.path }}
           my="$4"
           mx="$4"
         />
         <Text color="#fff" mx="$4">
-          {item.item.title}
+          {item.item?.title}
+        </Text>
+        <Text color="#fff" mx="$4" maxWidth={"$32"} flexWrap="wrap">
+          {item.item?.overview}
         </Text>
       </Box>
     );
@@ -100,7 +82,7 @@ const HomeScreen = () => {
             What are you looking for?
           </Text>
           <FlashList
-            data={DATA}
+            data={films}
             horizontal
             renderItem={renderItem}
             estimatedItemSize={200}
