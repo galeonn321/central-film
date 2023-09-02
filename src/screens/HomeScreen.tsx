@@ -14,7 +14,7 @@ const HomeScreen = () => {
   const insets = useSafeAreaInsets();
   const navigator = useNavigation();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [films, setFilms] = useState<Object>({});
+
   useEffect(() => {
     navigator.setOptions({
       title: "Home",
@@ -22,46 +22,20 @@ const HomeScreen = () => {
   }, []);
 
 
+
+
   useEffect(() => {
-      movieDB.get('/now_playing').then(
-        (response)=>{
-          LOG.warn(response.data.results, 'HAHAHAHAH');
-          setFilms(response.data.results);
-
-          if(response.data.results?.length > 0){
-
-            setIsLoading(false);
-          }else{
-            setIsLoading(true);
-          }
-        }
-      ).catch(
-        (error)=>{
-          LOG.error(error, ' HAHAHA');
-        }
-      ).finally(
-        ()=>{
-          LOG.info('finally');
-        }
-
-      );
-
-    // LOG.info(movieDB);
+    movieDB('/now_playing')
   }, []);
-
-  // useEffect(() => {
-  //   LOG.warn(films);
-  // }, [films]);
 
   const renderItem = (item, index) => {
     const uri = `https://image.tmdb.org/t/p/w500${item.item?.poster_path}`
-   return (
-      <Pressable 
-      onPress={() => {
-        // navigator.navigate("Details", { id: item.item?.id });
-        LOG.info(item.item?.id)
-      }}
-      
+    return (
+      <Pressable
+        onPress={() => {
+          // navigator.navigate("Details", { id: item.item?.id });
+          LOG.info(item.item?.id)
+        }}
       >
         <Image
           size={'2xl'}
@@ -69,7 +43,7 @@ const HomeScreen = () => {
           source={{ uri: uri ?? '' }}
           resizeMode="cover"
           mx="$4"
-          sx={{ ":pressed" : { backgroundColor: "#fff" } }}
+          sx={{ ":pressed": { backgroundColor: "#fff" } }}
         />
         <Text color="#fff" mx="$4" mt='$4' italic fontWeight="700" fontSize={'$xl'} py={'$2'} maxWidth={'$72'}>
           {item.item?.title}
@@ -91,7 +65,7 @@ const HomeScreen = () => {
           mx="$4"
         />
         <Box bgColor="$black">
-          <Heading 
+          <Heading
             color="#fff"
             textAlign="center"
             p={"$2"}
@@ -122,14 +96,14 @@ const HomeScreen = () => {
             Playing now
           </Heading>
           {isLoading ? <ActivityIndicator size="large" color="#fff" /> :
-          <Box>
-            <FlashList
-              data={films}
-              horizontal
-              renderItem={renderItem}
-              estimatedItemSize={200}
-            />
-          </Box>
+            <Box>
+              <FlashList
+                data={films}
+                horizontal
+                renderItem={renderItem}
+                estimatedItemSize={200}
+              />
+            </Box>
           }
           <Image
             size="2xl"
