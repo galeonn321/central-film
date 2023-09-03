@@ -1,4 +1,3 @@
-
 import { Box, Heading, Image, Pressable, Text } from '@gluestack-ui/themed'
 import { FlashList } from '@shopify/flash-list'
 import React, { useEffect, useState } from 'react'
@@ -20,7 +19,7 @@ const PlayingNowComponent = () => {
 
 
     useEffect(() => {
-
+        LOG.info(films)
     }, [])
 
 
@@ -60,16 +59,17 @@ const PlayingNowComponent = () => {
             >
                 Playing now
             </Heading>
-            {isLoading ? <ActivityIndicator size="large" color="#fff" /> :
-                <Box>
-                    <FlashList
-                        data={films}
-                        horizontal
-                        renderItem={renderItem as any}
-                        estimatedItemSize={200}
-                    />
-                </Box>
-            }
+            <Box>
+                <FlashList
+                    data={films}
+                    horizontal
+                    renderItem={renderItem as any}
+                    estimatedItemSize={200}
+                />
+            </Box>
+            {/* {isLoading ? <ActivityIndicator size="large" color="#fff" /> : */}
+
+            {/* } */}
         </Box>
     )
 }

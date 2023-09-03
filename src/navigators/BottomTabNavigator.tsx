@@ -20,12 +20,11 @@ const BottomTabNavigator = () => {
         tabBarInactiveTintColor: "#707070",
         tabBarStyle: {
           backgroundColor: "#040D12",
-          position: "absolute",
         },
         tabBarBackground: () => (
           <BlurView
             tint="dark"
-            intensity={10}
+            intensity={40}
             style={StyleSheet.absoluteFill}
           />
         ),
@@ -58,9 +57,9 @@ const BottomTabNavigator = () => {
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-      <BottomTab.Screen name="Films" component={FilmsScreen} />
-      <BottomTab.Screen name="Series" component={SeriesScreen} />
-      <BottomTab.Screen name="Profile" component={ProfileScreen} />
+      <BottomTab.Screen name="Films" component={FilmsScreen} options={{ headerShown: false }} />
+      <BottomTab.Screen name="Series" component={SeriesScreen} options={{ headerShown: false }} />
+      <BottomTab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
     </BottomTab.Navigator>
   );
 };

@@ -1,22 +1,21 @@
-import { View, Text, SafeAreaView } from "react-native";
+import { ScrollView } from "react-native";
 import React, { useEffect } from "react";
-import { Box } from "@gluestack-ui/themed";
+
 import { useNavigation } from "@react-navigation/native";
+import PlayingNowComponent from "../components/playingNow/PlayingNowComponent";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const FilmsScreen = () => {
   const navigator = useNavigation();
+  const insets = useSafeAreaInsets();
 
 
-  useEffect(() => {
-    navigator.setOptions({
-      title: "Films",
-    });
-  }, []);
+
 
   return (
-    <Box flex={1} bgColor="#707070">
-      <Text>FilmsScreen</Text>
-    </Box>
+    <ScrollView style={{ flex: 1, paddingTop: insets.top, backgroundColor: '#000' }}>
+      <PlayingNowComponent />
+    </ScrollView>
   );
 };
 

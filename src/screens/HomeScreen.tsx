@@ -7,21 +7,13 @@ import PlayingNowComponent from "../components/playingNow/PlayingNowComponent";
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
-  const navigator = useNavigation();
 
-  useEffect(() => {
-    navigator.setOptions({
-      title: "Home",
-    });
-  }, []);
 
 
 
   return (
-    <SafeAreaView style={{
-      backgroundColor: "#000",
-    }}  >
-      <ScrollView>
+    <ScrollView style={{ flex: 1, paddingTop: insets.top, backgroundColor: '#000' }}>
+      <Box >
         <Image
           size="xs"
           borderRadius={32}
@@ -52,10 +44,10 @@ const HomeScreen = () => {
 
           </Input>
 
-          <PlayingNowComponent />
+          {/* <PlayingNowComponent /> */}
         </Box>
-      </ ScrollView >
-    </SafeAreaView >
+      </ Box >
+    </ ScrollView>
   );
 };
 

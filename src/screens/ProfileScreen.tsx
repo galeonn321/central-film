@@ -1,12 +1,17 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { AddIcon } from "@gluestack-ui/themed";
+import PlayingNowComponent from "../components/playingNow/PlayingNowComponent";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ProfileScreen = () => {
+  const insets = useSafeAreaInsets();
+
+
   return (
-    <View>
-      <Text>ProfileScreen</Text>
-    </View>
+    <ScrollView style={{ flex: 1, paddingTop: insets.top + 20, backgroundColor: '#000' }}>
+      <PlayingNowComponent />
+    </ScrollView>
   );
 };
 
