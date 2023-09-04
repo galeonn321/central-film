@@ -3,13 +3,13 @@ import movieDB from '../api/movieDB';
 import { LOG } from '../config/logger';
 
 const useMovieDB = ({ path }: any) => {
-    LOG.debug(path, 'path')
+    LOG.debug(path, 'path hahaha')
     const [films, setFilms] = useState<Object>({});
 
 
     const getFilms = async () => {
         const resp = await movieDB.get(path);
-        LOG.info(resp.data.results, 'this is from the PlayingNowComponent')
+        // LOG.info(resp.data.results, 'this is from the PlayingNowComponent')
         setFilms(resp.data.results)
     }
 

@@ -5,14 +5,9 @@ import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PlayingNowComponent from "../components/playingNow/PlayingNowComponent";
 import { LOG } from "../config/logger";
-import axios from "axios";
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
-
-
-
-
 
   return (
     <ScrollView style={{ flex: 1, paddingTop: insets.top, backgroundColor: '#000' }}>
@@ -44,7 +39,6 @@ const HomeScreen = () => {
             mx="$4"
           >
             <InputField color="#fff" placeholder="film, actor, director" />
-
           </Input>
 
           <PlayingNowComponent />

@@ -18,21 +18,12 @@ type Item = {
 
 const PlayingNowComponent = () => {
     const [isLoading, setIsLoading] = useState(true)
-    const [films, setFilms] = useState([])
+    const [getFilms, setGetFilms] = useMovieDB<string>({ path: '/now_playing' })
 
 
-    const getFilms = async () => {
-        const resp = useMovieDB({ path: 'movie/now_playing' })
-        LOG.info(resp, 'this is from the PlayingNowComponent')
-        // LOG.info(resp, 'this is from the PlayingNowComponent') 
-        // setFilms(resp)
-        // setIsLoading(false)
-        // LOG.debug(typeof films)
-    }
+    LOG.debug(getFilms, 'this is from the PlayingNowComponent')
 
-    useEffect(() => {
-        getFilms()
-    }, [])
+
 
     const renderItem = (item: Item, index: number) => {
         LOG.info(typeof item)
@@ -43,6 +34,7 @@ const PlayingNowComponent = () => {
                     // navigator.navigate("Details", { id: item.item?.id });
                     LOG.info(item.item?.id)
                 }}
+                minHeight={200}
             >
                 <Image
                     size={'2xl'}
@@ -70,15 +62,16 @@ const PlayingNowComponent = () => {
             >
                 Playing now
             </Heading>
-            <Box>
+            <Box minHeight={200} >
                 <FlashList
-                    data={films}
+                    data={getFilms}
                     horizontal
                     renderItem={renderItem as any}
                     estimatedItemSize={200}
                 />
             </Box>
-            {/* {isLoading ? <ActivityIndicator size="large" color="#fff" /> : */}
+            {/* <ActivityIndicator size="large" color="#fff" /> */}
+            {/* {isLoading ?  : * /}
 
             {/* } */}
         </Box>
