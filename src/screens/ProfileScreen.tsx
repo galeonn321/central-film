@@ -1,7 +1,7 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { AddIcon } from "@gluestack-ui/themed";
-import PlayingNowComponent from "../components/playingNow/PlayingNowComponent";
+import PlayingNowComponent from "../components/carouselComponent/CarouselComponent";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ProfileScreen = () => {

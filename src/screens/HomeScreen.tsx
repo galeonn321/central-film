@@ -1,10 +1,11 @@
 import { SafeAreaView, ScrollView } from "react-native";
 import React, { useEffect } from "react";
-import { Box, Heading, Image, Input, InputField } from "@gluestack-ui/themed";
+import { Box, Heading, Image, Input, InputField, Text } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import PlayingNowComponent from "../components/playingNow/PlayingNowComponent";
+import PlayingNowComponent from "../components/carouselComponent/CarouselComponent";
 import { LOG } from "../config/logger";
+import SearchContent from "../components/searchContent/SearchContent";
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
@@ -21,28 +22,7 @@ const HomeScreen = () => {
           my="$4"
           mx="$4"
         />
-        <Box bgColor="$black">
-          <Heading
-            color="#fff"
-            textAlign="center"
-            p={"$2"}
-            fontWeight="$extrabold"
-            fontSize={"$3xl"}
-          >
-            Search and see how good the film is
-          </Heading>
-          <Input
-            bgColor="#707070"
-            borderColor="#fff"
-            borderWidth={1}
-            borderRadius={12}
-            mx="$4"
-          >
-            <InputField color="#fff" placeholder="film, actor, director" />
-          </Input>
-
-          <PlayingNowComponent path={'66753'} />
-        </Box>
+        <SearchContent />
       </ Box >
     </ ScrollView>
   );

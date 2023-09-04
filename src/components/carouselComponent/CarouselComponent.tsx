@@ -16,7 +16,7 @@ type Item = {
     }
 }
 
-const PlayingNowComponent = ({ path }: any) => {
+const CarouselComponent = ({ path }: any) => {
     const [isLoading, setIsLoading] = useState(true)
     const [getFilms, setGetFilms] = useMovieDB({ path: path })
 
@@ -53,29 +53,18 @@ const PlayingNowComponent = ({ path }: any) => {
 
     return (
         <Box>
-            <Heading
-                color="#fff"
-                textAlign="center"
-                p={"$2"}
-                fontWeight="$extrabold"
-                fontSize={"$3xl"}
-            >
-                Playing now
-            </Heading>
-            <Box minHeight={200} >
+            {isLoading ? <Box minHeight={200} >
                 <FlashList
                     data={getFilms as any}
                     horizontal
                     renderItem={renderItem as any}
                     estimatedItemSize={200}
                 />
-            </Box>
-            {/* <ActivityIndicator size="large" color="#fff" /> */}
-            {/* {isLoading ?  : * /}
+            </Box> : <ActivityIndicator size="large" color="#fff" />
 
-            {/* } */}
+            }
         </Box>
     )
 }
 
-export default PlayingNowComponent
+export default CarouselComponent
