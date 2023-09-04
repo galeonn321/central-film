@@ -4,9 +4,12 @@ import { Box, Heading, Image, Input, InputField } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PlayingNowComponent from "../components/playingNow/PlayingNowComponent";
+import { LOG } from "../config/logger";
+import axios from "axios";
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
+
 
 
 
@@ -44,7 +47,7 @@ const HomeScreen = () => {
 
           </Input>
 
-          {/* <PlayingNowComponent /> */}
+          <PlayingNowComponent />
         </Box>
       </ Box >
     </ ScrollView>

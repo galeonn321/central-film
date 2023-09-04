@@ -3,6 +3,9 @@ import { FlashList } from '@shopify/flash-list'
 import React, { useEffect, useState } from 'react'
 import { LOG } from '../../config/logger'
 import { ActivityIndicator } from 'react-native'
+import movieDB from '../../api/movieDB'
+import { MovieDBNowPlaying } from '../../types/movieInterface'
+import useMovieDB from '../../hooks/useMovieDB'
 
 
 type Item = {
@@ -18,10 +21,18 @@ const PlayingNowComponent = () => {
     const [films, setFilms] = useState([])
 
 
-    useEffect(() => {
-        LOG.info(films)
-    }, [])
+    const getFilms = async () => {
+        const resp = useMovieDB({ path: 'movie/now_playing' })
+        LOG.info(resp, 'this is from the PlayingNowComponent')
+        // LOG.info(resp, 'this is from the PlayingNowComponent') 
+        // setFilms(resp)
+        // setIsLoading(false)
+        // LOG.debug(typeof films)
+    }
 
+    useEffect(() => {
+        getFilms()
+    }, [])
 
     const renderItem = (item: Item, index: number) => {
         LOG.info(typeof item)
