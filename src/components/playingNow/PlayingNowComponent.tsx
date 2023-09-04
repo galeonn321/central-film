@@ -16,17 +16,17 @@ type Item = {
     }
 }
 
-const PlayingNowComponent = () => {
+const PlayingNowComponent = ({ path }: any) => {
     const [isLoading, setIsLoading] = useState(true)
-    const [getFilms, setGetFilms] = useMovieDB<string>({ path: '/now_playing' })
+    const [getFilms, setGetFilms] = useMovieDB({ path: path })
 
 
-    LOG.debug(getFilms, 'this is from the PlayingNowComponent')
+    // LOG.debug(getFilms, 'this is from the PlayingNowComponent')
 
 
 
     const renderItem = (item: Item, index: number) => {
-        LOG.info(typeof item)
+        LOG.info(item)
         const uri = `https://image.tmdb.org/t/p/w500${item.item?.poster_path}`
         return (
             <Pressable
@@ -64,7 +64,7 @@ const PlayingNowComponent = () => {
             </Heading>
             <Box minHeight={200} >
                 <FlashList
-                    data={getFilms}
+                    data={getFilms as any}
                     horizontal
                     renderItem={renderItem as any}
                     estimatedItemSize={200}

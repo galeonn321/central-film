@@ -41,7 +41,7 @@ const HomeScreen = () => {
             <InputField color="#fff" placeholder="film, actor, director" />
           </Input>
 
-          <PlayingNowComponent />
+          <PlayingNowComponent path={'66753'} />
         </Box>
       </ Box >
     </ ScrollView>
