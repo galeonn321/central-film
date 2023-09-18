@@ -4,12 +4,12 @@ import { LOG } from '../config/logger';
 import searchMovieDB from '../api/searchMovieDB';
 import { Movie } from '../types/movieInterface';
 
-const useMovieDB = ({ path }: any) => {
+const useSearchMovieDB = ({ path }: any) => {
     LOG.debug(path, 'path hahaha')
-    const [films, setFilms] = useState<Movie>();
+    const [films, setFilms] = useState<object>({});
 
 
-    const getFilms = async () => {
+    const getFilmsFromSearch = async () => {
         const resp = await searchMovieDB.get(path);
         LOG.info(resp.data.results, 'this is from the searchMovieDB')
         setFilms(resp.data.results)
@@ -18,10 +18,10 @@ const useMovieDB = ({ path }: any) => {
 
 
     useEffect(() => {
-        getFilms();
-    }, []);
+        getFilmsFromSearch();
+    }, [path]);
 
     return [films, setFilms]
 }
 
-export default useMovieDB
+export default useSearchMovieDB;

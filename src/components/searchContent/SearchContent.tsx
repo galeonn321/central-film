@@ -3,25 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Box, Heading, Input, InputField, InputIcon } from '@gluestack-ui/themed';
 import Icon from "react-native-vector-icons/Ionicons";
 import { LOG } from '../../config/logger';
+import useSearchMovieDB from '../../hooks/useSearchMovieDB';
 
 const SearchContent = () => {
-
-    //Reciba un texto e investiga en la API de The Movie DB para obtener los resultados de la búsqueda.
-    //Muestre los resultados de la búsqueda en una lista de películas.
-    //Al hacer clic en una película, debe navegar a la pantalla de detalles de la película.
-    //Debe poder volver a la pantalla de inicio desde la pantalla de detalles de la película.
-
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [getFilms, setGetFilms] = useSearchMovieDB({ path: search })
 
-
-    const hangleInput = (text: string) => {
+    const searchForFilm = (text: string) => {
         setSearch(text);
-
     }
 
     useEffect(() => {
-        LOG.debug(search)
+        LOG.error(search)
     }, [search])
 
 
@@ -49,7 +43,7 @@ const SearchContent = () => {
                 <InputIcon pl="$3">
                     <Icon name={'search-outline'} size={20} color={"#fff"} />
                 </InputIcon>
-                <InputField onChangeText={hangleInput} color="#fff" placeholder="film, actor, director" />
+                <InputField onChangeText={searchForFilm} color="#fff" placeholder="film, actor, director" />
             </Input>
         </Box>
     )
