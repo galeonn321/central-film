@@ -9,17 +9,17 @@ const useSearchMovieDB = ({ path }: any) => {
     const [films, setFilms] = useState<object>({});
 
 
-    const getFilmsFromSearch = async () => {
-        const resp = await searchMovieDB.get(path);
-        LOG.info(resp.data.results, 'this is from the searchMovieDB')
-        setFilms(resp.data.results)
-    }
+    // const getFilmsFromSearch = async () => {
+    //     const resp = await searchMovieDB.get(path);
+    //     LOG.info(resp.data.results, 'this is from the searchMovieDB')
+    //     setFilms(resp.data.results)
+    // }
 
 
 
-    useEffect(() => {
-        getFilmsFromSearch();
-    }, [path]);
+    // useEffect(() => {
+    //     getFilmsFromSearch();
+    // }, [path]);
 
     return [films, setFilms]
 }

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { LOG } from '../../config/logger'
 import { ActivityIndicator } from 'react-native'
 import movieDB from '../../api/movieDB'
-import { MovieDBNowPlaying } from '../../types/movieInterface'
 import useMovieDB from '../../hooks/useMovieDB'
 
 
@@ -61,7 +60,6 @@ const CarouselComponent = ({ path }: any) => {
                     estimatedItemSize={200}
                 />
             </Box> : <ActivityIndicator size="large" color="#fff" />
-
             }
         </Box>
     )
