@@ -1,12 +1,14 @@
-import { ActivityIndicator, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, Input, InputField, InputIcon, Pressable, Text, Image } from '@gluestack-ui/themed';
 import Icon from "react-native-vector-icons/Ionicons";
 import { LOG } from '../../config/logger';
 import searchMovieDB from '../../api/searchMovieDB';
 import { FlashList } from '@shopify/flash-list';
+import { useNavigation } from '@react-navigation/native';
+import MyStack from '../../navigators/MainNavigator';
 
 const SearchContent = () => {
+    const navigator = useNavigation();
     const [inputText, setInputText] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [error, setError] = useState(null);
@@ -36,28 +38,30 @@ const SearchContent = () => {
     // }, [searchResults]);
 
     const renderItem = (item: any, index: any) => {
-        LOG.info(item.item.poster_path, ' HAHAHAHAHAH')
-        const uri = `https://image.tmdb.org/t/p/w500${item.item?.poster_path}`
+        LOG.info(typeof item.item.poster_path, ' HAHAHAHAHAH')
+
+        const uri = item.item?.poster_path ? `https://image.tmdb.org/t/p/w500${item.item?.poster_path}` : 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1728&q=80';
         return (
             <Pressable
-                onPress={() => {
-                    // navigator.navigate("Details", { id: item.item?.id });
-                    LOG.info(item.item?.id)
-                }}
+                onPress={() => navigator.navigate("DetailMovie")}
                 minHeight={200}
+                height={400}
             >
+                <Text color="#fff" mx="$4" mt='$4' italic fontWeight="700" fontSize={'$xl'} py={'$2'} maxWidth={'$72'}>
+                    {item.item?.title}
+                </Text>
                 <Image
+                    height={300}
                     size={'2xl'}
                     borderRadius={32}
-                    source={{ uri: uri ?? '' }}
+                    source={{
+                        uri: uri
+                    }}
                     resizeMode="cover"
                     mx="$4"
                     sx={{ ":pressed": { backgroundColor: "#fff" } }}
                 />
-                <Text color="#fff" mx="$4" mt='$4' italic fontWeight="700" fontSize={'$xl'} py={'$2'} maxWidth={'$72'}>
-                    {item.item?.title}
-                </Text>
-            </Pressable>
+            </Pressable >
         );
     };
 
@@ -88,16 +92,15 @@ const SearchContent = () => {
             </Input>
             <Text color='$amber300'>{inputText}</Text>
             {/* {isLoading ?  */}
-            <Box minHeight={200} >
+
+            <Box minHeight={200} h={800}>
                 <FlashList
                     data={searchResults as any}
-                    horizontal
                     renderItem={renderItem as any}
                     estimatedItemSize={200}
                 />
             </Box>
-            {/* : <ActivityIndicator size="large" color="#fff" /> */}
-            {/* } */}
+
         </Box>
     )
 }
