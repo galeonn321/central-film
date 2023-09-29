@@ -9,12 +9,12 @@ function MyStack() {
 
     return (
         <Stack.Navigator
-            initialRouteName='Home'
+            initialRouteName='HomeScreen'
         >
             <Stack.Screen options={{
                 title: '', headerBackTitle: ' ', headerShadowVisible: false, headerTintColor: '#fff', headerStyle: { backgroundColor: '#000' }
             }} name="DetailMovie" component={MovieDetailScreen} />
-            <Stack.Screen options={{ headerShown: false }} name="Home" component={BottomTabNavigator} />
+            <Stack.Screen options={{ headerShown: false }} name="HomeScreen" component={BottomTabNavigator} />
         </Stack.Navigator>
     );
 }

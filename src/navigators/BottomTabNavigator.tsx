@@ -7,7 +7,6 @@ import ProfileScreen from "../screens/ProfileScreen";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import { LOG } from "../config/logger";
 
 const BottomTab = createBottomTabNavigator();
 
