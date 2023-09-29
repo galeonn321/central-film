@@ -5,12 +5,13 @@ import BottomTabNavigator from "./src/navigators/BottomTabNavigator";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaView } from "react-native";
+import MyStack from "./src/navigators/MainNavigator";
 
 export default function App() {
   return (
     <GluestackUIProvider config={config.theme}>
       <NavigationContainer>
-        <BottomTabNavigator />
+        <MyStack />
       </NavigationContainer>
     </GluestackUIProvider>
   );

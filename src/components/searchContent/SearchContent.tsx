@@ -5,10 +5,16 @@ import { LOG } from '../../config/logger';
 import searchMovieDB from '../../api/searchMovieDB';
 import { FlashList } from '@shopify/flash-list';
 import { useNavigation } from '@react-navigation/native';
-import MyStack from '../../navigators/MainNavigator';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const SearchContent = () => {
-    const navigator = useNavigation();
+type RootStackParamList = {
+    DetailMovie: { item: any };
+    // Other screen definitions
+};
+type DetailMovieScreenNavigationProp = StackNavigationProp<RootStackParamList, 'DetailMovie'>;
+
+
+const SearchContent = ({ navigator }: { navigator: DetailMovieScreenNavigationProp }) => {
     const [inputText, setInputText] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [error, setError] = useState(null);
@@ -43,7 +49,9 @@ const SearchContent = () => {
         const uri = item.item?.poster_path ? `https://image.tmdb.org/t/p/w500${item.item?.poster_path}` : 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1728&q=80';
         return (
             <Pressable
-                onPress={() => navigator.navigate("DetailMovie")}
+                onPress={() => navigator.navigate("DetailMovie", {
+                    item: item,
+                })}
                 minHeight={200}
                 height={400}
             >
