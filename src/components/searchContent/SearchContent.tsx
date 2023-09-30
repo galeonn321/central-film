@@ -98,18 +98,18 @@ const SearchContent = () => {
                 </InputIcon>
                 <InputField onChangeText={(text) => setInputText(text)} value={inputText} color="#fff" placeholder="film, actor, director" />
             </Input>
-            <Text color='$amber300'>{inputText}</Text>
             {/* {isLoading ?  */}
 
-            <Box minHeight={200} h={800}>
+            <Box minHeight={200}>
                 <FlashList
                     data={searchResults as any}
                     renderItem={renderItem as any}
+
                     estimatedItemSize={200}
                 />
             </Box>
 
-        </Box>
+        </Box >
     )
 }
 
