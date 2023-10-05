@@ -1,5 +1,5 @@
 import { Dimensions, ImageBackground, ScrollView } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Image, Text, } from '@gluestack-ui/themed';
 import { LOG } from '../config/logger';
 import { BlurView } from 'expo-blur';
@@ -9,17 +9,17 @@ const { width, height } = Dimensions.get('window');
 
 const MovieDetailScreen = ({ route }: any) => {
     const { item } = route.params;
+    const [isTruncated, setIsTruncated] = useState(true);
     const roundedNumber = parseFloat(item.item.vote_average.toFixed(1))
-
 
     useEffect(() => {
         LOG.info(item.item, 'item')
     }, [])
 
-
-
-
-
+    const seeMore = () => {
+        setIsTruncated(false)
+        LOG.debug(isTruncated, 'isTruncated')
+    }
 
     return (
         <ScrollView style={{ backgroundColor: '#000' }}>
@@ -32,11 +32,11 @@ const MovieDetailScreen = ({ route }: any) => {
                     }}
                     alignSelf='center'
                     resizeMode='contain'
+                    alt='miniature example'
                 />
-
             </ Box >
             <BlurView tint='dark' style={{ marginTop: height * 0.35, marginBottom: 200 }}>
-                <Text fontWeight='700' fontStyle='italic' color='#fff' fontSize='$4xl' p='$4' mt='$1'>{item.item.original_title}</Text>
+                <Text fontWeight='700' fontStyle='italic' color='#fff' fontSize='$2xl' p='$4' mt='$1' textAlign='center'>{item.item.original_title}</Text>
                 <Box flexDirection='row' alignItems='center' >
                     <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$2'>
                         <Text color='#fff' mx='$4' fontWeight='900' p='$2'>{roundedNumber}/10</Text>
@@ -45,12 +45,13 @@ const MovieDetailScreen = ({ route }: any) => {
                 </Box>
                 <Box mx='$4' mt='$4'>
                     <Text mb='$4' color='#fff' fontWeight='800'>Release date : {item.item.release_date}</Text>
-                    <Text color='#fff' fontFamily='$heading'>
+                    <Text color='#fff' fontFamily='$heading' isTruncated={isTruncated}>
                         {item.item.overview}
                     </Text>
+                    <Text mb='$4' color='#fff' fontWeight='800' onPress={seeMore} > See more</Text>
                 </Box>
-            </BlurView>
-        </ ScrollView>
+            </BlurView >
+        </ ScrollView >
     );
 }
 

@@ -17,7 +17,7 @@ const SearchContent = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        LOG.info(typeof navigator, 'navigator')
+        LOG.error(navigator, 'navigator')
     }, [])
 
     const movieSearch = async () => {
@@ -66,6 +66,7 @@ const SearchContent = () => {
                         uri: uri
                     }}
                     resizeMode="cover"
+                    alt='miniature example'
                     mx="$4"
                     sx={{ ":pressed": { backgroundColor: "#fff" } }}
                 />
@@ -92,11 +93,15 @@ const SearchContent = () => {
                 borderRadius={12}
                 mx="$4"
                 my="$4"
+                p="$2"
             >
-                <InputIcon pl="$3">
-                    <Icon name={'search-outline'} size={20} color={"#fff"} />
+                <InputIcon
+                    mr="$2"
+                    ml="$2"
+                >
+                    <Icon name={'search-outline'} size={18} color={"#fff"} />
                 </InputIcon>
-                <InputField onChangeText={(text) => setInputText(text)} value={inputText} color="#fff" placeholder="film, actor, director" />
+                <InputField onChangeText={(text: any) => setInputText(text)} value={inputText} color="#fff" placeholder="film, actor, director" />
             </Input>
             {/* {isLoading ?  */}
 

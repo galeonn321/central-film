@@ -42,6 +42,7 @@ const CarouselComponent = ({ path }: any) => {
                     resizeMode="cover"
                     mx="$4"
                     sx={{ ":pressed": { backgroundColor: "#fff" } }}
+                    alt='miniature example'
                 />
                 <Text color="#fff" mx="$4" mt='$4' italic fontWeight="700" fontSize={'$xl'} py={'$2'} maxWidth={'$72'}>
                     {item.item?.title}

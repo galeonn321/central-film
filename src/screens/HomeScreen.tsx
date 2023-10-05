@@ -7,6 +7,10 @@ import PlayingNowComponent from "../components/carouselComponent/CarouselCompone
 import { LOG } from "../config/logger";
 import SearchContent from "../components/searchContent/SearchContent";
 
+
+
+
+
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
 
@@ -21,6 +25,7 @@ const HomeScreen = () => {
           }}
           my="$4"
           mx="$4"
+          alt='miniature example'
         />
         <SearchContent />
       </ Box >
