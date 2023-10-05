@@ -6,6 +6,7 @@ import searchMovieDB from '../../api/searchMovieDB';
 import { FlashList } from '@shopify/flash-list';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
 
 
 
@@ -103,17 +104,17 @@ const SearchContent = () => {
                 </InputIcon>
                 <InputField onChangeText={(text: any) => setInputText(text)} value={inputText} color="#fff" placeholder="film, actor, director" />
             </Input>
-            {/* {isLoading ?  */}
+            {isLoading ?
+                <ActivityIndicator size="large" color="#fff" />
+                : <Box minHeight={200}>
+                    <FlashList
+                        data={searchResults as any}
+                        renderItem={renderItem as any}
 
-            <Box minHeight={200}>
-                <FlashList
-                    data={searchResults as any}
-                    renderItem={renderItem as any}
-
-                    estimatedItemSize={200}
-                />
-            </Box>
-
+                        estimatedItemSize={200}
+                    />
+                </Box>
+            }
         </Box >
     )
 }
