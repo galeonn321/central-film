@@ -51,7 +51,7 @@ const SearchContent = () => {
         return (
             <Pressable
                 onPress={() => navigaton.navigate("DetailMovie", {
-                    item: item,
+                    filmItem: item,
                 })}
                 minHeight={200}
                 height={400}
