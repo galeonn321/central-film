@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@gluestack-style/react": "^0.2.51",
-    "@gluestack-ui/themed": "^0.1.56",
+    "@gluestack-ui/themed": "^1.0.5",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
