@@ -1,7 +1,8 @@
 import { Dimensions, ImageBackground, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Box, EyeIcon, Image, Text, } from '@gluestack-ui/themed';
+import { Box, Image, Text, } from '@gluestack-ui/themed';
 import { LOG } from '../config/logger';
+import Icon from "react-native-vector-icons/Ionicons";
 
 
 const { width, height } = Dimensions.get('window');
@@ -44,14 +45,14 @@ const MovieDetailScreen = ({ route }: any) => {
                         <Text color='#fff' mx='$4' fontWeight='900' p='$2' fontSize={'$xl'}>{roundedNumber}/10</Text>
                     </Box>
                     <Text color='#fff' fontWeight='800'>Rating</Text>
-                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$1'>
-
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$2'>
+                        <Icon name={"thumbs-up-outline"} size={20} color={'#fff'} />
                     </Box>
-                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$1'>
-
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$2'>
+                        <Icon name={"thumbs-down-outline"} size={20} color={'#fff'} />
                     </Box>
-                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$1'>
-
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$2'>
+                        <Icon name={"heart-outline"} size={20} color={'#fff'} />
                     </Box>
                 </Box>
                 <Box mx='$4' mt='$4'>
