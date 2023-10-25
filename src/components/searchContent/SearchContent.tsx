@@ -69,6 +69,7 @@ const SearchContent = () => {
                     resizeMode="cover"
                     alt='miniature example'
                     mx="$4"
+                    role='presentation'
                     sx={{ ":pressed": { backgroundColor: "#fff" } }}
                 />
             </Pressable >

@@ -13,16 +13,16 @@ const HomeScreen = () => {
 
   return (
     <ScrollView style={{ flex: 1, paddingTop: insets.top, backgroundColor: '#000' }}>
-      <Box >
+      <Box alignSelf="center">
         <Image
-          size="xs"
-          borderRadius={32}
-          source={{
-            uri: "https://images.unsplash.com/photo-1543973277-5020ef836640?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80",
-          }}
-          my="$4"
-          mx="$4"
+          source={require('../../assets/images/icon.png')}
           alt='miniature example'
+          size="xs"
+          rounded={"$full"}
+          alignSelf="center"
+          mb='$4'
+          mt='$2'
+          role="presentation"
         />
         <SearchContent />
       </ Box >

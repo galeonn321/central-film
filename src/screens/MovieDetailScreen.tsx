@@ -34,6 +34,7 @@ const MovieDetailScreen = ({ route }: any) => {
                     alignSelf='center'
                     resizeMode='contain'
                     alt='miniature example'
+                    role='presentation'
                 />
             </ Box >
             <Box style={{ marginTop: height * 0.35, marginBottom: 200 }}>
