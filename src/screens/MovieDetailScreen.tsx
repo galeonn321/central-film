@@ -1,6 +1,6 @@
 import { Dimensions, ImageBackground, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Box, Image, Text, } from '@gluestack-ui/themed';
+import { Box, EyeIcon, Image, Text, } from '@gluestack-ui/themed';
 import { LOG } from '../config/logger';
 
 
@@ -37,12 +37,21 @@ const MovieDetailScreen = ({ route }: any) => {
                 />
             </ Box >
             <Box style={{ marginTop: height * 0.35, marginBottom: 200 }}>
-                <Text fontWeight='700' fontStyle='italic' color='#fff' fontSize='$2xl' p='$4' mt='$1' textAlign='center'>{filmItem.item.original_title}</Text>
+                <Text fontWeight='900' fontStyle='italic' color='#fff' fontSize='$2xl' p='$4' mt='$2'>{filmItem.item.title}</Text>
                 <Box flexDirection='row' alignItems='center' >
-                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$2'>
-                        <Text color='#fff' mx='$4' fontWeight='900' p='$2'>{roundedNumber}/10</Text>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$1'>
+                        <Text color='#fff' mx='$4' fontWeight='900' p='$2' fontSize={'$xl'}>{roundedNumber}/10</Text>
                     </Box>
                     <Text color='#fff' fontWeight='800'>Rating</Text>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$1'>
+
+                    </Box>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$1'>
+
+                    </Box>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$1'>
+
+                    </Box>
                 </Box>
                 <Box mx='$4' mt='$4'>
                     <Text mb='$4' color={'$blue700'} fontWeight='800'>Release date : {filmItem.item.release_date}</Text>

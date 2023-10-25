@@ -1,14 +1,11 @@
 import { SafeAreaView, ScrollView } from "react-native";
 import React, { useEffect } from "react";
-import { Box, Heading, Image, Input, InputField, Text } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PlayingNowComponent from "../components/carouselComponent/CarouselComponent";
 import { LOG } from "../config/logger";
 import SearchContent from "../components/searchContent/SearchContent";
-
-
-
+import { Image, Box } from "@gluestack-ui/themed";
 
 
 const HomeScreen = () => {
