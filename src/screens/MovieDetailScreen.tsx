@@ -39,20 +39,28 @@ const MovieDetailScreen = ({ route }: any) => {
                 />
             </ Box >
             <Box style={{ marginTop: height * 0.35, marginBottom: 200 }}>
-                <Text fontWeight='900' fontStyle='italic' color='#fff' fontSize='$2xl' p='$4' mt='$2'>{filmItem.item.title}</Text>
-                <Box flexDirection='row' alignItems='center' >
-                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$4' p='$1'>
+                <Text fontWeight='900' textAlign='center' fontStyle='italic' color='#fff' fontSize='$2xl' p='$4' mt='$10'>{filmItem.item.title}</Text>
+                <Box flexDirection='row' alignItems='center' justifyContent='center' mb='$6'>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$3'>
+                        <Icon name={"thumbs-up-outline"} size={32} color={'#fff'} />
+                    </Box>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$3'>
+                        <Icon name={"thumbs-down-outline"} size={32} color={'#fff'} />
+                    </Box>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$3'>
+                        <Icon name={"heart-outline"} size={32} color={'#fff'} />
+                    </Box>
+                </Box>
+                <Box flexDirection='row' alignItems='center' mx='$4' mb='$2'>
+                    <Text color='#fff' fontWeight='800' fontSize={'$xl'}>IMDB Rating</Text>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='column' mx='$3' p='$2'>
                         <Text color='#fff' mx='$4' fontWeight='900' p='$2' fontSize={'$xl'}>{roundedNumber}/10</Text>
                     </Box>
-                    <Text color='#fff' fontWeight='800'>Rating</Text>
-                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$2'>
-                        <Icon name={"thumbs-up-outline"} size={20} color={'#fff'} />
-                    </Box>
-                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$2'>
-                        <Icon name={"thumbs-down-outline"} size={20} color={'#fff'} />
-                    </Box>
-                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='row' mx='$3' p='$2'>
-                        <Icon name={"heart-outline"} size={20} color={'#fff'} />
+                </Box>
+                <Box flexDirection='row' alignItems='center' mx='$4' >
+                    <Text color='#fff' fontWeight='800' fontSize={'$xl'}>Central Film Rating</Text>
+                    <Box bgColor='$darkBlue800' rounded='$full' flexDirection='column' mx='$3' p='$2'>
+                        <Text color='#fff' mx='$4' fontWeight='900' p='$2' fontSize={'$xl'}>{roundedNumber}/10</Text>
                     </Box>
                 </Box>
                 <Box mx='$4' mt='$4'>
