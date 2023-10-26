@@ -56,9 +56,6 @@ const SearchContent = () => {
                 minHeight={200}
                 height={400}
             >
-                <Text color="#fff" mx="$4" mt='$4' italic fontWeight="700" fontSize={'$xl'} py={'$2'} maxWidth={'$72'}>
-                    {item.item?.title}
-                </Text>
                 <Image
                     height={300}
                     size={'2xl'}
@@ -72,6 +69,9 @@ const SearchContent = () => {
                     role='presentation'
                     sx={{ ":pressed": { backgroundColor: "#fff" } }}
                 />
+                <Text color="#fff" mx="$4" mt='$4' italic fontWeight="700" textAlign='center' fontSize={'$2xl'} py={'$2'} maxWidth={'$72'}>
+                    {item.item?.title}
+                </Text>
             </Pressable >
         );
     };
@@ -108,10 +108,11 @@ const SearchContent = () => {
             {isLoading ?
                 <ActivityIndicator size="large" color="#fff" />
                 : <Box minHeight={200}>
+                    <Heading fontSize={'$3xl'} color='#fff' ml='$4' mb='$2'>Results</Heading>
                     <FlashList
                         data={searchResults as any}
                         renderItem={renderItem as any}
-
+                        horizontal={true}
                         estimatedItemSize={200}
                     />
                 </Box>
