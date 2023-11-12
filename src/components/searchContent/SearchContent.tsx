@@ -108,11 +108,9 @@ const SearchContent = () => {
             {isLoading ?
                 <ActivityIndicator size="large" color="#fff" />
                 : <Box minHeight={200}>
-                    <Heading fontSize={'$3xl'} color='#fff' ml='$4' mb='$2'>Results</Heading>
                     <FlashList
                         data={searchResults as any}
                         renderItem={renderItem as any}
-                        horizontal={true}
                         estimatedItemSize={200}
                     />
                 </Box>
