@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Box, Image, Text, } from '@gluestack-ui/themed';
 import { LOG } from '../config/logger';
 import Icon from "react-native-vector-icons/Ionicons";
+import { FlashList } from '@shopify/flash-list';
+import CommentItem from '../components/commentSectionComponent/CommentItem';
 
 
 const { width, height } = Dimensions.get('window');
@@ -11,6 +13,10 @@ const MovieDetailScreen = ({ route }: any) => {
     const { filmItem } = route.params;
     const [isTruncated, setIsTruncated] = useState(true);
     const roundedNumber = parseFloat(filmItem.item.vote_average.toFixed(1))
+    const Data = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77
+    ]
+
 
     useEffect(() => {
         LOG.info(filmItem, 'item')
@@ -21,6 +27,11 @@ const MovieDetailScreen = ({ route }: any) => {
         setIsTruncated(!isTruncated);
     }
 
+    const renderItem = () => {
+        return (
+            <CommentItem />
+        )
+    }
 
 
     return (
@@ -71,6 +82,14 @@ const MovieDetailScreen = ({ route }: any) => {
                     {isTruncated && (
                         <Text mb='$4' color='#fff' fontWeight='800' onPress={seeMore} textAlign='right'>See more</Text>
                     )}
+                </Box>
+                <Box mx='$4' mt='$6' minHeight={200}>
+                    <Text color='#fff' fontWeight="$bold" fontSize={'$2xl'}>Comments (1)</Text>
+                    <FlashList
+                        data={Data}
+                        renderItem={CommentItem}
+                        estimatedItemSize={250}
+                    />
                 </Box>
             </Box >
         </ ScrollView >
