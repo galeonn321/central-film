@@ -1,10 +1,11 @@
 import { Dimensions, ImageBackground, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Box, Image, Text, } from '@gluestack-ui/themed';
+import { Box, Image, Text } from '@gluestack-ui/themed';
 import { LOG } from '../config/logger';
 import Icon from "react-native-vector-icons/Ionicons";
 import { FlashList } from '@shopify/flash-list';
 import CommentItem from '../components/commentSectionComponent/CommentItem';
+import FilmCommentInput from '../components/filmCommentInput/FilmCommentInput';
 
 
 const { width, height } = Dimensions.get('window');
@@ -84,6 +85,7 @@ const MovieDetailScreen = ({ route }: any) => {
                     )}
                 </Box>
                 <Box mx='$4' mt='$6' minHeight={200}>
+                    <FilmCommentInput />
                     <Text color='#fff' fontWeight="$bold" fontSize={'$2xl'}>Comments (1)</Text>
                     <FlashList
                         data={Data}

@@ -100,10 +100,12 @@ const SearchContent = () => {
                 <InputIcon
                     mr="$2"
                     ml="$2"
+                    alignSelf='center'
                 >
                     <Icon name={'search-outline'} size={18} color={"#fff"} />
                 </InputIcon>
                 <InputField onChangeText={(text: any) => setInputText(text)} value={inputText} color="#fff" placeholder="film, actor, director" />
+
             </Input>
             {isLoading ?
                 <ActivityIndicator size="large" color="#fff" />
