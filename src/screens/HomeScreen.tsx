@@ -5,14 +5,23 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PlayingNowComponent from "../components/carouselComponent/CarouselComponent";
 import { LOG } from "../config/logger";
 import SearchContent from "../components/searchContent/SearchContent";
-import { Image, Box } from "@gluestack-ui/themed";
+import { Image, Box, Button, ButtonText } from "@gluestack-ui/themed";
+import { StackNavigationProp } from '@react-navigation/stack';
+
 
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation<StackNavigationProp<any>>();
+
 
   return (
     <ScrollView style={{ flex: 1, paddingTop: insets.top, backgroundColor: '#000' }}>
+      <Button
+        onPress={() => navigation.navigate("LoginScreen")}
+      >
+        <ButtonText>quesopanelero</ButtonText>
+      </Button>
       <Box alignSelf="center">
         <Image
           source={require('../../assets/images/icon.png')}
