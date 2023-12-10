@@ -1,3 +1,4 @@
+import React from 'react'
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { useFonts } from "expo-font";
 import BottomTabNavigator from "./src/navigators/BottomTabNavigator";

@@ -20,6 +20,8 @@ const SearchContent = () => {
     useEffect(() => {
         LOG.error(navigator, 'navigator')
     }, [])
+   
+
 
     const movieSearch = async () => {
         try {
