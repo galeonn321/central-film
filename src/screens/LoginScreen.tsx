@@ -1,52 +1,76 @@
 
-import { Box, FormControl, FormControlError, FormControlErrorText, FormControlHelper, FormControlHelperText, FormControlLabel, FormControlLabelText, Heading, Input, InputField, Text } from '@gluestack-ui/themed'
-import React from 'react'
+import { Box, Button, ButtonSpinner, ButtonText, FormControl, FormControlError, FormControlErrorText, FormControlHelper, FormControlHelperText, FormControlLabel, FormControlLabelText, Heading, Image, Input, InputField, Text } from '@gluestack-ui/themed'
+import React, { useState } from 'react'
+import { Dimensions, ImageBackground } from 'react-native';
+import { LOG } from '../config/logger';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const LoginScreen = () => {
-    return (
-        <Box mx='$12' bgColor='$amber50'>
-            <Heading alignSelf='center'>Login</Heading>
-            <FormControl >
-                <FormControlLabel>
-                    <FormControlLabelText>UserName or Email</FormControlLabelText>
-                </FormControlLabel>
-                <Input>
-                    <InputField />
-                </Input>
-                <FormControlHelper>
-                    <FormControlHelperText>
-                        What would you like people to call you?
-                    </FormControlHelperText>
-                </FormControlHelper>
-            </FormControl>
-            <FormControl
-                size="md"
-                isDisabled={false}
-                isInvalid={false}
-                isReadOnly={false}
-                isRequired={false}
-            >
-                <FormControlLabel mb="$1">
-                    <FormControlLabelText>Password</FormControlLabelText>
-                </FormControlLabel>
-                <Input>
-                    <InputField type="password" defaultValue="12345" placeholder="password" />
-                </Input>
-                <FormControlHelper>
-                    <FormControlHelperText>
-                        Must be at least 6 characters.
-                    </FormControlHelperText>
-                </FormControlHelper>
-                <FormControlError>
-                    {/* <FormControlErrorIcon as={AlertCircleIcon} /> */}
-                    <FormControlErrorText>
-                        At least 6 characters are required.
-                    </FormControlErrorText>
-                </FormControlError>
-            </FormControl>
-            <Text
+    const [showPassword, setShowPassword] = useState<Boolean>(false)
 
-            >Sign up</Text>
+
+
+    return (
+        <Box w='$full' h={windowHeight} bgColor='$black'>
+            <Image
+                source={require('../../assets/images/cinema.jpg')}
+                alt='miniature example'
+                size="full"
+                opacity={0.5}
+                alignSelf="center"
+                mt='$2'
+                role="presentation"
+                position='absolute'
+            />
+            <Image
+                source={require('../../assets/images/icon.png')}
+                alt='miniature example'
+                size="md"
+                rounded={"$full"}
+                alignSelf="center"
+                mt='$2'
+                role="presentation"
+            />
+            <Heading alignSelf='center' color='#fff' fontSize={'$5xl'} pt='$10' mb='$20'>Central Film</Heading>
+            <Box mx='$8'>
+
+                <FormControl >
+                    <FormControlLabel>
+                        <FormControlLabelText color='#fff'>UserName</FormControlLabelText>
+                    </FormControlLabel>
+                    <Input variant="underlined">
+                        <InputField color='#fff' />
+                    </Input>
+                </FormControl>
+                <FormControl
+                    mt={'$4'}
+                    size="md"
+                    isDisabled={false}
+                    isInvalid={false}
+                    isReadOnly={false}
+                    isRequired={false}
+                >
+                    <FormControlLabel mb="$1">
+                        <FormControlLabelText color='#fff'>Password</FormControlLabelText>
+                    </FormControlLabel>
+                    <Input variant='underlined'>
+                        <InputField type="password" color='#fff' />
+                    </Input>
+                    <Text mt='$3' color='#fff9'>Forgot Password?</Text>
+                </FormControl>
+                <Button mt='$10' rounded={'$full'} bgColor='$cyan600' size="md"
+                    variant="solid"
+                    action="primary"
+                    isDisabled={false}
+                    isFocusVisible={false}>
+                    {/* <ButtonSpinner mr="$1" /> */}
+                    <ButtonText>Log In</ButtonText>
+                </Button>
+                <Text textAlign='center' mt='$4'>Sign up</Text>
+
+            </Box>
+
         </Box >
     )
 }
