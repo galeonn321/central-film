@@ -1,6 +1,6 @@
 
 import { Box, Button, ButtonSpinner, ButtonText, FormControl, FormControlError, FormControlErrorText, FormControlHelper, FormControlHelperText, FormControlLabel, FormControlLabelText, Heading, Image, Input, InputField, Text } from '@gluestack-ui/themed'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dimensions, ImageBackground } from 'react-native';
 import { LOG } from '../config/logger';
 const windowWidth = Dimensions.get('window').width;
@@ -9,6 +9,15 @@ const windowHeight = Dimensions.get('window').height;
 const LoginScreen = () => {
     const [showPassword, setShowPassword] = useState<Boolean>(false)
 
+    const onPressShowPassword = () => {
+        setShowPassword((showState) => {
+            return !showState
+        })
+    }
+
+    useEffect(() => {
+        LOG.info(showPassword);
+    }, [showPassword])
 
 
     return (
@@ -65,7 +74,7 @@ const LoginScreen = () => {
                     isDisabled={false}
                     isFocusVisible={false}>
                     {/* <ButtonSpinner mr="$1" /> */}
-                    <ButtonText>Log In</ButtonText>
+                    <ButtonText onPress={onPressShowPassword}>Log In</ButtonText>
                 </Button>
                 <Text textAlign='center' mt='$4'>Sign up</Text>
 
