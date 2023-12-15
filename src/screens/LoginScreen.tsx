@@ -23,7 +23,7 @@ const LoginScreen = () => {
     return (
         <Box w='$full' h={windowHeight} bgColor='$black'>
             <Image
-                source={require('../../assets/images/cinema.jpg')}
+                source={require('../../assets/images/cinema.jpeg')}
                 alt='miniature example'
                 size="full"
                 opacity={0.5}
@@ -32,16 +32,7 @@ const LoginScreen = () => {
                 role="presentation"
                 position='absolute'
             />
-            <Image
-                source={require('../../assets/images/icon.png')}
-                alt='miniature example'
-                size="md"
-                rounded={"$full"}
-                alignSelf="center"
-                mt='$2'
-                role="presentation"
-            />
-            <Heading alignSelf='center' color='#fff' fontSize={'$5xl'} pt='$10' mb='$20'>Central Film</Heading>
+            <Heading alignSelf='center' color='#fff' fontSize={'$5xl'} pt='$20' mb='$6'>Central Film</Heading>
             <Box mx='$8'>
 
                 <FormControl >
@@ -76,7 +67,7 @@ const LoginScreen = () => {
                     {/* <ButtonSpinner mr="$1" /> */}
                     <ButtonText onPress={onPressShowPassword}>Log In</ButtonText>
                 </Button>
-                <Text textAlign='center' mt='$4'>Sign up</Text>
+                <Text textAlign='center' mt='$4' color='#fff'>Sign up</Text>
 
             </Box>
 
