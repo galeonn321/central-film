@@ -20,7 +20,12 @@ const HomeScreen = () => {
       <Button
         onPress={() => navigation.navigate("LoginScreen")}
       >
-        <ButtonText>quesopanelero</ButtonText>
+        <ButtonText>LoginScreen</ButtonText>
+      </Button>
+      <Button
+        onPress={() => navigation.navigate("RegisterScreen")}
+      >
+        <ButtonText>RegisterScreen</ButtonText>
       </Button>
       <Box alignSelf="center">
         <Image

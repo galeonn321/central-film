@@ -7,7 +7,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import Icon from "react-native-vector-icons/Ionicons";
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
     const [showPassword, setShowPassword] = useState<Boolean>(false)
 
     const onPressShowPassword = () => {
@@ -33,17 +33,8 @@ const LoginScreen = () => {
                 role="presentation"
                 position='absolute'
             />
-            <Image
-                source={require('../../assets/images/icon.png')}
-                alt='miniature example'
-                size="md"
-                rounded={"$full"}
-                alignSelf="center"
-                mt='$2'
-                role="presentation"
-            />
-            <Heading alignSelf='center' color='#fff' fontSize={'$5xl'} pt='$10' mb='$20'>Central Film</Heading>
-            <Box mx='$8'>
+            <Heading alignSelf='center' color='#fff' fontSize={'$5xl'} pt='$10' mt='$16' mb='$24'>Central Film</Heading>
+            <Box mx='$8' >
 
                 <FormControl >
                     <FormControlLabel>
@@ -68,7 +59,7 @@ const LoginScreen = () => {
                         <InputField type={showPassword ? "text" : "password"} color='#fff' />
                         <Icon name={showPassword ? "eye" : "eye-off"} size={20} style={{ alignSelf: 'center' }} color={'#fff'} onPress={onPressShowPassword} />
                     </Input>
-                    <Text mt='$3' color='#fff9'>Forgot Password?</Text>
+
                 </FormControl>
                 <Button mt='$10' rounded={'$full'} bgColor='$cyan600' size="md"
                     variant="solid"
@@ -76,14 +67,13 @@ const LoginScreen = () => {
                     isDisabled={false}
                     isFocusVisible={false}>
                     {/* <ButtonSpinner mr="$1" /> */}
-                    <ButtonText >Log In</ButtonText>
+                    <ButtonText >Create Account</ButtonText>
                 </Button>
-                <Text textAlign='center' mt='$4'>Sign up</Text>
-
+                <Text textAlign='center' mt='$4'>Sign in</Text>
             </Box>
 
         </Box >
     )
 }
 
-export default LoginScreen
+export default RegisterScreen;
