@@ -61,7 +61,7 @@ const LoginScreen = () => {
                     </Input>
                     <Text mt='$3' color='#fff9'>Forgot Password?</Text>
                 </FormControl>
-                <Button mt='$10' rounded={'$full'} bgColor='$cyan600' size="md"
+                <Button mt='$10' rounded={'$full'} bgColor='$red900' size="md"
                     variant="solid"
                     action="primary"
                     isDisabled={false}
