@@ -2,9 +2,10 @@ import { Box, Heading, Image, Pressable, Text } from '@gluestack-ui/themed'
 import { FlashList } from '@shopify/flash-list'
 import React, { useEffect, useState } from 'react'
 import { LOG } from '../../config/logger'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator, View } from 'react-native'
 import movieDB from '../../api/movieDB'
 import useMovieDB from '../../hooks/useMovieDB'
+
 
 
 type Item = {
@@ -25,7 +26,7 @@ const CarouselComponent = ({ path }: any) => {
 
 
     const renderItem = (item: Item, index: number) => {
-        LOG.info(item)
+        // LOG.info(item)
         const uri = `https://image.tmdb.org/t/p/w500${item.item?.poster_path}`
         return (
             <Pressable
@@ -33,16 +34,18 @@ const CarouselComponent = ({ path }: any) => {
                     // navigator.navigate("Details", { id: item.item?.id });
                     LOG.info(item.item?.id)
                 }}
-                minHeight={200}
+                h='$32'
+                w='$32'
             >
                 <Image
-                    size={'2xl'}
+                    size={'full'}
                     borderRadius={32}
                     source={{ uri: uri ?? '' }}
                     resizeMode="cover"
                     mx="$4"
                     sx={{ ":pressed": { backgroundColor: "#fff" } }}
                     alt='miniature example'
+                    role='presentation'
                 />
                 <Text color="#fff" mx="$4" mt='$4' italic fontWeight="700" fontSize={'$xl'} py={'$2'} maxWidth={'$72'}>
                     {item.item?.title}
@@ -52,17 +55,17 @@ const CarouselComponent = ({ path }: any) => {
     };
 
     return (
-        <Box>
-            {isLoading ? <Box minHeight={200} >
+        <View style={{ minHeight: 2, minWidth: 2, height: 200, width: 200 }}>
+            {isLoading ? <View>
                 <FlashList
                     data={getFilms as any}
-                    horizontal
                     renderItem={renderItem as any}
-                    estimatedItemSize={200}
+                    estimatedItemSize={32}
+                    horizontal
                 />
-            </Box> : <ActivityIndicator size="large" color="#fff" />
+            </View> : <ActivityIndicator size="large" color="#fff" />
             }
-        </Box>
+        </View>
     )
 }
 

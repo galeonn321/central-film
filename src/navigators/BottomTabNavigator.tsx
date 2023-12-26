@@ -18,7 +18,7 @@ const BottomTabNavigator = () => {
         tabBarActiveTintColor: "#fff",
         tabBarInactiveTintColor: "#707070",
         tabBarStyle: {
-          backgroundColor: "#040D12",
+          backgroundColor: "#000",
         },
         tabBarBackground: () => (
           <BlurView
@@ -47,7 +47,7 @@ const BottomTabNavigator = () => {
               break;
           }
 
-          return <Icon name={iconName} size={20} color={"#fff"} />;
+          return <Icon name={iconName} size={20} color={focused ? '#7D0A0A' :'#fff' } />;
         },
       })}
     >

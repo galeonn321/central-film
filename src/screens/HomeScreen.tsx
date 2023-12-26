@@ -27,6 +27,11 @@ const HomeScreen = () => {
       >
         <ButtonText>RegisterScreen</ButtonText>
       </Button>
+      <Button
+        onPress={() => navigation.navigate("WelcomeScreen")}
+      >
+        <ButtonText>WelcomeScreen</ButtonText>
+      </Button>
       <Box alignSelf="center">
         <Image
           source={require('../../assets/images/icon.png')}

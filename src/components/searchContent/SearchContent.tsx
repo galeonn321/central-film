@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, Input, InputField, InputIcon, Pressable, Text, Image } from '@gluestack-ui/themed';
+import { Box, Heading, Input, InputField, InputIcon, Pressable, Text, Image, Spinner,} from '@gluestack-ui/themed';
 import Icon from "react-native-vector-icons/Ionicons";
 import { LOG } from '../../config/logger';
 import searchMovieDB from '../../api/searchMovieDB';
 import { FlashList } from '@shopify/flash-list';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native';
+import {  View } from 'react-native';
 
 
 
@@ -17,18 +17,13 @@ const SearchContent = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        LOG.error(navigator, 'navigator')
-    }, [])
-
-
-
     const movieSearch = async () => {
         try {
-            // setIsLoading(true);
+            setIsLoading(true);
             const results = await searchMovieDB(inputText);
             setSearchResults(results);
-            // setIsLoading(false);
+            setIsLoading(false);
+
         } catch (error: any) {
             setError(error);
         }
@@ -47,7 +42,6 @@ const SearchContent = () => {
     // }, [searchResults]);
 
     const renderItem = (item: any, index: any) => {
-        LOG.info(typeof item.item, ' HAHAHAHAHAH')
 
         const uri = item.item?.poster_path ? `https://image.tmdb.org/t/p/w500${item.item?.poster_path}` : 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1728&q=80';
         return (
@@ -79,7 +73,7 @@ const SearchContent = () => {
     };
 
     return (
-        <Box bgColor="$black">
+        <Box bgColor="$black" flex={1}>
             <Heading
                 color="#fff"
                 textAlign="center"
@@ -98,6 +92,7 @@ const SearchContent = () => {
                 mx="$4"
                 my="$4"
                 p="$2"
+                
             >
                 <InputIcon
                     mr="$2"
@@ -110,14 +105,16 @@ const SearchContent = () => {
 
             </Input>
             {isLoading ?
-                <ActivityIndicator size="large" color="#fff" />
-                : <Box minHeight={200}>
+                <Box w='$32' h='$32' alignSelf='center' alignItems='center' justifyContent='center' mt='$32'>
+                    <Spinner size={'large'} />
+                </Box> :
+                <View style={{ flex: 1, minHeight: 200, minWidth: 200 }}>
                     <FlashList
                         data={searchResults as any}
                         renderItem={renderItem as any}
                         estimatedItemSize={200}
                     />
-                </Box>
+                </View>
             }
         </Box >
     )

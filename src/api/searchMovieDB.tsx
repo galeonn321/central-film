@@ -10,6 +10,7 @@ const tmdbAPI = axios.create({
 
 const searchMovieDB = async (query: string) => {
     try {
+
         const response = await tmdbAPI.get('/search/movie', {
             params: {
                 api_key: APIKEY,
