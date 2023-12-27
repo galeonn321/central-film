@@ -2,10 +2,11 @@ import { Box, Heading, Image, Pressable, Text } from '@gluestack-ui/themed'
 import { FlashList } from '@shopify/flash-list'
 import React, { useEffect, useState } from 'react'
 import { LOG } from '../../config/logger'
-import { ActivityIndicator, View } from 'react-native'
+import { ActivityIndicator, Dimensions, View } from 'react-native'
 import movieDB from '../../api/movieDB'
 import useMovieDB from '../../hooks/useMovieDB'
 
+const { height, width } = Dimensions.get("screen");
 
 
 type Item = {
@@ -55,17 +56,18 @@ const CarouselComponent = ({ path }: any) => {
     };
 
     return (
-        <View style={{ minHeight: 2, minWidth: 2, height: 200, width: 200 }}>
-            {isLoading ? <View>
+        <Box style={{ minHeight: 2, minWidth: 2, height: 200, width: 200 }}>
+            {isLoading ? <Box>
                 <FlashList
                     data={getFilms as any}
                     renderItem={renderItem as any}
-                    estimatedItemSize={32}
+                    estimatedItemSize={120}
+            estimatedListSize={{ height: 120, width: width }}
                     horizontal
                 />
-            </View> : <ActivityIndicator size="large" color="#fff" />
+            </Box> : <ActivityIndicator size="large" color="#fff" />
             }
-        </View>
+        </Box>
     )
 }
 

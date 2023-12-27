@@ -29,7 +29,7 @@ const FilmsScreen = () => {
         p={"$2"}
         fontWeight="$extrabold"
         fontSize={"$3xl"}>upcoming</Text>
-      <Box mb='$24'>
+      <Box mb='$24' >
         <PlayingNowComponent path={'upcoming'} />
       </Box>
     </ScrollView>

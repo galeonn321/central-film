@@ -55,44 +55,40 @@ const SearchContent = () => {
       ? `https://image.tmdb.org/t/p/w500${item.item?.poster_path}`
       : "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1728&q=80";
     return (
-      <View style={{ minHeight: 3 }}>
-        <Pressable
-          onPress={() =>
-            navigation.navigate("DetailMovie", {
-              filmItem: item,
-            })
-          }
-          minHeight={200}
-          height={400}
+      <Pressable
+        onPress={() =>
+          navigation.navigate("DetailMovie", {
+            filmItem: item,
+          })
+        }
+      >
+        <Image
+          height={300}
+          size={"2xl"}
+          borderRadius={32}
+          source={{
+            uri: uri,
+          }}
+          resizeMode="cover"
+          alt="miniature example"
+          mx="$4"
+          role="presentation"
+          sx={{ ":pressed": { backgroundColor: "#fff" } }}
+        />
+        <Text
+          color="#fff"
+          mx="$4"
+          mt="$4"
+          italic
+          fontWeight="700"
+          textAlign="center"
+          fontSize={"$2xl"}
+          py={"$2"}
+          maxWidth={"$72"}
         >
-          <Image
-            height={300}
-            size={"2xl"}
-            borderRadius={32}
-            source={{
-              uri: uri,
-            }}
-            resizeMode="cover"
-            alt="miniature example"
-            mx="$4"
-            role="presentation"
-            sx={{ ":pressed": { backgroundColor: "#fff" } }}
-          />
-          <Text
-            color="#fff"
-            mx="$4"
-            mt="$4"
-            italic
-            fontWeight="700"
-            textAlign="center"
-            fontSize={"$2xl"}
-            py={"$2"}
-            maxWidth={"$72"}
-          >
-            {item.item?.title}
-          </Text>
-        </Pressable>
-      </View>
+          {item.item?.title}
+        </Text>
+      </Pressable>
     );
   };
 
@@ -134,19 +130,21 @@ const SearchContent = () => {
           alignSelf="center"
           alignItems="center"
           justifyContent="center"
-          mt="$32"
+          mt="$12"
+          minHeight={"$10"}
         >
           <Spinner size={"large"} />
         </Box>
       ) : (
-        <View style={{ flex: 1, height: "100%", width: "100%" }}>
+        <Box height={'$full'}>
           <FlashList
             data={searchResults as any}
             horizontal
             renderItem={renderItem as any}
             estimatedItemSize={200}
+            estimatedListSize={{ height: 200, width: width }}
           />
-        </View>
+        </Box>
       )}
     </Box>
   );
