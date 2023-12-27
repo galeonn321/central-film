@@ -78,12 +78,11 @@ const SearchContent = () => {
         <Text
           color="#fff"
           mx="$4"
-          mt="$4"
           italic
           fontWeight="700"
           textAlign="center"
           fontSize={"$2xl"}
-          py={"$2"}
+          py={"$6"}
           maxWidth={"$72"}
         >
           {item.item?.title}
@@ -136,13 +135,14 @@ const SearchContent = () => {
           <Spinner size={"large"} />
         </Box>
       ) : (
-        <Box height={'$full'}>
+        <Box h={height / 2.2} >
           <FlashList
             data={searchResults as any}
             horizontal
             renderItem={renderItem as any}
-            estimatedItemSize={200}
-            estimatedListSize={{ height: 200, width: width }}
+            estimatedItemSize={350}
+            estimatedListSize={{ height: 350, width: width }}
+            showsHorizontalScrollIndicator={false}
           />
         </Box>
       )}
