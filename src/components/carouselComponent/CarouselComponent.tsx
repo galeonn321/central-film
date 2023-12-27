@@ -30,7 +30,7 @@ const CarouselComponent = ({ path }: any) => {
   //   LOG.debug(getFilms, 'this is from the PlayingNowComponent')
 
   const renderItem = (item: Item, index: number) => {
-    LOG.info(item);
+    // LOG.info(item);
     const uri = `https://image.tmdb.org/t/p/w500${item.item?.poster_path}`;
     return (
       <Pressable
