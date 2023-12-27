@@ -18,7 +18,7 @@ const HomeScreen = () => {
   return (
     <ScrollView style={{ flex: 1, paddingTop: insets.top, backgroundColor: '#000' }}>
       <Button
-        onPress={() => navigation.navigate("LoginScreen")}
+        onPress={() => navigation.replace("LoginScreen")}
       >
         <ButtonText>LoginScreen</ButtonText>
       </Button>

@@ -46,9 +46,10 @@ const CarouselComponent = ({ path }: any) => {
           source={{
             uri: uri,
           }}
-          resizeMode="cover"
+          bgColor="red"
+          resizeMode="contain"
           alt="miniature example"
-          mx="$4"
+          ml="$4"
           role="presentation"
           sx={{ ":pressed": { backgroundColor: "#fff" } }}
         />
