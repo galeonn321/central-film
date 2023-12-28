@@ -10,8 +10,9 @@ const useMovieDB = (path: string) => {
   const getFilms = async () => {
     try {
       const resp = await movieDB.get(path);
-      LOG.info(resp.data.results.length, 'this is from the PlayingNowComponent');
       setFilms(resp.data.results);
+      // LOG.info(resp.data.results.length, 'this is from the PlayingNowComponent');
+      // LOG.info(films, 'this is from the PlayingNowComponent');
     } catch (error) {
       // Handle error if needed
       LOG.error('Error fetching films:', error);

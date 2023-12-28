@@ -13,6 +13,8 @@ import { Dimensions } from "react-native";
 import useMovieDB from "../../hooks/useMovieDB";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Movie } from "../../types/movieInterface";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -21,14 +23,19 @@ type CarouselComponentProps = {
 };
 
 const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const films = useMovieDB(path); // useMovieDB returns Movie[] | undefined directly
 
   //   LOG.debug(getFilms, 'this is from the PlayingNowComponent')
 
-  // useEffect(() => {
-  //   setIsLoading(!films);
-  // }, [films]);
+  useEffect(() => {
+    if (films === undefined) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [films]);
 
   const renderItem = ({ item }: { item: Movie }, index: number) => {
     const uri = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
@@ -36,8 +43,10 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
     return (
       <Pressable
         onPress={() => {
-          // navigator.navigate("Details", { id: item.item?.id });
-          LOG.info(item);
+          // LOG.debug(item.title, "this is from the PlayingNowComponent");
+          navigation.navigate("DetailMovie", {
+            // filmItem: item,
+          })
         }}
       >
         
@@ -52,7 +61,8 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
           alt="miniature example"
           ml="$2"
           role="presentation"
-          sx={{ ":pressed": { backgroundColor: "#fff" } }}
+          
+
         />
         <Text
           color="#fff"
@@ -61,7 +71,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
           textAlign="center"
           fontSize={"$xl"}
           py={"$2"}
-          maxWidth={"$56"}
+          maxWidth={"$48"}
         >
           {item.title}
         </Text>

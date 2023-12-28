@@ -22,8 +22,8 @@ const { height, width } = Dimensions.get("screen");
 
 const SearchContent = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
-  const [inputText, setInputText] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [inputText, setInputText] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,13 +42,14 @@ const SearchContent = () => {
     movieSearch();
   }, [inputText]);
 
-  // useEffect(() => {
-  //     if (searchResults.length > 2) {
-  //         LOG.debug(searchResults.length)
-  //     } else {
-  //         LOG.info(searchResults.length)
-  //     }
-  // }, [searchResults]);
+  useEffect(() => {
+      // if (searchResults.length > 2) {
+      //     LOG.debug(searchResults.length)
+      // } else {
+      //     LOG.info(searchResults.length)
+      // }
+      LOG.error(searchResults.length)
+  }, [searchResults]);
 
   const renderItem = (item: any, index: any) => {
     const uri = item.item?.poster_path
