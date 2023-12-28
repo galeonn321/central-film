@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import movieDB from '../api/movieDB';
 import { LOG } from '../config/logger';
 import { Movie } from '../types/MovieInterface';
 
-const useMovieDB = ({ path }: any) => {
-    // LOG.debug(typeof path, 'path hahaha')
-    const [films, setFilms] = useState<Movie>();
+const useMovieDB = (path: string) => {
+  const [films, setFilms] = useState<Movie[] | undefined>(undefined);
 
-
-    const getFilms = async () => {
-        const resp = await movieDB.get(path);
-        // LOG.info(resp.data.results, 'this is from the PlayingNowComponent')
-        setFilms(resp.data.results)
+  const getFilms = async () => {
+    try {
+      const resp = await movieDB.get(path);
+      LOG.info(resp.data.results.length, 'this is from the PlayingNowComponent');
+      setFilms(resp.data.results);
+    } catch (error) {
+      // Handle error if needed
+      LOG.error('Error fetching films:', error);
     }
+  };
 
+  useEffect(() => {
+    getFilms();
+  }, [path]); // Include 'path' in the dependency array to re-fetch when it changes
 
+  return films;
+};
 
-    useEffect(() => {
-        getFilms();
-    }, []);
-
-    return [films, setFilms]
-}
-
-export default useMovieDB
+export default useMovieDB;

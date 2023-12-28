@@ -1,6 +1,6 @@
 import {
   Box,
-  Heading,
+  HStack,
   Image,
   Pressable,
   Spinner,
@@ -9,74 +9,79 @@ import {
 import { FlashList } from "@shopify/flash-list";
 import React, { useEffect, useState } from "react";
 import { LOG } from "../../config/logger";
-import { ActivityIndicator, Dimensions, View } from "react-native";
-import movieDB from "../../api/movieDB";
+import { Dimensions } from "react-native";
 import useMovieDB from "../../hooks/useMovieDB";
+import Icon from "react-native-vector-icons/Ionicons";
+import { Movie } from "../../types/MovieInterface";
 
 const { height, width } = Dimensions.get("screen");
 
-type Item = {
-  item: {
-    id: number;
-    title: string;
-    poster_path: string;
-  };
+type CarouselComponentProps = {
+  path: string;
 };
 
-const CarouselComponent = ({ path }: any) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [getFilms, setGetFilms] = useMovieDB({ path: path });
+const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const films = useMovieDB(path); // useMovieDB returns Movie[] | undefined directly
 
   //   LOG.debug(getFilms, 'this is from the PlayingNowComponent')
 
-  const renderItem = (item: Item, index: number) => {
-    // LOG.info(item);
-    const uri = `https://image.tmdb.org/t/p/w500${item.item?.poster_path}`;
+  // useEffect(() => {
+  //   // You might want to set isLoading based on the presence of films
+  //   setIsLoading(!films);
+  // }, [films]);
+
+  const renderItem = ({ item }: { item: Movie }, index: number) => {
+    const uri = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+    const roundedNumber = parseFloat(item.vote_average.toFixed(1))
     return (
       <Pressable
         onPress={() => {
           // navigator.navigate("Details", { id: item.item?.id });
-          LOG.info(item.item?.id);
+          LOG.info(item);
         }}
       >
+        
         <Image
-          height={300}
-          size={"2xl"}
-          borderRadius={32}
+          height={height / 3.05}
+          width={width / 2.1}
+          rounded={'$2xl'}
           source={{
             uri: uri,
           }}
-          bgColor="red"
           resizeMode="contain"
           alt="miniature example"
-          ml="$4"
+          ml="$2"
           role="presentation"
           sx={{ ":pressed": { backgroundColor: "#fff" } }}
         />
         <Text
           color="#fff"
-          mx="$4"
           italic
           fontWeight="700"
           textAlign="center"
-          fontSize={"$2xl"}
+          fontSize={"$xl"}
           py={"$2"}
-          maxWidth={"$72"}
+          maxWidth={"$56"}
         >
-          {item.item?.title}
+          {item.title}
         </Text>
+        <HStack position="absolute" w={50} h={30} top={10} right={15} bgColor={'$red900'} alignItems="center" justifyContent="center" rounded={'$xl'}>
+          <Icon name={"star"} color={'yellow'}/> 
+          <Text color="#fff" bold>{roundedNumber}</Text>
+        </HStack>
       </Pressable>
     );
   };
 
   return (
     <Box>
-      {!isLoading ? (
+      {isLoading ? (
         <Spinner size="large" />
       ) : (
         <Box height={height / 2.3}>
           <FlashList
-            data={getFilms as any}
+            data={films}
             renderItem={renderItem as any}
             estimatedItemSize={height / 2.3}
             estimatedListSize={{ height: height / 2.3, width: width }}
