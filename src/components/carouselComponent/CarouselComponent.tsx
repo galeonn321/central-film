@@ -12,7 +12,7 @@ import { LOG } from "../../config/logger";
 import { Dimensions } from "react-native";
 import useMovieDB from "../../hooks/useMovieDB";
 import Icon from "react-native-vector-icons/Ionicons";
-import { Movie } from "../../types/MovieInterface";
+import { Movie } from "../../types/movieInterface";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -27,7 +27,6 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
   //   LOG.debug(getFilms, 'this is from the PlayingNowComponent')
 
   // useEffect(() => {
-  //   // You might want to set isLoading based on the presence of films
   //   setIsLoading(!films);
   // }, [films]);
 

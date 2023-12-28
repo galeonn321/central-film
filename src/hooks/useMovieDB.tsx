@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import movieDB from '../api/movieDB';
 import { LOG } from '../config/logger';
-import { Movie } from '../types/MovieInterface';
+import { Movie } from '../types/movieInterface';
+
 
 const useMovieDB = (path: string) => {
   const [films, setFilms] = useState<Movie[] | undefined>(undefined);
