@@ -1,39 +1,41 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { API_KEY_MOVIES_TMDb } from "@env";
 import { LOG } from "../config/logger";
-
-const APIKEY = process.env.API_KEY_MOVIES_TMDb;
+import { Movie } from "../types/movieInterface";
 
 const tmdbAPI = axios.create({
-    baseURL: "https://api.themoviedb.org/3",
+  baseURL: "https://api.themoviedb.org/3",
+  params: {
+    api_key: API_KEY_MOVIES_TMDb,
+  },
 });
 
-const searchMovieDB = async (query: string) => {
-    try {
+type MovieApiResponse = Movie | { results: Movie[] };
 
-        const response = await tmdbAPI.get('/search/movie', {
-            params: {
-                api_key: APIKEY,
-                query: query,
-            },
-        });
+const isMovieArray = (data: MovieApiResponse): data is { results: Movie[] } => {
+  return 'results' in data;
+};
 
-        if (response.status === 200) {
-            return response.data.results;
-        } else {
-            throw new Error('API request failed with status:', response.status as any);
-        }
-    } catch (error: any) {
-        throw new Error('API request error:', error);
+
+const searchMovieDB = async (query: string): Promise<Movie[]> => {
+  try {
+    const response: AxiosResponse<Movie | { results: Movie[] }> = await tmdbAPI.get("/search/movie", {
+      params: {
+        query: query,
+      },
+    });
+
+    if (response.status === 200) {
+      // LOG.info(response.data, "This is from the searchMovieDB");
+      const movies: Movie[] = isMovieArray(response.data) ? response.data.results : [response.data];
+
+      return movies;
+    } else {
+      throw new Error(`API request failed with status: ${response.status}`);
     }
-}
-// const searchMovieDB = axios.create({
-//     baseURL: `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${query}`,
-//     params: {
-//         api_key: APIKEY,
-//         language: "en-US",
-//     },
-// });
-
+  } catch (error: any) {
+    throw new Error(`API request error: ${error}`);
+  }
+};
 
 export default searchMovieDB;

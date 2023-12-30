@@ -15,14 +15,14 @@ export interface Dates {
 
 export interface Movie {
     adult:             boolean;
-    backdrop_path:     string;
+    backdrop_path:     null | string;
     genre_ids:         number[];
     id:                number;
     original_language: OriginalLanguage;
     original_title:    string;
     overview:          string;
     popularity:        number;
-    poster_path:       string;
+    poster_path:       null | string;
     release_date:      string;
     title:             string;
     video:             boolean;

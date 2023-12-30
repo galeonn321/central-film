@@ -48,7 +48,7 @@ const SearchContent = () => {
       // } else {
       //     LOG.info(searchResults.length)
       // }
-      LOG.error(searchResults.length)
+      // LOG.error(searchResults.length)
   }, [searchResults]);
 
   const renderItem = (item: any, index: any) => {
