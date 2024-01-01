@@ -7,6 +7,7 @@ import { LOG } from "../config/logger";
 import SearchContent from "../components/searchContent/SearchContent";
 import { Image, Box, Button, ButtonText } from "@gluestack-ui/themed";
 import { StackNavigationProp } from '@react-navigation/stack';
+import LottieView from "lottie-react-native";
 
 
 
@@ -33,7 +34,7 @@ const HomeScreen = () => {
         <ButtonText>WelcomeScreen</ButtonText>
       </Button>
       <Box alignSelf="center">
-        <Image
+        {/* <Image
           source={require('../../assets/images/icon.png')}
           alt='miniature example'
           size="xs"
@@ -42,7 +43,17 @@ const HomeScreen = () => {
           mb='$4'
           mt='$2'
           role="presentation"
-        />
+        /> */}
+        <LottieView
+        autoPlay
+        style={{
+          alignSelf: "center",
+          width: 150,
+          height: 150,
+          backgroundColor: "#000",
+        }}
+        source={require("../../assets/lottie/popcorn.json")}
+      />
         <SearchContent />
       </ Box >
     </ ScrollView>

@@ -1,55 +1,50 @@
 import { Box } from "@gluestack-ui/themed";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Dimensions, View, Text } from "react-native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-import Swiper from "react-native-swiper";
-import { LOG } from "../config/logger";
 import { StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
-import { Image } from "react-native-svg";
+import Swiper from 'react-native-swiper';
 
 const WelcomeScreen = () => {
-  const animationRef = React.useRef<LottieView | null>(null);
+  const firstAnimationRef = useRef<LottieView | null>(null);
+  const secondAnimationRef = useRef<LottieView | null>(null);
 
   useEffect(() => {
-    animationRef.current?.play();
+    // Play the first animation when the component mounts
+    firstAnimationRef.current?.play();
+    
+    
   }, []);
 
   return (
     <Box w="$full" h={windowHeight} bgColor="$white">
       <LottieView
         autoPlay
-        ref={animationRef}
         style={{
-          width: 300,
-          height: 300,
-          backgroundColor: "#eee",
+          width: 200,
+          height: 200,
+          backgroundColor: "#000",
         }}
-        // Find more Lottie files at https://lottiefiles.com/featured
-        source={require("../../assets/lottie/cinema-roll.json")}
+        source={require("../../assets/lottie/popcorn.json")}
       />
       <Swiper style={styles.wrapper} showsButtons={true} autoplay={false}>
         <View style={styles.slide1}>
           <Text style={styles.text}>Hello Swiper</Text>
+          {/* Use a different ref for the second animation */}
           <LottieView
             autoPlay
-            ref={animationRef}
+            ref={secondAnimationRef}
             style={{
               width: 200,
               height: 200,
               backgroundColor: "#eee",
             }}
-            // Find more Lottie files at https://lottiefiles.com/featured
             source={require("../../assets/lottie/cinema-roll.json")}
           />
         </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-        </View>
+        {/* Remaining slides */}
       </Swiper>
     </Box>
   );
