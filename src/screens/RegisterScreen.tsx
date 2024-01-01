@@ -16,10 +16,6 @@ const RegisterScreen = () => {
         })
     }
 
-    useEffect(() => {
-        LOG.info(showPassword);
-    }, [showPassword])
-
 
     return (
         <Box w='$full' h={windowHeight} bgColor='$black'>
