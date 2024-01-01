@@ -6,8 +6,9 @@ import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 
 const Stack = createStackNavigator();
+const isSignedIn = false;
 
-function MyStack() {
+function MainNavigator() {
 
     return (
         <Stack.Navigator
@@ -34,4 +35,4 @@ function MyStack() {
     );
 }
 
-export default MyStack;
+export default MainNavigator;
