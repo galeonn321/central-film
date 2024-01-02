@@ -44,16 +44,15 @@ const SearchContent = () => {
     movieSearch();
   }, [inputText]);
 
-  useEffect(() => {
-    // if (searchResults.length > 2) {
-    //     LOG.debug(searchResults.length)
-    // } else {
-    //     LOG.info(searchResults.length)
-    // }
-    // LOG.error(searchResults.length)
-
-    LOG.error(inputText);
-  }, [inputText]);
+  // useEffect(() => {
+  //   // if (searchResults.length > 2) {
+  //   //     LOG.debug(searchResults.length)
+  //   // } else {
+  //   //     LOG.info(searchResults.length)
+  //   // }
+  //   // LOG.error(searchResults.length)
+  //   // LOG.error(inputText);
+  // }, [inputText]);
 
   const renderItem = (item: any, index: any) => {
     const uri = item.item?.poster_path
@@ -125,7 +124,7 @@ const SearchContent = () => {
           onChangeText={(text: string) => setInputText(text)}
           value={inputText}
           color="#fff"
-          placeholder="film, actor, director"
+          placeholder="Titanic, Frozen, Eyes Wide Shut.."
           selectionColor={"#fff"}
         />
         {inputText.length > 0 && (

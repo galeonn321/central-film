@@ -47,7 +47,13 @@ const BottomTabNavigator = () => {
               break;
           }
 
-          return <Icon name={iconName} size={20} color={focused ? '#7D0A0A' :'#fff' } />;
+          return (
+            <Icon
+              name={iconName}
+              size={20}
+              color={focused ? "#7f1d1d" : "#fff"}
+            />
+          );
         },
       })}
     >
@@ -56,9 +62,21 @@ const BottomTabNavigator = () => {
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-      <BottomTab.Screen name="Films" component={FilmsScreen} options={{ headerShown: false }} />
-      <BottomTab.Screen name="Series" component={SeriesScreen} options={{ headerShown: false }} />
-      <BottomTab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+      <BottomTab.Screen
+        name="Films"
+        component={FilmsScreen}
+        options={{ headerShown: false }}
+      />
+      <BottomTab.Screen
+        name="Series"
+        component={SeriesScreen}
+        options={{ headerShown: false }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
     </BottomTab.Navigator>
   );
 };
