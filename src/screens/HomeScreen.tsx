@@ -6,34 +6,27 @@ import PlayingNowComponent from "../components/carouselComponent/CarouselCompone
 import { LOG } from "../config/logger";
 import SearchContent from "../components/searchContent/SearchContent";
 import { Image, Box, Button, ButtonText } from "@gluestack-ui/themed";
-import { StackNavigationProp } from '@react-navigation/stack';
+import { StackNavigationProp } from "@react-navigation/stack";
 import LottieView from "lottie-react-native";
-
-
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<any>>();
 
-
   return (
-    <ScrollView style={{ flex: 1, paddingTop: insets.top, backgroundColor: '#000' }}>
-      <Button
-        onPress={() => navigation.navigate("LoginScreen")}
-      >
+    <ScrollView
+      style={{ flex: 1, paddingTop: insets.top, backgroundColor: "#000" }}
+    >
+      <Button onPress={() => navigation.navigate("LoginScreen")}>
         <ButtonText>LoginScreen</ButtonText>
       </Button>
-      <Button
-        onPress={() => navigation.navigate("RegisterScreen")}
-      >
+      <Button onPress={() => navigation.navigate("RegisterScreen")}>
         <ButtonText>RegisterScreen</ButtonText>
       </Button>
-      <Button
-        onPress={() => navigation.navigate("WelcomeScreen")}
-      >
+      <Button onPress={() => navigation.navigate("WelcomeScreen")}>
         <ButtonText>WelcomeScreen</ButtonText>
       </Button>
-      <Box alignSelf="center">
+      <Box>
         {/* <Image
           source={require('../../assets/images/icon.png')}
           alt='miniature example'
@@ -44,19 +37,22 @@ const HomeScreen = () => {
           mt='$2'
           role="presentation"
         /> */}
-        <LottieView
-        autoPlay
-        style={{
-          alignSelf: "center",
-          width: 150,
-          height: 150,
-          backgroundColor: "#000",
-        }}
-        source={require("../../assets/lottie/popcorn.json")}
-      />
+        <Box alignSelf="center">
+          <LottieView
+            autoPlay
+            resizeMode="cover"
+            loop={false}
+            style={{
+              width: 200,
+              height: 200,
+              backgroundColor: "#000",
+            }}
+            source={require("../../assets/lottie/cinema.json")}
+          />
+        </Box>
         <SearchContent />
-      </ Box >
-    </ ScrollView>
+      </Box>
+    </ScrollView>
   );
 };
 

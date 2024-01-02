@@ -9,6 +9,7 @@ import {
   Text,
   Image,
   Spinner,
+  Divider,
 } from "@gluestack-ui/themed";
 import Icon from "react-native-vector-icons/Ionicons";
 import { LOG } from "../../config/logger";
@@ -17,6 +18,7 @@ import { FlashList } from "@shopify/flash-list";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions, View } from "react-native";
+import { Movie } from "../../types/movieInterface";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -43,18 +45,21 @@ const SearchContent = () => {
   }, [inputText]);
 
   useEffect(() => {
-      // if (searchResults.length > 2) {
-      //     LOG.debug(searchResults.length)
-      // } else {
-      //     LOG.info(searchResults.length)
-      // }
-      // LOG.error(searchResults.length)
-  }, [searchResults]);
+    // if (searchResults.length > 2) {
+    //     LOG.debug(searchResults.length)
+    // } else {
+    //     LOG.info(searchResults.length)
+    // }
+    // LOG.error(searchResults.length)
+
+    LOG.error(inputText);
+  }, [inputText]);
 
   const renderItem = (item: any, index: any) => {
     const uri = item.item?.poster_path
       ? `https://image.tmdb.org/t/p/w500${item.item?.poster_path}`
       : "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1728&q=80";
+
     return (
       <Pressable
         onPress={() =>
@@ -86,14 +91,14 @@ const SearchContent = () => {
           py={"$6"}
           maxWidth={"$72"}
         >
-          {item.item?.title}
+          {item.item.title}
         </Text>
       </Pressable>
     );
   };
 
   return (
-    <Box bgColor="$black" flex={1}>
+    <Box bgColor="#000" flex={1} mb="$56">
       <Heading
         color="#fff"
         textAlign="center"
@@ -106,22 +111,30 @@ const SearchContent = () => {
       </Heading>
       <Input
         bgColor="#707070"
-        borderColor="#000"
+        borderColor="#fff"
         borderWidth={1}
-        borderRadius={12}
+        borderRadius={"$full"}
         mx="$4"
-        my="$4"
-        p="$2"
+        my="$2"
+        alignItems="center"
       >
-        <InputIcon mr="$2" ml="$2" alignSelf="center">
-          <Icon name={"search-outline"} size={18} color={"#fff"} />
+        <InputIcon p="$3" ml={"$2"} mt="$1" alignSelf="center">
+          <Icon name={"search-outline"} size={20} color={"#fff"} />
         </InputIcon>
         <InputField
-          onChangeText={(text: any) => setInputText(text)}
+          onChangeText={(text: string) => setInputText(text)}
           value={inputText}
           color="#fff"
           placeholder="film, actor, director"
+          selectionColor={"#fff"}
         />
+        {inputText.length > 0 && (
+          <Pressable onPress={() => setInputText("")}>
+            <InputIcon p="$4" alignSelf="center" mr={"$1.5"}>
+              <Icon name={"close-outline"} size={30} color={"#fff"} />
+            </InputIcon>
+          </Pressable>
+        )}
       </Input>
       {isLoading ? (
         <Box
@@ -136,7 +149,7 @@ const SearchContent = () => {
           <Spinner size={"large"} />
         </Box>
       ) : (
-        <Box h={height / 2.2} >
+        <Box h={height / 2.2}>
           <FlashList
             data={searchResults as any}
             horizontal

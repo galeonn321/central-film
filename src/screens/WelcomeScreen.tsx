@@ -5,7 +5,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import { StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
-import Swiper from 'react-native-swiper';
+import Swiper from "react-native-swiper";
 
 const WelcomeScreen = () => {
   const firstAnimationRef = useRef<LottieView | null>(null);
@@ -14,8 +14,6 @@ const WelcomeScreen = () => {
   useEffect(() => {
     // Play the first animation when the component mounts
     firstAnimationRef.current?.play();
-    
-    
   }, []);
 
   return (
@@ -27,22 +25,17 @@ const WelcomeScreen = () => {
           height: 200,
           backgroundColor: "#000",
         }}
-        source={require("../../assets/lottie/popcorn.json")}
+        source={require("../../assets/lottie/cinema.json")}
       />
       <Swiper style={styles.wrapper} showsButtons={true} autoplay={false}>
         <View style={styles.slide1}>
           <Text style={styles.text}>Hello Swiper</Text>
-          {/* Use a different ref for the second animation */}
-          <LottieView
-            autoPlay
-            ref={secondAnimationRef}
-            style={{
-              width: 200,
-              height: 200,
-              backgroundColor: "#eee",
-            }}
-            source={require("../../assets/lottie/cinema-roll.json")}
-          />
+        </View>
+        <View style={styles.slide1}>
+          <Text style={styles.text}>Hello Swiper2</Text>
+        </View>
+        <View style={styles.slide1}>
+          <Text style={styles.text}>Hello Swiper3</Text>
         </View>
         {/* Remaining slides */}
       </Swiper>
@@ -55,7 +48,8 @@ const styles = StyleSheet.create({
   slide1: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#7777",
+    justifyContent: "center",
+    backgroundColor: "#000",
   },
   slide2: {
     flex: 1,
