@@ -17,8 +17,11 @@ import { LOG } from "../config/logger";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import Icon from "react-native-vector-icons/Ionicons";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const LoginScreen = () => {
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const [showPassword, setShowPassword] = useState<Boolean>(false);
 
   const onPressShowPassword = () => {
@@ -93,7 +96,12 @@ const LoginScreen = () => {
           {/* <ButtonSpinner mr="$1" /> */}
           <ButtonText>Log In</ButtonText>
         </Button>
-        <Text textAlign="center" mt="$4" color="#fff">
+        <Text
+          textAlign="center"
+          mt="$4"
+          color="#fff"
+          onPress={() => navigation.navigate("Register")}
+        >
           Sign up
         </Text>
       </Box>

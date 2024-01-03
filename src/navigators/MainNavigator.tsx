@@ -6,7 +6,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 
 const Stack = createStackNavigator();
-const isSignedIn = false;
+const isSignedIn = true;
 
 function MainNavigator() {
 

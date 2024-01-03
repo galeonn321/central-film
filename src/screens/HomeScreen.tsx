@@ -7,7 +7,7 @@ import { LOG } from "../config/logger";
 import SearchContent from "../components/searchContent/SearchContent";
 import { Image, Box, Button, ButtonText } from "@gluestack-ui/themed";
 import { StackNavigationProp } from "@react-navigation/stack";
-import LottieView from "lottie-react-native";
+// import LottieView from "lottie-react-native";
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
@@ -17,7 +17,7 @@ const HomeScreen = () => {
     <ScrollView
       style={{ flex: 1, paddingTop: insets.top, backgroundColor: "#000" }}
     >
-      <Button onPress={() => navigation.navigate("LoginScreen")}>
+      {/* <Button onPress={() => navigation.navigate("LoginScreen")}>
         <ButtonText>LoginScreen</ButtonText>
       </Button>
       <Button onPress={() => navigation.navigate("RegisterScreen")}>
@@ -25,7 +25,7 @@ const HomeScreen = () => {
       </Button>
       <Button onPress={() => navigation.navigate("WelcomeScreen")}>
         <ButtonText>WelcomeScreen</ButtonText>
-      </Button>
+      </Button> */}
       <Box>
         {/* <Image
           source={require('../../assets/images/icon.png')}
@@ -38,7 +38,7 @@ const HomeScreen = () => {
           role="presentation"
         /> */}
         <Box alignSelf="center">
-          <LottieView
+          {/* <LottieView
             autoPlay
             resizeMode="cover"
             loop={false}
@@ -48,7 +48,7 @@ const HomeScreen = () => {
               backgroundColor: "#000",
             }}
             source={require("../../assets/lottie/cinema.json")}
-          />
+          /> */}
         </Box>
         <SearchContent />
       </Box>

@@ -6,33 +6,29 @@ import {
   Image,
   Text,
 } from "@gluestack-ui/themed";
-import React, { useEffect, useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Dimensions, View } from "react-native";
 const Width = Dimensions.get("window").width;
 const Height = Dimensions.get("window").height;
-import LottieView from "lottie-react-native";
+
 import Swiper from "react-native-swiper";
 
 const WelcomeScreen = () => {
-  const firstAnimationRef = useRef<LottieView | null>(null);
-  const secondAnimationRef = useRef<LottieView | null>(null);
-
-  useEffect(() => {
-    // Play the first animation when the component mounts
-    firstAnimationRef.current?.play();
-  }, []);
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   return (
     <Box w="$full" flex={1} bgColor="#000">
       <Swiper
-        style={{ height: Height / 1.6, backgroundColor: "#000" }}
-        autoplay={true}
+        style={{ height: Height / 1.4, backgroundColor: "#000" }}
+        autoplay={false}
         showsPagination={true}
         activeDotColor="#7f1d1d"
         dotColor="#666"
         paginationStyle={{ bottom: Height * 0.12, position: "absolute" }}
         showsButtons={false}
       >
+        {/* First Slide */}
         <Box>
           {/* <Text>Hello Swiper</Text> */}
           <Image
@@ -48,7 +44,7 @@ const WelcomeScreen = () => {
             <Text fontSize={"$lg"} color="#fff" mt={"$4"}>
               Welcome to
             </Text>
-            <Heading fontSize={"$6xl"} bold color="#fff" pt={"$8"}>
+            <Heading fontSize={"$5xl"} bold color="#fff" pt={"$6"}>
               Central Film
             </Heading>
             <Text textAlign="center" color="#777" mt={"$2"} fontSize={"$xl"}>
@@ -56,6 +52,7 @@ const WelcomeScreen = () => {
             </Text>
           </Box>
         </Box>
+        {/* Second Slide */}
         <Box justifyContent="center" alignItems="center">
           {/* <Text>Hello Swiper</Text> */}
           <Image
@@ -69,7 +66,7 @@ const WelcomeScreen = () => {
           <Text fontSize={"$lg"} color="#fff" mt={"$2"}>
             Real
           </Text>
-          <Heading fontSize={"$6xl"} bold color="#fff" pt={"$8"}>
+          <Heading fontSize={"$5xl"} bold color="#fff" pt={"$6"}>
             Reviews
           </Heading>
           <Text textAlign="center" color="#777" mt={"$1"} fontSize={"$xl"}>
@@ -77,6 +74,7 @@ const WelcomeScreen = () => {
             your honest opinion without filters.
           </Text>
         </Box>
+        {/* Third Slide */}
         <Box justifyContent="center" alignItems="center">
           {/* <Text>Hello Swiper</Text> */}
           <Image
@@ -90,7 +88,7 @@ const WelcomeScreen = () => {
           <Text fontSize={"$lg"} color="#fff" mt={"$2"}>
             Quick search for
           </Text>
-          <Heading fontSize={"$6xl"} bold color="#fff" pt={"$8"}>
+          <Heading fontSize={"$5xl"} bold color="#fff" pt={"$6"}>
             Films & Series
           </Heading>
           <Text textAlign="center" color="#777" mt={"$1"} fontSize={"$xl"}>
@@ -98,17 +96,24 @@ const WelcomeScreen = () => {
             read the reviews and make your choice.
           </Text>
         </Box>
-        {/* Remaining slides */}
       </Swiper>
       <Button
         bgColor="$red900"
         mx="$10"
         rounded={"$full"}
         bottom={Height * 0.08}
+        onPress={() => navigation.navigate("Login")}
       >
         <ButtonText bold>Login</ButtonText>
       </Button>
-      <Text textAlign="center" bold bottom={Height * 0.07}>
+      <Text
+        textAlign="center"
+        bold
+        bottom={Height * 0.07}
+        onPress={() =>
+          navigation.replace("HomeScreen", { screen: "HomeScreen" })
+        }
+      >
         Continue as guest
       </Text>
     </Box>
