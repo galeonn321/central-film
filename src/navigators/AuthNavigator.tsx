@@ -4,12 +4,12 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 
-const Stack = createStackNavigator();
+const AuthStack = createStackNavigator();
 
 const AuthNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Welcome">
-      <Stack.Screen
+    <AuthStack.Navigator initialRouteName="Welcome">
+      <AuthStack.Screen
         options={{
           title: "",
           headerBackTitle: "",
@@ -20,7 +20,7 @@ const AuthNavigator = () => {
         name="Welcome"
         component={WelcomeScreen}
       />
-      <Stack.Screen
+      <AuthStack.Screen
         options={{
           title: "",
           headerBackTitle: "",
@@ -31,7 +31,7 @@ const AuthNavigator = () => {
         name="Login"
         component={LoginScreen}
       />
-      <Stack.Screen
+      <AuthStack.Screen
         options={{
           title: "",
           headerBackTitle: "",
@@ -42,7 +42,7 @@ const AuthNavigator = () => {
         name="Register"
         component={RegisterScreen}
       />
-    </Stack.Navigator>
+    </AuthStack.Navigator>
   );
 };
 

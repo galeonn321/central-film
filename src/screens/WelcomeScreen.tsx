@@ -110,9 +110,7 @@ const WelcomeScreen = () => {
         textAlign="center"
         bold
         bottom={Height * 0.07}
-        onPress={() =>
-          navigation.replace("HomeScreen", { screen: "HomeScreen" })
-        }
+        onPress={() => navigation.replace("MainNavigator")}
       >
         Continue as guest
       </Text>

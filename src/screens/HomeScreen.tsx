@@ -27,16 +27,6 @@ const HomeScreen = () => {
         <ButtonText>WelcomeScreen</ButtonText>
       </Button> */}
       <Box>
-        {/* <Image
-          source={require('../../assets/images/icon.png')}
-          alt='miniature example'
-          size="xs"
-          rounded={"$full"}
-          alignSelf="center"
-          mb='$4'
-          mt='$2'
-          role="presentation"
-        /> */}
         <Box alignSelf="center">
           {/* <LottieView
             autoPlay
