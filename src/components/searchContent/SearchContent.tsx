@@ -19,6 +19,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions, View } from "react-native";
 import { Movie } from "../../types/movieInterface";
+import { AntDesign } from "@expo/vector-icons";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -108,18 +109,19 @@ const SearchContent = () => {
       >
         type the film you are looking for..
       </Heading>
+
       <Input
-        bgColor="#707070"
+        bgColor={"$warmGray700"}
         borderColor="#fff"
-        borderWidth={1}
+        borderWidth={0.5}
         borderRadius={"$full"}
         mx="$4"
         my="$2"
         alignItems="center"
+        px={"$2"}
       >
-        <InputIcon p="$3" ml={"$2"} mt="$1" alignSelf="center">
-          <Icon name={"search-outline"} size={20} color={"#fff"} />
-        </InputIcon>
+        <AntDesign name="search1" size={20} color="white" />
+
         <InputField
           onChangeText={(text: string) => setInputText(text)}
           value={inputText}
@@ -129,9 +131,7 @@ const SearchContent = () => {
         />
         {inputText.length > 0 && (
           <Pressable onPress={() => setInputText("")}>
-            <InputIcon p="$4" alignSelf="center" mr={"$1.5"}>
-              <Icon name={"close-outline"} size={30} color={"#fff"} />
-            </InputIcon>
+            <Icon name={"close-outline"} size={25} color={"#fff"} />
           </Pressable>
         )}
       </Input>

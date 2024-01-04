@@ -7,6 +7,7 @@ import { LOG } from "../config/logger";
 import SearchContent from "../components/searchContent/SearchContent";
 import { Image, Box, Button, ButtonText } from "@gluestack-ui/themed";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { AntDesign } from '@expo/vector-icons';
 // import LottieView from "lottie-react-native";
 
 const HomeScreen = () => {
@@ -17,15 +18,6 @@ const HomeScreen = () => {
     <ScrollView
       style={{ flex: 1, paddingTop: insets.top, backgroundColor: "#000" }}
     >
-      {/* <Button onPress={() => navigation.navigate("LoginScreen")}>
-        <ButtonText>LoginScreen</ButtonText>
-      </Button>
-      <Button onPress={() => navigation.navigate("RegisterScreen")}>
-        <ButtonText>RegisterScreen</ButtonText>
-      </Button>
-      <Button onPress={() => navigation.navigate("WelcomeScreen")}>
-        <ButtonText>WelcomeScreen</ButtonText>
-      </Button> */}
       <Box>
         <Box alignSelf="center">
           {/* <LottieView
@@ -39,6 +31,7 @@ const HomeScreen = () => {
             }}
             source={require("../../assets/lottie/cinema.json")}
           /> */}
+          
         </Box>
         <SearchContent />
       </Box>

@@ -58,6 +58,8 @@ const LoginScreen = () => {
               UserName or email
             </FormControlLabelText>
           </FormControlLabel>
+
+
           <Input variant="underlined" borderColor="#fff">
             <InputField color="#fff" selectionColor={"#fff"} />
           </Input>
@@ -66,6 +68,7 @@ const LoginScreen = () => {
           <FormControlLabel mb="$1">
             <FormControlLabelText color="#fff">Password</FormControlLabelText>
           </FormControlLabel>
+          
           <Input variant="underlined" borderColor="#fff">
             <InputField
               type={showPassword ? "text" : "password"}
@@ -92,6 +95,7 @@ const LoginScreen = () => {
           action="primary"
           isDisabled={false}
           isFocusVisible={false}
+          onPress={() => navigation.navigate("")}
         >
           {/* <ButtonSpinner mr="$1" /> */}
           <ButtonText>Log In</ButtonText>

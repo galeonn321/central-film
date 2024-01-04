@@ -15,9 +15,9 @@ const MovieDetailScreen = ({ route }: any) => {
   const roundedNumber = parseFloat(filmItem.item.vote_average.toFixed(1));
   const Data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77];
 
-  useEffect(() => {
-    LOG.info(filmItem, "item");
-  }, []);
+  // useEffect(() => {
+  //   LOG.info(filmItem, "item");
+  // }, []);
 
   const seeMore = () => {
     setIsTruncated(!isTruncated);
@@ -145,9 +145,9 @@ const MovieDetailScreen = ({ route }: any) => {
             </Text>
           )}
         </Box>
-        <Box mx="$4" mt="$6" minHeight={200}>
+        <Box mx="$4" pt="$6" minHeight={200}>
           <FilmCommentInput />
-          <Text color="#fff" fontWeight="$bold" fontSize={"$2xl"}>
+          <Text color="#fff" fontWeight="$bold" fontSize={"$xl"}>
             Comments (1)
           </Text>
           <FlashList
