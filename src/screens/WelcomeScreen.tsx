@@ -13,9 +13,16 @@ const Width = Dimensions.get("window").width;
 const Height = Dimensions.get("window").height;
 
 import Swiper from "react-native-swiper";
+import { useDispatch } from "react-redux";
+import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
 const WelcomeScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
+
+  const handleContinueAsGuest = () => {
+    dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+  }
 
   return (
     <Box w="$full" flex={1} bgColor="#000">
@@ -110,7 +117,7 @@ const WelcomeScreen = () => {
         textAlign="center"
         bold
         bottom={Height * 0.07}
-        onPress={() => navigation.replace("MainNavigator")}
+        onPress={handleContinueAsGuest}
       >
         Continue as guest
       </Text>

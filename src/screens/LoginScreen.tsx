@@ -19,8 +19,11 @@ const windowHeight = Dimensions.get("window").height;
 import Icon from "react-native-vector-icons/Ionicons";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { setAuthStatus } from "../lib/redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [showPassword, setShowPassword] = useState<Boolean>(false);
 
@@ -28,6 +31,10 @@ const LoginScreen = () => {
     setShowPassword((showState) => {
       return !showState;
     });
+  };
+
+  const handleLogin = () => {
+    dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
   };
 
   return (
@@ -59,7 +66,6 @@ const LoginScreen = () => {
             </FormControlLabelText>
           </FormControlLabel>
 
-
           <Input variant="underlined" borderColor="#fff">
             <InputField color="#fff" selectionColor={"#fff"} />
           </Input>
@@ -68,7 +74,7 @@ const LoginScreen = () => {
           <FormControlLabel mb="$1">
             <FormControlLabelText color="#fff">Password</FormControlLabelText>
           </FormControlLabel>
-          
+
           <Input variant="underlined" borderColor="#fff">
             <InputField
               type={showPassword ? "text" : "password"}
@@ -95,7 +101,7 @@ const LoginScreen = () => {
           action="primary"
           isDisabled={false}
           isFocusVisible={false}
-          onPress={() => navigation.navigate("")}
+          onPress={handleLogin}
         >
           {/* <ButtonSpinner mr="$1" /> */}
           <ButtonText>Log In</ButtonText>

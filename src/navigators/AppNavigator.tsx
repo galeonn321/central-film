@@ -1,13 +1,21 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { useEffect } from "react";
 import MainNavigator from "./MainNavigator";
 import AuthNavigator from "./AuthNavigator";
+import { useSelector } from "react-redux";
+import { LOG } from "../config/logger";
 
-const Stack = createStackNavigator();
-const isSignedIn = false;
 
 const AppNavigator: React.FC = () => {
-  return isSignedIn ? <MainNavigator /> : <AuthNavigator />;
+  const isUserAuthenticated = useSelector((state: any ) => state.auth.isAuthenticated);
+
+
+  useEffect(() => {
+    LOG.info(isUserAuthenticated)
+  }, [isUserAuthenticated]);
+  
+
+
+  return isUserAuthenticated ? <MainNavigator /> : <AuthNavigator />;
 };
 
 export default AppNavigator;
