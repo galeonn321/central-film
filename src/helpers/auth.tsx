@@ -1,3 +1,4 @@
+import { LOG } from "../config/logger";
 import { User } from "../types/interfaces";
 
 const API_URL_REGISTER = "http://localhost:3000/api/auth/register";
@@ -14,12 +15,12 @@ export const registerUser = async (user: User, cleanFormRegister: any) => {
       body: JSON.stringify(user),
     });
     const data: any = await resp.json();
-    console.log(data);
+    LOG.debug(data);
     if (data.ok) {
       cleanFormRegister();
     }
   } catch (error) {
-    console.log(error);
+    LOG.error(error);
   };
 };
 
@@ -33,12 +34,12 @@ export const loginUser = async (user: User, cleanFormLogin: any) => {
       body: JSON.stringify(user),
     });
     const data: any = await resp.json();
-    console.log(data);
+    LOG.debug(data);
     if (data.ok) {
       cleanFormLogin();
     }
   } catch (error) {
-    console.log(error);
+    LOG.error(error);
   };
 };
 
@@ -51,8 +52,8 @@ export const logoutUser = async () => {
       },
     });
     const data: any = await resp.json();
-    console.log(data);
+    LOG.debug(data);
   } catch (error) {
-    console.log(error);
+    LOG.error(error);
   };
 };
