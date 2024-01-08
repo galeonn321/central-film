@@ -1,7 +1,5 @@
 import {
   Box,
-  Button,
-  ButtonText,
   FormControl,
   FormControlLabel,
   FormControlLabelText,
@@ -9,10 +7,11 @@ import {
   Image,
   Input,
   InputField,
+  Pressable,
   Text,
 } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
-import { Dimensions, ImageBackground } from "react-native";
+import { Dimensions } from "react-native";
 import { LOG } from "../config/logger";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -21,20 +20,23 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import { useDispatch } from "react-redux";
+import LoginButton from "../components/loginButton/LoginButton";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
+  const [usernameInput, setUsernameInput] = useState<string>("");
+  const [passwordInput, setPasswordInput] = useState<string>("");
   const [showPassword, setShowPassword] = useState<Boolean>(false);
+
+  useEffect(() => {
+    LOG.info("userInput:", usernameInput, "passwordinput:", passwordInput);
+  }, [usernameInput, passwordInput]);
 
   const onPressShowPassword = () => {
     setShowPassword((showState) => {
       return !showState;
     });
-  };
-
-  const handleLogin = () => {
-    dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
   };
 
   return (
@@ -67,7 +69,16 @@ const LoginScreen = () => {
           </FormControlLabel>
 
           <Input variant="underlined" borderColor="#fff">
-            <InputField color="#fff" selectionColor={"#fff"} />
+            <InputField
+              color="#fff"
+              selectionColor={"#fff"}
+              onChangeText={(text: string) => setUsernameInput(text)}
+            />
+            {usernameInput.length > 0 && (
+              <Pressable onPress={() => setUsernameInput("")}>
+                <Icon name={"close-outline"} size={25} color={"#fff"} />
+              </Pressable>
+            )}
           </Input>
         </FormControl>
         <FormControl mt={"$4"} size="md">
@@ -79,6 +90,8 @@ const LoginScreen = () => {
             <InputField
               type={showPassword ? "text" : "password"}
               selectionColor={"#fff"}
+              color="#fff"
+              onChangeText={(text: string) => setPasswordInput(text)}
             />
             <Icon
               name={showPassword ? "eye" : "eye-off"}
@@ -92,20 +105,10 @@ const LoginScreen = () => {
             Forgot Password?
           </Text>
         </FormControl>
-        <Button
-          mt="$10"
-          rounded={"$full"}
-          bgColor="$red900"
-          size="md"
-          variant="solid"
-          action="primary"
-          isDisabled={false}
-          isFocusVisible={false}
-          onPress={handleLogin}
-        >
-          {/* <ButtonSpinner mr="$1" /> */}
-          <ButtonText>Log In</ButtonText>
-        </Button>
+        <LoginButton
+          usernameInput={usernameInput}
+          passwordInput={passwordInput}
+        />
         <Text
           textAlign="center"
           mt="$4"
