@@ -5,7 +5,7 @@ const API_URL_REGISTER = "http://localhost:3000/api/auth/register";
 const API_URL_LOGIN = "http://localhost:3000/api/auth/login";
 const API_URL_LOGOUT = "http://localhost:3000/api/auth/logout";
 
-export const registerUser = async (user: User, cleanFormRegister: any) => {
+export const registerUser = async (user: User) => {
   try {
     const resp: any = await fetch(API_URL_REGISTER, {
       method: "POST",
@@ -17,14 +17,14 @@ export const registerUser = async (user: User, cleanFormRegister: any) => {
     const data: any = await resp.json();
     LOG.debug(data);
     if (data.ok) {
-      cleanFormRegister();
+      LOG.info("User registered successfully")
     }
   } catch (error) {
     LOG.error(error);
   };
 };
 
-export const loginUser = async (user: User, cleanFormLogin: any) => {
+export const loginUser = async (user: User) => {
   try {
     const resp: any = await fetch(API_URL_LOGIN, {
       method: "POST",
@@ -36,7 +36,7 @@ export const loginUser = async (user: User, cleanFormLogin: any) => {
     const data: any = await resp.json();
     LOG.debug(data);
     if (data.ok) {
-      cleanFormLogin();
+      LOG.info("User logged in successfully")
     }
   } catch (error) {
     LOG.error(error);

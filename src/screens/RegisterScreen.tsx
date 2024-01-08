@@ -9,6 +9,7 @@ import {
   Image,
   Input,
   InputField,
+  Pressable,
   Text,
 } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
@@ -19,15 +20,51 @@ const windowHeight = Dimensions.get("window").height;
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { registerUser } from "../helpers/auth";
+import { User } from "../types/interfaces";
 
 const RegisterScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [showPassword, setShowPassword] = useState<Boolean>(false);
+  const [usernameInput, setUsernameInput] = useState<string>("");
+  const [emailInput, setEmailInput] = useState<string>("");
+  const [passwordInput, setPasswordInput] = useState<string>("");
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
 
   const onPressShowPassword = () => {
     setShowPassword((showState) => {
       return !showState;
     });
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValid = emailRegex.test(email);
+    setIsEmailValid(isValid);
+  };
+
+  const handleRegister = async () => {
+    validateEmail(emailInput);
+    const userData: User = {
+      name: usernameInput,
+      email: emailInput,
+      password: passwordInput,
+    };
+    if (usernameInput === "" || passwordInput === "" || emailInput === "") {
+      LOG.error("Username or password or email is empty");
+      return;
+    } else if (!isEmailValid) {
+      LOG.error("Email is not valid");
+      return;
+    } else if (passwordInput.length < 8) {
+      LOG.error("Password must be at least 8 characters");
+      return;
+    } else if (usernameInput.length < 4 || emailInput.length < 4) {
+      LOG.error("Username or email must be at least 4 characters");
+      return;
+    } else {
+      await registerUser(userData);
+    }
   };
 
   return (
@@ -58,7 +95,20 @@ const RegisterScreen = () => {
             <FormControlLabelText color="#fff">UserName</FormControlLabelText>
           </FormControlLabel>
           <Input variant="underlined" borderColor="#fff">
-            <InputField color="#fff" selectionColor={"#fff"} />
+            <InputField
+              value={usernameInput}
+              color="#fff"
+              selectionColor={"#fff"}
+              onChangeText={(text: string) => setUsernameInput(text)}
+            />
+            {usernameInput.length > 0 && (
+              <Pressable
+                onPress={() => setUsernameInput("")}
+                justifyContent="center"
+              >
+                <Icon name={"close-outline"} size={25} color={"#fff"} />
+              </Pressable>
+            )}
           </Input>
         </FormControl>
         <FormControl mt={"$4"}>
@@ -66,25 +116,33 @@ const RegisterScreen = () => {
             <FormControlLabelText color="#fff">email</FormControlLabelText>
           </FormControlLabel>
           <Input variant="underlined" borderColor="#fff">
-            <InputField color="#fff" selectionColor={"#fff"} />
+            <InputField
+              value={emailInput}
+              color="#fff"
+              selectionColor={"#fff"}
+              onChangeText={(text: string) => setEmailInput(text)}
+            />
+            {emailInput.length > 0 && (
+              <Pressable
+                onPress={() => setEmailInput("")}
+                justifyContent="center"
+              >
+                <Icon name={"close-outline"} size={25} color={"#fff"} />
+              </Pressable>
+            )}
           </Input>
         </FormControl>
-        <FormControl
-          mt={"$4"}
-          size="md"
-          isDisabled={false}
-          isInvalid={false}
-          isReadOnly={false}
-          isRequired={false}
-        >
+        <FormControl mt={"$4"} size="md">
           <FormControlLabel mb="$1">
             <FormControlLabelText color="#fff">Password</FormControlLabelText>
           </FormControlLabel>
           <Input variant="underlined" borderColor="#fff">
             <InputField
+              value={passwordInput}
               type={showPassword ? "text" : "password"}
               color="#fff"
               selectionColor={"#fff"}
+              onChangeText={(text: string) => setPasswordInput(text)}
             />
             <Icon
               name={showPassword ? "eye" : "eye-off"}
@@ -104,11 +162,17 @@ const RegisterScreen = () => {
           action="primary"
           isDisabled={false}
           isFocusVisible={false}
+          onPress={handleRegister}
         >
           {/* <ButtonSpinner mr="$1" /> */}
           <ButtonText>Create Account</ButtonText>
         </Button>
-        <Text textAlign="center" mt="$4" color="#fff" onPress={() => navigation.navigate("Login")}>
+        <Text
+          textAlign="center"
+          mt="$4"
+          color="#fff"
+          onPress={() => navigation.navigate("Login")}
+        >
           Sign in
         </Text>
       </Box>

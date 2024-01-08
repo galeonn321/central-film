@@ -70,13 +70,13 @@ const LoginScreen = () => {
 
           <Input variant="underlined" borderColor="#fff">
             <InputField
+              value={usernameInput}
               color="#fff"
               selectionColor={"#fff"}
               onChangeText={(text: string) => setUsernameInput(text)}
-              
             />
             {usernameInput.length > 0 && (
-              <Pressable onPress={() => setUsernameInput("")}>
+              <Pressable onPress={() => setUsernameInput("")} justifyContent="center">
                 <Icon name={"close-outline"} size={25} color={"#fff"} />
               </Pressable>
             )}
@@ -86,19 +86,14 @@ const LoginScreen = () => {
           <FormControlLabel mb="$1">
             <FormControlLabelText color="#fff">Password</FormControlLabelText>
           </FormControlLabel>
-
           <Input variant="underlined" borderColor="#fff">
             <InputField
+              value={passwordInput}
               type={showPassword ? "text" : "password"}
               selectionColor={"#fff"}
               color="#fff"
               onChangeText={(text: string) => setPasswordInput(text)}
             />
-            {passwordInput.length > 0 && (
-              <Pressable onPress={() => setPasswordInput("")}>
-                <Icon name={"close-outline"} size={25} color={"#fff"} />
-              </Pressable>
-            )}
             <Icon
               name={showPassword ? "eye" : "eye-off"}
               size={20}
