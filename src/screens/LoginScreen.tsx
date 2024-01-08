@@ -93,6 +93,11 @@ const LoginScreen = () => {
               color="#fff"
               onChangeText={(text: string) => setPasswordInput(text)}
             />
+            {passwordInput.length > 0 && (
+              <Pressable onPress={() => setPasswordInput("")}>
+                <Icon name={"close-outline"} size={25} color={"#fff"} />
+              </Pressable>
+            )}
             <Icon
               name={showPassword ? "eye" : "eye-off"}
               size={20}
