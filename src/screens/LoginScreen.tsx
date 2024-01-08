@@ -73,6 +73,7 @@ const LoginScreen = () => {
               color="#fff"
               selectionColor={"#fff"}
               onChangeText={(text: string) => setUsernameInput(text)}
+              
             />
             {usernameInput.length > 0 && (
               <Pressable onPress={() => setUsernameInput("")}>
