@@ -46,7 +46,7 @@ const RegisterScreen = () => {
   const handleRegister = async () => {
     validateEmail(emailInput);
     const userData: User = {
-      name: usernameInput,
+      username: usernameInput,
       email: emailInput,
       password: passwordInput,
     };

@@ -6,6 +6,7 @@ const API_URL_LOGIN = "http://localhost:3000/api/auth/login";
 const API_URL_LOGOUT = "http://localhost:3000/api/auth/logout";
 
 export const registerUser = async (user: User) => {
+  LOG.info(JSON.stringify(user))
   try {
     const resp: any = await fetch(API_URL_REGISTER, {
       method: "POST",
@@ -20,7 +21,7 @@ export const registerUser = async (user: User) => {
       LOG.info("User registered successfully")
     }
   } catch (error) {
-    LOG.error(error);
+    LOG.error(error, 'error');
   };
 };
 
