@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./src/lib/redux/store";
 
 export default function App() {
+
   return (
     <Provider store={store}>
       <GluestackUIProvider config={config}>

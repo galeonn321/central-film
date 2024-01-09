@@ -15,15 +15,13 @@ import { Dimensions } from "react-native";
 import { LOG } from "../config/logger";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-import Icon from "react-native-vector-icons/Ionicons";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { setAuthStatus } from "../lib/redux/slices/authSlice";
-import { useDispatch } from "react-redux";
 import LoginButton from "../components/loginButton/LoginButton";
+import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const LoginScreen = () => {
-  const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [usernameInput, setUsernameInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
@@ -76,8 +74,11 @@ const LoginScreen = () => {
               onChangeText={(text: string) => setUsernameInput(text)}
             />
             {usernameInput.length > 0 && (
-              <Pressable onPress={() => setUsernameInput("")} justifyContent="center">
-                <Icon name={"close-outline"} size={25} color={"#fff"} />
+              <Pressable
+                onPress={() => setUsernameInput("")}
+                justifyContent="center"
+              >
+                <AntDesign name="close" size={25} color={"#fff"} />
               </Pressable>
             )}
           </Input>
@@ -94,7 +95,7 @@ const LoginScreen = () => {
               color="#fff"
               onChangeText={(text: string) => setPasswordInput(text)}
             />
-            <Icon
+            <Ionicons
               name={showPassword ? "eye" : "eye-off"}
               size={20}
               style={{ alignSelf: "center" }}
