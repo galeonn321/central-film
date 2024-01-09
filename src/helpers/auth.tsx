@@ -6,7 +6,7 @@ const API_URL_LOGIN = "http://localhost:3000/api/auth/login";
 const API_URL_LOGOUT = "http://localhost:3000/api/auth/logout";
 
 export const registerUser = async (user: User) => {
-  LOG.info(JSON.stringify(user))
+  LOG.info(JSON.stringify(user));
   try {
     const resp: any = await fetch(API_URL_REGISTER, {
       method: "POST",
@@ -15,14 +15,15 @@ export const registerUser = async (user: User) => {
       },
       body: JSON.stringify(user),
     });
+
     const data: any = await resp.json();
-    LOG.debug(data);
+    LOG.warn(data);
     if (data.ok) {
-      LOG.info("User registered successfully")
+      LOG.info("User registered successfully");
     }
   } catch (error) {
-    LOG.error(error, 'error');
-  };
+    LOG.error(error, "error");
+  }
 };
 
 export const loginUser = async (user: User) => {
@@ -37,11 +38,11 @@ export const loginUser = async (user: User) => {
     const data: any = await resp.json();
     LOG.debug(data);
     if (data.ok) {
-      LOG.info("User logged in successfully")
+      LOG.info("User logged in successfully");
     }
   } catch (error) {
     LOG.error(error);
-  };
+  }
 };
 
 export const logoutUser = async () => {
@@ -56,5 +57,5 @@ export const logoutUser = async () => {
     LOG.debug(data);
   } catch (error) {
     LOG.error(error);
-  };
+  }
 };

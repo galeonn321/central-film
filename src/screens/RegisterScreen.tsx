@@ -31,6 +31,11 @@ const RegisterScreen = () => {
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
 
+  useEffect(() => {
+    validateEmail(emailInput);
+    LOG.debug("Email validated", isEmailValid);
+  }, [emailInput]);
+
   const onPressShowPassword = () => {
     setShowPassword((showState) => {
       return !showState;
@@ -44,7 +49,6 @@ const RegisterScreen = () => {
   };
 
   const handleRegister = () => {
-    validateEmail(emailInput);
     const userData: User = {
       username: usernameInput,
       email: emailInput,
