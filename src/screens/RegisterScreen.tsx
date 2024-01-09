@@ -43,7 +43,7 @@ const RegisterScreen = () => {
     setIsEmailValid(isValid);
   };
 
-  const handleRegister = async () => {
+  const handleRegister = () => {
     validateEmail(emailInput);
     const userData: User = {
       username: usernameInput,
@@ -63,7 +63,7 @@ const RegisterScreen = () => {
       LOG.error("Username or email must be at least 4 characters");
       return;
     } else {
-      await registerUser(userData);
+      registerUser(userData);
     }
   };
 
