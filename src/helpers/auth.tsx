@@ -15,14 +15,13 @@ export const registerUser = async (user: User) => {
       },
       body: JSON.stringify(user),
     });
-
     const data: any = await resp.json();
     LOG.warn(data);
     if (data.ok) {
       LOG.info("User registered successfully");
     }
   } catch (error) {
-    LOG.error(error, "error");
+    LOG.error(`Error in registerUser: ${error}`,);
   }
 };
 

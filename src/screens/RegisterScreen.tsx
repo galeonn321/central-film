@@ -57,14 +57,14 @@ const RegisterScreen = () => {
     if (usernameInput === "" || passwordInput === "" || emailInput === "") {
       LOG.error("Username or password or email is empty");
       return;
-    } else if (!isEmailValid) {
-      LOG.error("Email is not valid");
-      return;
     } else if (passwordInput.length < 8) {
       LOG.error("Password must be at least 8 characters");
       return;
     } else if (usernameInput.length < 4 || emailInput.length < 4) {
       LOG.error("Username or email must be at least 4 characters");
+      return;
+    } else if (!isEmailValid) {
+      LOG.error("Email is not valid");
       return;
     } else {
       registerUser(userData);
