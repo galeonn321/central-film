@@ -9,20 +9,25 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Dimensions, View } from "react-native";
-const Width = Dimensions.get("window").width;
-const Height = Dimensions.get("window").height;
-
 import Swiper from "react-native-swiper";
 import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
+import { useEffect } from "react";
+import { LOG } from "../config/logger";
+const Width = Dimensions.get("window").width;
+const Height = Dimensions.get("window").height;
 
 const WelcomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
 
+  useEffect(() => {
+    LOG.info(setAuthStatus, "setAuthStatus");
+  }, []);
+
   const handleContinueAsGuest = () => {
     dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
-  }
+  };
 
   return (
     <Box w="$full" flex={1} bgColor="#000">

@@ -22,6 +22,9 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { registerUser } from "../helpers/auth";
 import { User } from "../types/interfaces";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
 const RegisterScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
@@ -33,7 +36,6 @@ const RegisterScreen = () => {
 
   useEffect(() => {
     validateEmail(emailInput);
-    LOG.debug("Email validated", isEmailValid);
   }, [emailInput]);
 
   const onPressShowPassword = () => {
@@ -110,7 +112,7 @@ const RegisterScreen = () => {
                 onPress={() => setUsernameInput("")}
                 justifyContent="center"
               >
-                <Icon name={"close-outline"} size={25} color={"#fff"} />
+                <AntDesign name="close" size={25} color={"#fff"} />
               </Pressable>
             )}
           </Input>
@@ -131,7 +133,7 @@ const RegisterScreen = () => {
                 onPress={() => setEmailInput("")}
                 justifyContent="center"
               >
-                <Icon name={"close-outline"} size={25} color={"#fff"} />
+                <AntDesign name="close" size={25} color={"#fff"} />
               </Pressable>
             )}
           </Input>
@@ -148,7 +150,7 @@ const RegisterScreen = () => {
               selectionColor={"#fff"}
               onChangeText={(text: string) => setPasswordInput(text)}
             />
-            <Icon
+            <Ionicons
               name={showPassword ? "eye" : "eye-off"}
               size={20}
               style={{ alignSelf: "center" }}

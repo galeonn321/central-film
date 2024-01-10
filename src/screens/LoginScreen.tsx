@@ -18,18 +18,13 @@ const windowHeight = Dimensions.get("window").height;
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import LoginButton from "../components/loginButton/LoginButton";
-import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 
 const LoginScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [usernameInput, setUsernameInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [showPassword, setShowPassword] = useState<Boolean>(false);
-
-  useEffect(() => {
-    LOG.info("userInput:", usernameInput, "passwordinput:", passwordInput);
-  }, [usernameInput, passwordInput]);
 
   const onPressShowPassword = () => {
     setShowPassword((showState) => {

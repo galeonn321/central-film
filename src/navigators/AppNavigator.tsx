@@ -4,16 +4,14 @@ import AuthNavigator from "./AuthNavigator";
 import { useSelector } from "react-redux";
 import { LOG } from "../config/logger";
 
-
 const AppNavigator: React.FC = () => {
-  const isUserAuthenticated = useSelector((state: any ) => state.auth.isAuthenticated);
-
+  const isUserAuthenticated = useSelector(
+    (state: any) => state.auth.isAuthenticated
+  );
 
   useEffect(() => {
-    LOG.info(isUserAuthenticated)
+    LOG.info(`isUser authenticated: ${isUserAuthenticated}`);
   }, [isUserAuthenticated]);
-  
-
 
   return isUserAuthenticated ? <MainNavigator /> : <AuthNavigator />;
 };
