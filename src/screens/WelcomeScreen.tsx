@@ -21,9 +21,9 @@ const WelcomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
 
-  useEffect(() => {
-    LOG.info(setAuthStatus, "setAuthStatus");
-  }, []);
+  // useEffect(() => {
+  //   LOG.info(setAuthStatus, "setAuthStatus");
+  // }, []);
 
   const handleContinueAsGuest = () => {
     dispatch(setAuthStatus({ isAuthenticated: true, user: null }));

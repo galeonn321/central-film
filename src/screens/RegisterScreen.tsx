@@ -13,11 +13,10 @@ import {
   Text,
 } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
-import { Dimensions, ImageBackground } from "react-native";
+import { Dimensions } from "react-native";
 import { LOG } from "../config/logger";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { registerUser } from "../helpers/auth";
@@ -27,6 +26,7 @@ import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
 const RegisterScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   const [usernameInput, setUsernameInput] = useState<string>("");
@@ -72,6 +72,8 @@ const RegisterScreen = () => {
       registerUser(userData);
     }
   };
+
+  const openModal = () => {};
 
   return (
     <Box w="$full" h={windowHeight} bgColor="$black">
@@ -181,6 +183,20 @@ const RegisterScreen = () => {
         >
           Sign in
         </Text>
+        <Button
+          mt="$10"
+          rounded={"$full"}
+          bgColor="$red900"
+          size="md"
+          variant="solid"
+          action="primary"
+          isDisabled={false}
+          isFocusVisible={false}
+          onPress={openModal}
+        >
+          {/* <ButtonSpinner mr="$1" /> */}
+          <ButtonText>opEN mODAL</ButtonText>
+        </Button>
       </Box>
     </Box>
   );
