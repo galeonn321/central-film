@@ -50,7 +50,7 @@ const RegisterScreen = () => {
     setIsEmailValid(isValid);
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const userData: User = {
       username: usernameInput,
       email: emailInput,
@@ -69,7 +69,12 @@ const RegisterScreen = () => {
       LOG.error("Email is not valid");
       return;
     } else {
-      registerUser(userData);
+      try {
+        await registerUser(userData);
+        dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+      } catch (error) {
+        console.error("Registration failed:", error);
+      }
     }
   };
 
