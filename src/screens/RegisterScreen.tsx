@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   ButtonText,
+  Center,
   FormControl,
   FormControlLabel,
   FormControlLabelText,
@@ -9,6 +10,12 @@ import {
   Image,
   Input,
   InputField,
+  Modal,
+  ModalBackdrop,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
   Pressable,
   Text,
 } from "@gluestack-ui/themed";
@@ -24,6 +31,7 @@ import { User } from "../types/interfaces";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
+import { ModalFooter } from "@gluestack-ui/themed";
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
@@ -33,10 +41,16 @@ const RegisterScreen = () => {
   const [emailInput, setEmailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const ref = React.useRef(null);
 
   useEffect(() => {
     validateEmail(emailInput);
   }, [emailInput]);
+
+  useEffect(() => {
+    LOG.info(showModal);
+  }, [showModal]);
 
   const onPressShowPassword = () => {
     setShowPassword((showState) => {
@@ -50,7 +64,7 @@ const RegisterScreen = () => {
     setIsEmailValid(isValid);
   };
 
-  const handleRegister = async () => {
+  const handleRegister = () => {
     const userData: User = {
       username: usernameInput,
       email: emailInput,
@@ -59,8 +73,8 @@ const RegisterScreen = () => {
     if (usernameInput === "" || passwordInput === "" || emailInput === "") {
       LOG.error("Username or password or email is empty");
       return;
-    } else if (passwordInput.length < 8) {
-      LOG.error("Password must be at least 8 characters");
+    } else if (passwordInput.length < 8 || passwordInput.length > 12) {
+      LOG.error("Password must be at least 8 characters but no more than 12");
       return;
     } else if (usernameInput.length < 4 || emailInput.length < 4) {
       LOG.error("Username or email must be at least 4 characters");
@@ -70,15 +84,46 @@ const RegisterScreen = () => {
       return;
     } else {
       try {
-        await registerUser(userData);
-        dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+        // dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+
+        const userValidation = new Promise((resolve, reject) => {
+          // Assume registerUser is an asynchronous function that returns a Promise
+          registerUser(userData)
+            .then((result) => {
+              // Handle successful registration
+              LOG.info("entre al primer result wtf");
+              resolve(result);
+            })
+            .catch((error: any) => {
+              // Handle registration failure
+              LOG.info("entre al primer catch de error wtf", error);
+              reject(error);
+            });
+        });
+
+        userValidation
+          .then((result) => {
+            // Dispatch action or perform other actions on successful registration
+            LOG.debug("Registration successful despues de validaiton:", result);
+            //open a modal
+
+            dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+          })
+          .catch((error) => {
+            // Handle any other errors
+            console.error("Registration failed:", error);
+          });
       } catch (error) {
         console.error("Registration failed:", error);
       }
     }
   };
 
-  const openModal = () => {};
+  // const openModal = () => {
+  //   return (
+      
+  //   );
+  // };
 
   return (
     <Box w="$full" h={windowHeight} bgColor="$black">
@@ -105,7 +150,7 @@ const RegisterScreen = () => {
       <Box mx="$8">
         <FormControl>
           <FormControlLabel>
-            <FormControlLabelText color="#fff">UserName</FormControlLabelText>
+            <FormControlLabelText color="#fff">User</FormControlLabelText>
           </FormControlLabel>
           <Input variant="underlined" borderColor="#fff">
             <InputField
@@ -126,7 +171,7 @@ const RegisterScreen = () => {
         </FormControl>
         <FormControl mt={"$4"}>
           <FormControlLabel>
-            <FormControlLabelText color="#fff">email</FormControlLabelText>
+            <FormControlLabelText color="#fff">E-mail</FormControlLabelText>
           </FormControlLabel>
           <Input variant="underlined" borderColor="#fff">
             <InputField
@@ -197,12 +242,47 @@ const RegisterScreen = () => {
           action="primary"
           isDisabled={false}
           isFocusVisible={false}
-          onPress={openModal}
+          onPress={() => {
+            setShowModal(true);
+          }}
         >
           {/* <ButtonSpinner mr="$1" /> */}
-          <ButtonText>opEN mODAL</ButtonText>
+          <ButtonText>open pipipopo</ButtonText>
         </Button>
       </Box>
+      <Center h={300}>
+        <Modal
+          isOpen={showModal}
+          onClose={() => {
+            setShowModal(false);
+          }}
+          finalFocusRef={ref}
+        >
+          <ModalBackdrop />
+          <ModalContent>
+            <ModalHeader>
+              <Heading size="lg">Engage with Modals</Heading>
+            </ModalHeader>
+            <ModalBody>
+              <Text>
+                Ke mira sapo ahHAHAhaHahAHAhaHA
+              </Text>
+            </ModalBody>
+            <ModalFooter alignSelf="center">
+              <Button
+                size="md"
+                bgColor="$red900"
+                mr="$3"
+                onPress={() => {
+                  setShowModal(false);
+                }}
+              >
+                <ButtonText>Ok</ButtonText>
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Center>
     </Box>
   );
 };

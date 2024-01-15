@@ -4,9 +4,10 @@ import HomeScreen from "../screens/HomeScreen";
 import FilmsScreen from "../screens/FilmsScreen";
 import SeriesScreen from "../screens/SeriesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+
 
 const BottomTab = createBottomTabNavigator();
 
@@ -48,8 +49,8 @@ const BottomTabNavigator = () => {
           }
 
           return (
-            <Icon
-              name={iconName}
+            <Ionicons
+              name={iconName as any} 
               size={20}
               color={focused ? "#7f1d1d" : "#fff"}
             />

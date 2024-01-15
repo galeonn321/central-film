@@ -4,7 +4,7 @@ import useAuthentication from "../hooks/useAuthentication";
 import { User } from "../types/interfaces";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
-const API_URL_REGISTER = "http://192.168.1.18012312312:3000/api/auth/register";
+const API_URL_REGISTER = "http://192.168.1.180:3000/api/auth/register";
 const API_URL_LOGIN = "http://192.168.1.180:3000/api/auth/login";
 const API_URL_LOGOUT = "http://192.168.1.180:3000/api/auth/logout";
 
