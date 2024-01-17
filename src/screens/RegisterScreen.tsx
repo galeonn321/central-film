@@ -13,12 +13,11 @@ import {
   Modal,
   ModalBackdrop,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalHeader,
   Pressable,
   Text,
-  ModalFooter
+  ModalFooter,
 } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
@@ -102,14 +101,13 @@ const RegisterScreen = () => {
         });
 
         userValidation
-          .then((result:any) => {
+          .then((result: any) => {
             // Dispatch action or perform other actions on successful registration
             LOG.debug("Registration successful despues de validaiton:", result);
             //open a modal
-            if(result?.ok === true) {
-            dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
-            }
-            else {
+            if (result?.ok === true) {
+              dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+            } else {
               LOG.error("Registration failed:", result);
             }
           })
@@ -122,12 +120,6 @@ const RegisterScreen = () => {
       }
     }
   };
-
-  // const openModal = () => {
-  //   return (
-      
-  //   );
-  // };
 
   return (
     <Box w="$full" h={windowHeight} bgColor="$black">
@@ -268,9 +260,7 @@ const RegisterScreen = () => {
               <Heading size="lg">Engage with Modals</Heading>
             </ModalHeader>
             <ModalBody>
-              <Text>
-                Ke mira sapo ahHAHAhaHahAHAhaHA
-              </Text>
+              <Text>Ke mira sapo ahHAHAhaHahAHAhaHA</Text>
             </ModalBody>
             <ModalFooter alignSelf="center">
               <Button
@@ -287,6 +277,7 @@ const RegisterScreen = () => {
           </ModalContent>
         </Modal>
       </Center>
+      {/* <CustomModal showModal={showModal} /> */}
     </Box>
   );
 };
