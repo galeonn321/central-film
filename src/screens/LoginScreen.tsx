@@ -57,7 +57,7 @@ const LoginScreen = () => {
         <FormControl>
           <FormControlLabel>
             <FormControlLabelText color="#fff">
-              UserName or email
+              User or E-mail
             </FormControlLabelText>
           </FormControlLabel>
 

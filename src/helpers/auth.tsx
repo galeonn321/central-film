@@ -12,7 +12,6 @@ const API_URL_LOGOUT = "http://192.168.1.180:3000/api/auth/logout";
 // const API_URL_LOGIN = "http://192.168.1.246:4000/api/auth/login";
 // const API_URL_LOGOUT = "http://192.168.1.246:4000/api/auth/logout";
 
-
 export const registerUser = async (user: User) => {
   // LOG.info(JSON.stringify(user));
   try {
@@ -26,12 +25,9 @@ export const registerUser = async (user: User) => {
     });
     // LOG.error("after fetch", resp);
     const data: any = await resp.json();
-    // LOG.warn(data);
-    if (data.ok) {
-      LOG.info("User registered successfully");
+    // LOG.info(data);
 
-      return data;
-    }
+    return data;
   } catch (error) {
     LOG.error(`Error in registerUser: ${error}`);
   }

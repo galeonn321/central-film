@@ -18,6 +18,7 @@ import {
   ModalHeader,
   Pressable,
   Text,
+  ModalFooter
 } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
@@ -31,7 +32,6 @@ import { User } from "../types/interfaces";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
-import { ModalFooter } from "@gluestack-ui/themed";
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
@@ -102,12 +102,16 @@ const RegisterScreen = () => {
         });
 
         userValidation
-          .then((result) => {
+          .then((result:any) => {
             // Dispatch action or perform other actions on successful registration
             LOG.debug("Registration successful despues de validaiton:", result);
             //open a modal
-
+            if(result?.ok === true) {
             dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+            }
+            else {
+              LOG.error("Registration failed:", result);
+            }
           })
           .catch((error) => {
             // Handle any other errors
