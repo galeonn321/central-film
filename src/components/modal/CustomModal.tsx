@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   ButtonText,
@@ -13,10 +13,12 @@ import {
   Modal,
 } from "@gluestack-ui/themed";
 import { AntDesign } from "@expo/vector-icons";
+import { LOG } from "../../config/logger";
 
-const CustomModal = () => {
-  const [showModal, setShowModal] = useState<boolean>(false);
+const CustomModal = ( showModal:any, setShowModal:any, message:any ) => {
   const ref = React.useRef(null);
+
+  LOG.info(showModal, setShowModal, message);
 
   return (
     <Center h={300}>
@@ -33,7 +35,7 @@ const CustomModal = () => {
             <Heading size="lg">Engage with Modals</Heading>
           </ModalHeader>
           <ModalBody>
-            <Text>Ke mira sapo ahHAHAhaHahAHAhaHA</Text>
+            <Text>{message}</Text>
           </ModalBody>
           <ModalFooter alignSelf="center">
             <Button

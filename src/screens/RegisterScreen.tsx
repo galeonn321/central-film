@@ -31,6 +31,7 @@ import { User } from "../types/interfaces";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
+import CustomModal from "../components/modal/CustomModal";
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
@@ -238,46 +239,17 @@ const RegisterScreen = () => {
           action="primary"
           isDisabled={false}
           isFocusVisible={false}
-          onPress={() => {
-            setShowModal(true);
-          }}
+          onPress={()=> setShowModal(true)}
         >
           {/* <ButtonSpinner mr="$1" /> */}
           <ButtonText>open pipipopo</ButtonText>
         </Button>
       </Box>
-      <Center h={300}>
-        <Modal
-          isOpen={showModal}
-          onClose={() => {
-            setShowModal(false);
-          }}
-          finalFocusRef={ref}
-        >
-          <ModalBackdrop />
-          <ModalContent>
-            <ModalHeader>
-              <Heading size="lg">Engage with Modals</Heading>
-            </ModalHeader>
-            <ModalBody>
-              <Text>Ke mira sapo ahHAHAhaHahAHAhaHA</Text>
-            </ModalBody>
-            <ModalFooter alignSelf="center">
-              <Button
-                size="md"
-                bgColor="$red900"
-                mr="$3"
-                onPress={() => {
-                  setShowModal(false);
-                }}
-              >
-                <ButtonText>Ok</ButtonText>
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Center>
-      {/* <CustomModal showModal={showModal} /> */}
+      {
+        showModal && (
+          <CustomModal showModal={showModal} setShowModal={setShowModal} message={"pipipopo"} />
+        )
+      }
     </Box>
   );
 };
