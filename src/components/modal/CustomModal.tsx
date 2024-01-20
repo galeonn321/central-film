@@ -1,3 +1,4 @@
+// CustomModal.tsx
 import React from "react";
 import {
   Button,
@@ -15,7 +16,17 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { LOG } from "../../config/logger";
 
-const CustomModal = ( showModal:any, setShowModal:any, message:any ) => {
+interface CustomModalProps {
+  showModal: any;
+  setShowModal: any;
+  message: any;
+}
+
+const CustomModal: React.FC<CustomModalProps> = ({
+  showModal,
+  setShowModal,
+  message,
+}) => {
   const ref = React.useRef(null);
 
   LOG.info(showModal, setShowModal, message);

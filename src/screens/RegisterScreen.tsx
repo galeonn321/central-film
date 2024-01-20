@@ -18,6 +18,7 @@ import {
   Pressable,
   Text,
   ModalFooter,
+  set,
 } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
@@ -239,17 +240,19 @@ const RegisterScreen = () => {
           action="primary"
           isDisabled={false}
           isFocusVisible={false}
-          onPress={()=> setShowModal(true)}
+          onPress={() => setShowModal(true)}
         >
           {/* <ButtonSpinner mr="$1" /> */}
           <ButtonText>open pipipopo</ButtonText>
         </Button>
       </Box>
-      {
-        showModal && (
-          <CustomModal showModal={showModal} setShowModal={setShowModal} message={"pipipopo"} />
-        )
-      }
+      {showModal && (
+        <CustomModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          message={"pipipopo"}
+        />
+      )}
     </Box>
   );
 };
