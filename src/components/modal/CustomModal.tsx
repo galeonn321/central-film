@@ -1,5 +1,5 @@
 // CustomModal.tsx
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   ButtonText,
@@ -18,12 +18,17 @@ import { useModal } from "./ModalContext";
 
 interface CustomModalProps {
   message: string;
+  isSuccessful?: boolean | undefined;
   children?: React.ReactNode; // Include children here if needed
 }
 
 const CustomModal: React.FC<CustomModalProps> = ({ message }) => {
-  const { hideModal, isModalVisible } = useModal();
+  const { hideModal, isModalVisible, isSuccessful } = useModal();
   const ref = React.useRef(null);
+
+  useEffect(() => {
+    LOG.info("CustomModal mounted", isSuccessful);
+  }, []);
 
   return (
     <Center h={300}>
@@ -36,17 +41,16 @@ const CustomModal: React.FC<CustomModalProps> = ({ message }) => {
       >
         <ModalBackdrop />
         <ModalContent>
-          <ModalHeader alignSelf="center">
+          {/* <ModalHeader alignSelf="center">
             <Heading size="lg">error</Heading>
-          </ModalHeader>
+          </ModalHeader> */}
           <ModalBody>
-            <Text alignSelf="center">{message}</Text>
+            <Text alignSelf="center" pt='$10' textAlign="center">{message}</Text>
           </ModalBody>
           <ModalFooter alignSelf="center">
             <Button
-              size="md"
-              bgColor="$red900"
-              mr="$3"
+              size="lg"
+              bgColor={isSuccessful ? "$emerald700" : "$red900"}
               onPress={() => {
                 hideModal();
               }}

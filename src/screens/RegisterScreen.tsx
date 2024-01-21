@@ -75,27 +75,28 @@ const RegisterScreen = () => {
     if (usernameInput === "" || passwordInput === "" || emailInput === "") {
       LOG.error("Username or password or email is empty");
       setMessage("Username or password or email is empty");
-      showModal("Username or password or email is empty");
+      showModal("Username or password or email is empty", false);
       return;
     } else if (passwordInput.length < 8 || passwordInput.length > 12) {
       LOG.error("Password must be at least 8 characters but no more than 12");
       setMessage("Password must be at least 8 characters but no more than 12");
-      showModal("Password must be at least 8 characters but no more than 12");
+      showModal(
+        "Password must be at least 8 characters but no more than 12",
+        false
+      );
       return;
     } else if (usernameInput.length < 4 || emailInput.length < 4) {
       LOG.error("Username or email must be at least 4 characters");
       setMessage("Username or email must be at least 4 characters");
-      showModal("Username or email must be at least 4 characters");
+      showModal("Username or email must be at least 4 characters", false);
       return;
     } else if (!isEmailValid) {
       LOG.error("Email is not valid");
       setMessage("Email is not valid");
-      showModal("Email is not valid");
+      showModal("Email is not valid", false);
       return;
     } else {
       try {
-        // dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
-
         const userValidation = new Promise((resolve, reject) => {
           // Assume registerUser is an asynchronous function that returns a Promise
           registerUser(userData)
@@ -114,13 +115,16 @@ const RegisterScreen = () => {
         userValidation
           .then((result: any) => {
             // Dispatch action or perform other actions on successful registration
-            LOG.debug("Registration successful despues de validaiton:", result);
+            LOG.debug("Registration successful after validation:", result);
             //open a modal
             if (result?.ok === true) {
               LOG.info("entre al result ok");
               setMessage("Registration successful");
-              showModal("Registration successful");
-              dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+              showModal("Registration successful", true);
+
+              setTimeout(() => {
+                dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+              }, 3000);
             } else {
               LOG.error("Registration failed:", result);
             }
@@ -133,11 +137,6 @@ const RegisterScreen = () => {
         console.error("Registration failed:", error);
       }
     }
-  };
-
-  const handleShowModal = () => {
-    LOG.info("entre al handleShowModal");
-    showModal("cuca");
   };
 
   return (
@@ -248,20 +247,6 @@ const RegisterScreen = () => {
         >
           Sign in
         </Text>
-        <Button
-          mt="$10"
-          rounded={"$full"}
-          bgColor="$red900"
-          size="md"
-          variant="solid"
-          action="primary"
-          isDisabled={false}
-          isFocusVisible={false}
-          onPress={handleShowModal}
-        >
-          {/* <ButtonSpinner mr="$1" /> */}
-          <ButtonText>open pipipopo</ButtonText>
-        </Button>
       </Box>
       {/* Modal will be automatically shown when showModal is called */}
       <CustomModal message={message}></CustomModal>

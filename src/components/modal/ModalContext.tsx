@@ -2,19 +2,22 @@
 import React, { createContext, useContext, useState } from "react";
 
 interface ModalContextProps {
-  showModal: (message: string) => void;
+  showModal: (message: string, isSuccessful:boolean) => void;
   hideModal: () => void;
-  isModalVisible: boolean; // Add this property
+  isModalVisible: boolean;
+  isSuccessful: boolean | undefined;
 }
 
 const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
 export const ModalProvider: React.FC = ({ children }: any) => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
+  const [modalMessage, setModalMessage] = useState<string>("");
+  const [isSuccessful, setIsSuccessful] = useState<boolean>(false)
 
-  const showModal = (message: string) => {
+  const showModal = (message: string, isSuccessful:boolean) => {
     setModalMessage(message);
+    setIsSuccessful(isSuccessful);
     setModalVisible(true);
   };
 
@@ -23,7 +26,7 @@ export const ModalProvider: React.FC = ({ children }: any) => {
   };
 
   return (
-    <ModalContext.Provider value={{ showModal, hideModal, isModalVisible }}>
+    <ModalContext.Provider value={{ showModal, hideModal, isModalVisible, isSuccessful }}>
       {children}
     </ModalContext.Provider>
   );
