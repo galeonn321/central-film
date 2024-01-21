@@ -221,11 +221,13 @@ const RegisterScreen = () => {
           onPress={handleRegister}
         >
           {/* <ButtonSpinner mr="$1" /> */}
-          <ButtonText>Create Account</ButtonText>
+          <ButtonText fontWeight="bold">Create Account</ButtonText>
         </Button>
         <Text
           textAlign="center"
           mt="$4"
+          fontWeight="bold"
+          
           color="#fff"
           onPress={() => navigation.navigate("Login")}
         >

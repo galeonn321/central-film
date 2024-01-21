@@ -108,7 +108,8 @@ const LoginScreen = () => {
         />
         <Text
           textAlign="center"
-          mt="$4"
+          mt="$6"
+          fontWeight="bold"
           color="#fff"
           onPress={() => navigation.navigate("Register")}
         >

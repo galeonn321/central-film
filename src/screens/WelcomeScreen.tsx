@@ -33,24 +33,23 @@ const WelcomeScreen = () => {
     <Box w="$full" flex={1} bgColor="#000">
       <Swiper
         style={{ height: Height / 1.4, backgroundColor: "#000" }}
-        autoplay={true}
+        autoplay={false}
         showsPagination={true}
         activeDotColor="#7f1d1d"
         dotColor="#666"
-        paginationStyle={{ bottom: Height * 0.12, position: "absolute" }}
+        paginationStyle={{ bottom: Height * 0.1 }}
         showsButtons={false}
       >
         {/* First Slide */}
-        <Box>
+        <Box justifyContent="center" alignItems="center" h={Height / 1.4}>
           {/* <Text>Hello Swiper</Text> */}
           <Image
             source={require("../../assets/images/camera-film.jpg")}
             resizeMode="cover"
             w={Width}
-            h={Height * 0.5}
+            h={Height * 0.4}
             alt="welcome image"
             role="presentation"
-            bgColor="#fff"
           />
           <Box justifyContent="center" alignItems="center" mx="$12">
             <Text fontSize={"$lg"} color="#fff" mt={"$4"}>
@@ -65,35 +64,41 @@ const WelcomeScreen = () => {
           </Box>
         </Box>
         {/* Second Slide */}
-        <Box justifyContent="center" alignItems="center">
+        <Box justifyContent="center" alignItems="center" h={Height / 1.4}>
           {/* <Text>Hello Swiper</Text> */}
           <Image
             source={require("../../assets/images/controller-tv.jpg")}
             resizeMode="cover"
             w={Width}
-            h={Height * 0.5}
+            h={Height * 0.4}
             alt="welcome image"
             role="presentation"
           />
           <Text fontSize={"$lg"} color="#fff" mt={"$2"}>
-            Real
+            Gather
           </Text>
-          <Heading fontSize={"$5xl"} bold color="#fff" pt={"$6"}>
-            Reviews
+          <Heading
+            fontSize={"$5xl"}
+            bold
+            color="#fff"
+            pt={"$6"}
+            textAlign="center"
+          >
+            True Reviews
           </Heading>
           <Text textAlign="center" color="#777" mt={"$1"} fontSize={"$xl"}>
-            find out what people are saying about your favorite movies and write
-            your honest opinion without filters.
+            Discover what others are saying about your favorite movies and
+            express your genuine opinion without any filters.
           </Text>
         </Box>
         {/* Third Slide */}
-        <Box justifyContent="center" alignItems="center">
+        <Box justifyContent="center" alignItems="center" h={Height / 1.4}>
           {/* <Text>Hello Swiper</Text> */}
           <Image
             source={require("../../assets/images/entrance-cinema.jpg")}
             resizeMode="cover"
             w={Width}
-            h={Height * 0.5}
+            h={Height * 0.4}
             alt="welcome image"
             role="presentation"
           />
@@ -104,8 +109,8 @@ const WelcomeScreen = () => {
             Films & Series
           </Heading>
           <Text textAlign="center" color="#777" mt={"$1"} fontSize={"$xl"}>
-            Don't know what to watch? Search for your favorite films and series,
-            read the reviews and make your choice.
+            Unsure of what to watch? Explore your favorite films and series,
+            peruse reviews, and make an informed choice.
           </Text>
         </Box>
       </Swiper>
