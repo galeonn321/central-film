@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   ButtonText,
-  Center,
   FormControl,
   FormControlLabel,
   FormControlLabelText,
@@ -10,17 +9,10 @@ import {
   Image,
   Input,
   InputField,
-  Modal,
-  ModalBackdrop,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
   Pressable,
   Text,
-  ModalFooter,
-  set,
 } from "@gluestack-ui/themed";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import { LOG } from "../config/logger";
 const windowWidth = Dimensions.get("window").width;
@@ -46,14 +38,6 @@ const RegisterScreen = () => {
   const [message, setMessage] = useState<string>("");
   const { showModal, hideModal } = useModal();
 
-  useEffect(() => {
-    validateEmail(emailInput);
-  }, [emailInput]);
-
-  // useEffect(() => {
-  //   LOG.info(showModal);
-  // }, [showModal]);
-
   const onPressShowPassword = () => {
     setShowPassword((showState) => {
       return !showState;
@@ -73,12 +57,12 @@ const RegisterScreen = () => {
       password: passwordInput,
     };
     if (usernameInput === "" || passwordInput === "" || emailInput === "") {
-      LOG.error("Username or password or email is empty");
+
       setMessage("Username or password or email is empty");
       showModal("Username or password or email is empty", false);
       return;
     } else if (passwordInput.length < 8 || passwordInput.length > 12) {
-      LOG.error("Password must be at least 8 characters but no more than 12");
+      
       setMessage("Password must be at least 8 characters but no more than 12");
       showModal(
         "Password must be at least 8 characters but no more than 12",
@@ -86,12 +70,12 @@ const RegisterScreen = () => {
       );
       return;
     } else if (usernameInput.length < 4 || emailInput.length < 4) {
-      LOG.error("Username or email must be at least 4 characters");
+      
       setMessage("Username or email must be at least 4 characters");
       showModal("Username or email must be at least 4 characters", false);
       return;
     } else if (!isEmailValid) {
-      LOG.error("Email is not valid");
+     
       setMessage("Email is not valid");
       showModal("Email is not valid", false);
       return;
