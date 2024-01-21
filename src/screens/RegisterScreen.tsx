@@ -33,6 +33,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import CustomModal from "../components/modal/CustomModal";
+import { useModal } from "../components/modal/ModalContext";
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
@@ -42,16 +43,16 @@ const RegisterScreen = () => {
   const [emailInput, setEmailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const ref = React.useRef(null);
+  const [message, setMessage] = useState<string>("");
+  const { showModal, hideModal } = useModal();
 
   useEffect(() => {
     validateEmail(emailInput);
   }, [emailInput]);
 
-  useEffect(() => {
-    LOG.info(showModal);
-  }, [showModal]);
+  // useEffect(() => {
+  //   LOG.info(showModal);
+  // }, [showModal]);
 
   const onPressShowPassword = () => {
     setShowPassword((showState) => {
@@ -73,15 +74,23 @@ const RegisterScreen = () => {
     };
     if (usernameInput === "" || passwordInput === "" || emailInput === "") {
       LOG.error("Username or password or email is empty");
+      setMessage("Username or password or email is empty");
+      showModal("Username or password or email is empty");
       return;
     } else if (passwordInput.length < 8 || passwordInput.length > 12) {
       LOG.error("Password must be at least 8 characters but no more than 12");
+      setMessage("Password must be at least 8 characters but no more than 12");
+      showModal("Password must be at least 8 characters but no more than 12");
       return;
     } else if (usernameInput.length < 4 || emailInput.length < 4) {
       LOG.error("Username or email must be at least 4 characters");
+      setMessage("Username or email must be at least 4 characters");
+      showModal("Username or email must be at least 4 characters");
       return;
     } else if (!isEmailValid) {
       LOG.error("Email is not valid");
+      setMessage("Email is not valid");
+      showModal("Email is not valid");
       return;
     } else {
       try {
@@ -108,6 +117,9 @@ const RegisterScreen = () => {
             LOG.debug("Registration successful despues de validaiton:", result);
             //open a modal
             if (result?.ok === true) {
+              LOG.info("entre al result ok");
+              setMessage("Registration successful");
+              showModal("Registration successful");
               dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
             } else {
               LOG.error("Registration failed:", result);
@@ -121,6 +133,11 @@ const RegisterScreen = () => {
         console.error("Registration failed:", error);
       }
     }
+  };
+
+  const handleShowModal = () => {
+    LOG.info("entre al handleShowModal");
+    showModal("cuca");
   };
 
   return (
@@ -240,19 +257,14 @@ const RegisterScreen = () => {
           action="primary"
           isDisabled={false}
           isFocusVisible={false}
-          onPress={() => setShowModal(true)}
+          onPress={handleShowModal}
         >
           {/* <ButtonSpinner mr="$1" /> */}
           <ButtonText>open pipipopo</ButtonText>
         </Button>
       </Box>
-      {showModal && (
-        <CustomModal
-          showModal={showModal}
-          setShowModal={setShowModal}
-          message={"pipipopo"}
-        />
-      )}
+      {/* Modal will be automatically shown when showModal is called */}
+      <CustomModal message={message}></CustomModal>
     </Box>
   );
 };

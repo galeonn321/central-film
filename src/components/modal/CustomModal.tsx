@@ -13,40 +13,34 @@ import {
   Text,
   Modal,
 } from "@gluestack-ui/themed";
-import { AntDesign } from "@expo/vector-icons";
 import { LOG } from "../../config/logger";
+import { useModal } from "./ModalContext";
 
 interface CustomModalProps {
-  showModal: any;
-  setShowModal: any;
-  message: any;
+  message: string;
+  children?: React.ReactNode; // Include children here if needed
 }
 
-const CustomModal: React.FC<CustomModalProps> = ({
-  showModal,
-  setShowModal,
-  message,
-}) => {
+const CustomModal: React.FC<CustomModalProps> = ({ message }) => {
+  const { hideModal, isModalVisible } = useModal();
   const ref = React.useRef(null);
-
-  LOG.info(showModal, setShowModal, message);
 
   return (
     <Center h={300}>
       <Modal
-        isOpen={showModal}
+        isOpen={isModalVisible}
         onClose={() => {
-          setShowModal(false);
+          hideModal();
         }}
         finalFocusRef={ref}
       >
         <ModalBackdrop />
         <ModalContent>
-          <ModalHeader>
-            <Heading size="lg">Engage with Modals</Heading>
+          <ModalHeader alignSelf="center">
+            <Heading size="lg">error</Heading>
           </ModalHeader>
           <ModalBody>
-            <Text>{message}</Text>
+            <Text alignSelf="center">{message}</Text>
           </ModalBody>
           <ModalFooter alignSelf="center">
             <Button
@@ -54,7 +48,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
               bgColor="$red900"
               mr="$3"
               onPress={() => {
-                setShowModal(false);
+                hideModal();
               }}
             >
               <ButtonText>Ok</ButtonText>
