@@ -38,6 +38,10 @@ const RegisterScreen = () => {
   const [message, setMessage] = useState<string>("");
   const { showModal, hideModal } = useModal();
 
+  useEffect(() => {
+    validateEmail(emailInput);
+  }, [emailInput]);
+
   const onPressShowPassword = () => {
     setShowPassword((showState) => {
       return !showState;
@@ -57,12 +61,10 @@ const RegisterScreen = () => {
       password: passwordInput,
     };
     if (usernameInput === "" || passwordInput === "" || emailInput === "") {
-
       setMessage("Username or password or email is empty");
       showModal("Username or password or email is empty", false);
       return;
     } else if (passwordInput.length < 8 || passwordInput.length > 12) {
-      
       setMessage("Password must be at least 8 characters but no more than 12");
       showModal(
         "Password must be at least 8 characters but no more than 12",
@@ -70,12 +72,10 @@ const RegisterScreen = () => {
       );
       return;
     } else if (usernameInput.length < 4 || emailInput.length < 4) {
-      
       setMessage("Username or email must be at least 4 characters");
       showModal("Username or email must be at least 4 characters", false);
       return;
     } else if (!isEmailValid) {
-     
       setMessage("Email is not valid");
       showModal("Email is not valid", false);
       return;
@@ -227,7 +227,6 @@ const RegisterScreen = () => {
           textAlign="center"
           mt="$4"
           fontWeight="bold"
-          
           color="#fff"
           onPress={() => navigation.navigate("Login")}
         >

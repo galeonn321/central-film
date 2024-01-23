@@ -33,7 +33,7 @@ const WelcomeScreen = () => {
     <Box w="$full" flex={1} bgColor="#000">
       <Swiper
         style={{ height: Height / 1.4, backgroundColor: "#000" }}
-        autoplay={false}
+        autoplay={true}
         showsPagination={true}
         activeDotColor="#7f1d1d"
         dotColor="#666"
