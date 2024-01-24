@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControl,
   FormControlLabel,
   FormControlLabelText,
@@ -19,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import LoginButton from "../components/loginButton/LoginButton";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { ButtonText } from "@gluestack-ui/themed";
 
 const LoginScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
@@ -31,6 +33,10 @@ const LoginScreen = () => {
       return !showState;
     });
   };
+
+  const handleLogin = async () => {
+    
+  }
 
   return (
     <Box w="$full" h={windowHeight} bgColor="$black">
@@ -102,10 +108,20 @@ const LoginScreen = () => {
             Forgot Password?
           </Text>
         </FormControl>
-        <LoginButton
-          usernameInput={usernameInput}
-          passwordInput={passwordInput}
-        />
+        <Button
+          mt="$10"
+          rounded={"$full"}
+          bgColor="$red900"
+          size="md"
+          variant="solid"
+          action="primary"
+          isDisabled={false}
+          isFocusVisible={false}
+          onPress={handleLogin}
+        >
+          {/* <ButtonSpinner mr="$1" /> */}
+          <ButtonText fontWeight="bold">Log In</ButtonText>
+        </Button>
         <Text
           textAlign="center"
           mt="$6"

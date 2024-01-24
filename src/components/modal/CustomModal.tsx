@@ -3,15 +3,13 @@ import React, { useEffect } from "react";
 import {
   Button,
   ButtonText,
-  ModalBackdrop,
-  ModalHeader,
-  Heading,
-  ModalContent,
   Center,
+  Modal,
+  ModalBackdrop,
   ModalBody,
+  ModalContent,
   ModalFooter,
   Text,
-  Modal,
 } from "@gluestack-ui/themed";
 import { LOG } from "../../config/logger";
 import { useModal } from "./ModalContext";
@@ -45,7 +43,9 @@ const CustomModal: React.FC<CustomModalProps> = ({ message }) => {
             <Heading size="lg">error</Heading>
           </ModalHeader> */}
           <ModalBody>
-            <Text alignSelf="center" pt='$10' textAlign="center">{message}</Text>
+            <Text alignSelf="center" pt="$10" textAlign="center">
+              {message}
+            </Text>
           </ModalBody>
           <ModalFooter alignSelf="center">
             <Button

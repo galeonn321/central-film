@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonSpinner,
   ButtonText,
   FormControl,
   FormControlLabel,
@@ -11,6 +12,7 @@ import {
   InputField,
   Pressable,
   Text,
+  set,
 } from "@gluestack-ui/themed";
 import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
@@ -37,6 +39,7 @@ const RegisterScreen = () => {
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const { showModal, hideModal } = useModal();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     validateEmail(emailInput);
@@ -55,6 +58,7 @@ const RegisterScreen = () => {
   };
 
   const handleRegister = () => {
+    setIsLoading(true);
     const userData: User = {
       username: usernameInput,
       email: emailInput,
@@ -63,6 +67,7 @@ const RegisterScreen = () => {
     if (usernameInput === "" || passwordInput === "" || emailInput === "") {
       setMessage("Username or password or email is empty");
       showModal("Username or password or email is empty", false);
+      setIsLoading(false);
       return;
     } else if (passwordInput.length < 8 || passwordInput.length > 12) {
       setMessage("Password must be at least 8 characters but no more than 12");
@@ -70,14 +75,17 @@ const RegisterScreen = () => {
         "Password must be at least 8 characters but no more than 12",
         false
       );
+      setIsLoading(false);
       return;
     } else if (usernameInput.length < 4 || emailInput.length < 4) {
       setMessage("Username or email must be at least 4 characters");
       showModal("Username or email must be at least 4 characters", false);
+      setIsLoading(false);
       return;
     } else if (!isEmailValid) {
       setMessage("Email is not valid");
       showModal("Email is not valid", false);
+      setIsLoading(false);
       return;
     } else {
       try {
@@ -103,6 +111,7 @@ const RegisterScreen = () => {
             //open a modal
             if (result?.ok === true) {
               LOG.info("entre al result ok");
+              setIsLoading(false);
               setMessage("Registration successful");
               showModal("Registration successful", true);
 
@@ -118,6 +127,7 @@ const RegisterScreen = () => {
             console.error("Registration failed:", error);
           });
       } catch (error) {
+        setIsLoading(false);
         console.error("Registration failed:", error);
       }
     }
@@ -209,20 +219,23 @@ const RegisterScreen = () => {
             />
           </Input>
         </FormControl>
-        <Button
-          mt="$10"
-          rounded={"$full"}
-          bgColor="$red900"
-          size="md"
-          variant="solid"
-          action="primary"
-          isDisabled={false}
-          isFocusVisible={false}
-          onPress={handleRegister}
-        >
-          {/* <ButtonSpinner mr="$1" /> */}
-          <ButtonText fontWeight="bold">Create Account</ButtonText>
-        </Button>
+        {isLoading ? (
+          <ButtonSpinner size={'large'}  mt="$10" color={'$red900'}/>
+        ) : (
+          <Button
+            mt="$10"
+            rounded={"$full"}
+            bgColor="$red900"
+            size="md"
+            variant="solid"
+            action="primary"
+            isDisabled={false}
+            isFocusVisible={false}
+            onPress={handleRegister}
+          >
+            <ButtonText fontWeight="bold">Create Account</ButtonText>
+          </Button>
+        )}
         <Text
           textAlign="center"
           mt="$4"
