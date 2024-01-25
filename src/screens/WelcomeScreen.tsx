@@ -21,10 +21,6 @@ const WelcomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
 
-  // useEffect(() => {
-  //   LOG.info(setAuthStatus, "setAuthStatus");
-  // }, []);
-
   const handleContinueAsGuest = () => {
     dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
   };
@@ -39,6 +35,7 @@ const WelcomeScreen = () => {
         dotColor="#666"
         paginationStyle={{ bottom: Height * 0.1 }}
         showsButtons={false}
+        autoplayTimeout={5}
       >
         {/* First Slide */}
         <Box justifyContent="center" alignItems="center" h={Height / 1.4}>

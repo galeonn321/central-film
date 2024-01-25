@@ -16,18 +16,19 @@ import {
 import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import { LOG } from "../config/logger";
-const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import LoginButton from "../components/loginButton/LoginButton";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { ButtonText } from "@gluestack-ui/themed";
 import CustomModal from "../components/modal/CustomModal";
 import { useModal } from "../components/modal/ModalContext";
 import { loginUser } from "../helpers/auth";
+import { useDispatch } from "react-redux";
+import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [usernameInput, setUsernameInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
@@ -48,6 +49,7 @@ const LoginScreen = () => {
 
     if (usernameInput === "" || passwordInput === "") {
       setIsLoading(false);
+      LOG.info("Inputs vacios");
       setMessage("Username or password is empty");
       showModal("Username or password or email is empty", false);
       return;
@@ -63,7 +65,7 @@ const LoginScreen = () => {
           loginUser(userData)
             .then((result) => {
               // Handle successful registration
-              LOG.info("entre al primer result wtf");
+              LOG.info("entre al primer result wtf", result);
               resolve(result);
               setIsLoading(false);
             })
@@ -75,7 +77,22 @@ const LoginScreen = () => {
             });
         });
 
-        userValidation.then((result) => {});
+        userValidation.then((result: any) => {
+          LOG.info("entre al segundo result wtf", result);
+          if (result.ok) {
+            LOG.info("resultado esta ok", result);
+            setMessage(result.message);
+            showModal(result.message, false);
+
+            setTimeout(() => {
+              dispatch(setAuthStatus({ isAuthenticated: true, user: result.data }));
+            }, 3000);
+          } else {
+            LOG.info("entre al segundo else wtf");
+            setMessage(result.message);
+            showModal(result.message, false);
+          }
+        });
       } catch (error) {
         LOG.info("entre al segundo catch de error wtf", error);
       }
@@ -179,6 +196,7 @@ const LoginScreen = () => {
           Sign up
         </Text>
       </Box>
+      <CustomModal message={message}></CustomModal>
     </Box>
   );
 };

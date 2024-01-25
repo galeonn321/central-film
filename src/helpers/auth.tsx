@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { LOG } from "../config/logger";
 import useAuthentication from "../hooks/useAuthentication";
-import { User } from "../types/interfaces";
+import { User, UserLogin } from "../types/interfaces";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
 const API_URL_REGISTER = "http://192.168.1.180:3000/api/auth/register";
@@ -33,7 +33,7 @@ export const registerUser = async (user: User) => {
   }
 };
 
-export const loginUser = async (user: User) => {
+export const loginUser = async (user: UserLogin) => {
   try {
     const resp: any = await fetch(API_URL_LOGIN, {
       method: "POST",
@@ -43,12 +43,13 @@ export const loginUser = async (user: User) => {
       body: JSON.stringify(user),
     });
     const data: any = await resp.json();
-    LOG.debug(data);
-    if (data.ok) {
-      LOG.info("User logged in successfully");
-    }
+
+    LOG.info(data)
+    
+
+    return data;
   } catch (error) {
-    LOG.error(error);
+    LOG.error(error, "Error in loginUser function of auth");
   }
 };
 
