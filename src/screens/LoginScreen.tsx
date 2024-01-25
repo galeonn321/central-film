@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonSpinner,
   FormControl,
   FormControlLabel,
   FormControlLabelText,
@@ -10,6 +11,7 @@ import {
   InputField,
   Pressable,
   Text,
+  set,
 } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
@@ -21,12 +23,18 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import LoginButton from "../components/loginButton/LoginButton";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { ButtonText } from "@gluestack-ui/themed";
+import CustomModal from "../components/modal/CustomModal";
+import { useModal } from "../components/modal/ModalContext";
+import { loginUser } from "../helpers/auth";
 
 const LoginScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [usernameInput, setUsernameInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [showPassword, setShowPassword] = useState<Boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const { showModal, hideModal } = useModal();
 
   const onPressShowPassword = () => {
     setShowPassword((showState) => {
@@ -34,9 +42,45 @@ const LoginScreen = () => {
     });
   };
 
-  const handleLogin = async () => {
-    
-  }
+  const handleLogin = () => {
+    LOG.info("entre al handle login");
+    setIsLoading(true);
+
+    if (usernameInput === "" || passwordInput === "") {
+      setIsLoading(false);
+      setMessage("Username or password is empty");
+      showModal("Username or password or email is empty", false);
+      return;
+    } else {
+      try {
+        const userData = {
+          username: usernameInput,
+          email: usernameInput,
+          password: passwordInput,
+        };
+
+        const userValidation = new Promise((resolve, reject) => {
+          loginUser(userData)
+            .then((result) => {
+              // Handle successful registration
+              LOG.info("entre al primer result wtf");
+              resolve(result);
+              setIsLoading(false);
+            })
+            .catch((error: any) => {
+              // Handle registration failure
+              LOG.info("entre al primer catch de error wtf", error);
+              setIsLoading(false);
+              reject(error);
+            });
+        });
+
+        userValidation.then((result) => {});
+      } catch (error) {
+        LOG.info("entre al segundo catch de error wtf", error);
+      }
+    }
+  };
 
   return (
     <Box w="$full" h={windowHeight} bgColor="$black">
@@ -108,20 +152,23 @@ const LoginScreen = () => {
             Forgot Password?
           </Text>
         </FormControl>
-        <Button
-          mt="$10"
-          rounded={"$full"}
-          bgColor="$red900"
-          size="md"
-          variant="solid"
-          action="primary"
-          isDisabled={false}
-          isFocusVisible={false}
-          onPress={handleLogin}
-        >
-          {/* <ButtonSpinner mr="$1" /> */}
-          <ButtonText fontWeight="bold">Log In</ButtonText>
-        </Button>
+        {isLoading ? (
+          <ButtonSpinner mt="$10" color={"$red900"} size={"large"} />
+        ) : (
+          <Button
+            mt="$10"
+            rounded={"$full"}
+            bgColor="$red900"
+            size="md"
+            variant="solid"
+            action="primary"
+            isDisabled={false}
+            isFocusVisible={false}
+            onPress={handleLogin}
+          >
+            <ButtonText fontWeight="bold">Log In</ButtonText>
+          </Button>
+        )}
         <Text
           textAlign="center"
           mt="$6"

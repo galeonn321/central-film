@@ -38,7 +38,7 @@ const RegisterScreen = () => {
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-  const { showModal, hideModal } = useModal();
+  const {showModal, hideModal } = useModal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
