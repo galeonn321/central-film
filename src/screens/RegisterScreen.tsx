@@ -28,6 +28,7 @@ import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import CustomModal from "../components/modal/CustomModal";
 import { useModal } from "../components/modal/ModalContext";
+import { setTokenToUser } from "../services/user.services";
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
@@ -110,16 +111,21 @@ const RegisterScreen = () => {
             LOG.debug("Registration successful after validation:", result);
             //open a modal
             if (result?.ok === true) {
-              LOG.info("entre al result ok");
+              LOG.info("entre al result ok", result);
               setIsLoading(false);
               setMessage("Registration successful");
               showModal("Registration successful", true);
-
-              setTimeout(() => {
-                dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
-              }, 3000);
+              setTokenToUser(result.data.token)
+              
+              
+              // setTimeout(() => {
+              //   dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+              // }, 3000);
             } else {
               LOG.error("Registration failed:", result);
+              setIsLoading(false);
+              setMessage(result.message);
+              showModal(result.message, false);
             }
           })
           .catch((error) => {

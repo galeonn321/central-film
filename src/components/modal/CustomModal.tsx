@@ -36,14 +36,15 @@ const CustomModal: React.FC<CustomModalProps> = ({ message }) => {
           hideModal();
         }}
         finalFocusRef={ref}
+        
       >
         <ModalBackdrop />
-        <ModalContent>
+        <ModalContent bgColor={"#000"}>
           {/* <ModalHeader alignSelf="center">
             <Heading size="lg">error</Heading>
           </ModalHeader> */}
           <ModalBody>
-            <Text alignSelf="center" pt="$10" textAlign="center">
+            <Text alignSelf="center" pt="$10" textAlign="center" color={'#fff'}>
               {message}
             </Text>
           </ModalBody>

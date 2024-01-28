@@ -4,6 +4,7 @@ import { LOG } from "../config/logger";
 export const setTokenToUser = async (token: string) => {
   try {
     await AsyncStorage.setItem("mykey", token);
+    LOG.debug('worked the async apaprently lmao')
   } catch (error) {
     LOG.error(`Error in setTokenToUser, error: ${error}`);
   }
