@@ -1,8 +1,5 @@
-import { useDispatch } from "react-redux";
 import { LOG } from "../config/logger";
-import useAuthentication from "../hooks/useAuthentication";
 import { User, UserLogin } from "../types/interfaces";
-import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
 const API_URL_REGISTER = "http://192.168.1.180:3000/api/auth/register";
 const API_URL_LOGIN = "http://192.168.1.180:3000/api/auth/login";
@@ -44,8 +41,7 @@ export const loginUser = async (user: UserLogin) => {
     });
     const data: any = await resp.json();
 
-    LOG.info(data)
-    
+    LOG.info(data);
 
     return data;
   } catch (error) {
