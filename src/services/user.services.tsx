@@ -1,23 +1,24 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOG } from "../config/logger";
+import { TOKEN_KEY } from "@env";
 
 export const setTokenToUser = async (token: string) => {
   try {
-    await AsyncStorage.setItem("mykey", token);
-    LOG.debug('worked the async apaprently lmao')
+    await AsyncStorage.setItem(TOKEN_KEY, token);
+    LOG.debug("worked the async apaprently lmao");
   } catch (error) {
     LOG.error(`Error in setTokenToUser, error: ${error}`);
   }
 };
 
-export const getTokenToUser = async (token: string) => {
-    try {
-      const value = await AsyncStorage.getItem("mykey");
+export const getTokenFromUser = async (token: string) => {
+  try {
+    const value = await AsyncStorage.getItem(TOKEN_KEY);
 
-      if(value !== null){
-
-      }
-    } catch (error) {
-      LOG.error(`Error in getTokenToUser, error: ${error}`);
+    if (value !== null) {
+      
     }
-  };
+  } catch (error) {
+    LOG.error(`Error in getTokenToUser, error: ${error}`);
+  }
+};
