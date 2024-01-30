@@ -10,11 +10,12 @@ const AppNavigator: React.FC = () => {
 
 
   const hasUserAccount = async () =>{
-    
+    const Token = await getTokenFromUser(TOKEN_KEY);
+    LOG.info(Token, 'whaaat')
   }
 
   useEffect(() => {
-    getTokenFromUser(TOKEN_KEY)
+    hasUserAccount();
   }, [])
   
 

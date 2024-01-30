@@ -16,7 +16,7 @@ export const getTokenFromUser = async (token: string) => {
     const value = await AsyncStorage.getItem(TOKEN_KEY);
 
     if (value !== null) {
-      
+      return LOG.error('wtf')
     }
   } catch (error) {
     LOG.error(`Error in getTokenToUser, error: ${error}`);

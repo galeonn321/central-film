@@ -17,7 +17,6 @@ import {
 import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import { LOG } from "../config/logger";
-const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -25,7 +24,6 @@ import { registerUser } from "../helpers/auth";
 import { User } from "../types/interfaces";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import { setAuthStatus } from "../lib/redux/slices/authSlice";
 import CustomModal from "../components/modal/CustomModal";
 import { useModal } from "../components/modal/ModalContext";
 import { setTokenToUser } from "../services/user.services";
