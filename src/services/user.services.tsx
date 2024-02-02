@@ -4,19 +4,20 @@ import { TOKEN_KEY } from "@env";
 
 export const setTokenToUser = async (token: string) => {
   try {
-    await AsyncStorage.setItem(TOKEN_KEY, token);
-    LOG.debug("worked the async apaprently lmao");
+    await AsyncStorage.setItem(token, TOKEN_KEY);
+
+    LOG.debug(token, 'Token stored successfully')
   } catch (error) {
     LOG.error(`Error in setTokenToUser, error: ${error}`);
   }
 };
 
-export const getTokenFromUser = async (token: string) => {
+export const getTokenFromUser = async () => {
   try {
     const value = await AsyncStorage.getItem(TOKEN_KEY);
 
     if (value !== null) {
-      return LOG.error('wtf')
+      return value;
     }
   } catch (error) {
     LOG.error(`Error in getTokenToUser, error: ${error}`);

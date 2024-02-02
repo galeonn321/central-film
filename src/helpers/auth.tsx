@@ -1,4 +1,5 @@
 import { LOG } from "../config/logger";
+import { getTokenFromUser } from "../services/user.services";
 import { User, UserLogin } from "../types/interfaces";
 
 const API_URL_REGISTER = "http://192.168.1.180:3000/api/auth/register";
@@ -32,9 +33,13 @@ export const registerUser = async (user: User) => {
 
 export const loginUser = async (user: UserLogin) => {
   try {
+    const token = await getTokenFromUser();
+    LOG.info(`is token validated: ${token}`);
+
     const resp: any = await fetch(API_URL_LOGIN, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),

@@ -1,23 +1,26 @@
 import React, { useEffect } from "react";
 import MainNavigator from "./MainNavigator";
 import AuthNavigator from "./AuthNavigator";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LOG } from "../config/logger";
 import { getTokenFromUser } from "../services/user.services";
-import { TOKEN_KEY } from "@env";
+import { setAuthStatus } from "../lib/redux/slices/authSlice";
 
 const AppNavigator: React.FC = () => {
+  const dispatch = useDispatch();
 
+  const hasUserAccount = async () => {
+    const token = await getTokenFromUser();
+    LOG.info(`is token validated: ${token}`);
 
-  const hasUserAccount = async () =>{
-    const Token = await getTokenFromUser(TOKEN_KEY);
-    LOG.info(Token, 'whaaat')
-  }
+    // if (token) {
+    //   dispatch(setAuthStatus({ isAuthenticated: true, userToken: token}));
+    // }
+  };
 
   useEffect(() => {
     hasUserAccount();
-  }, [])
-  
+  }, []);
 
   const isUserAuthenticated = useSelector(
     (state: any) => state.auth.isAuthenticated
@@ -27,6 +30,7 @@ const AppNavigator: React.FC = () => {
     LOG.info(`isUser authenticated: ${isUserAuthenticated}`);
   }, [isUserAuthenticated]);
 
+  
   return isUserAuthenticated ? <MainNavigator /> : <AuthNavigator />;
 };
 

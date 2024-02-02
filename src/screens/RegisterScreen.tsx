@@ -23,13 +23,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { registerUser } from "../helpers/auth";
 import { User } from "../types/interfaces";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
 import CustomModal from "../components/modal/CustomModal";
 import { useModal } from "../components/modal/ModalContext";
-import { setTokenToUser } from "../services/user.services";
 
 const RegisterScreen = () => {
-  const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   const [usernameInput, setUsernameInput] = useState<string>("");
@@ -37,7 +34,7 @@ const RegisterScreen = () => {
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-  const {showModal, hideModal } = useModal();
+  const { showModal, hideModal } = useModal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -113,12 +110,11 @@ const RegisterScreen = () => {
               setIsLoading(false);
               setMessage("Registration successful");
               showModal("Registration successful", true);
-              setTokenToUser(result.data.token)
-              
-              
-              // setTimeout(() => {
-              //   dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
-              // }, 3000);
+
+              setTimeout(() => {
+                hideModal()
+                navigation.navigate("Login");
+              }, 3000);
             } else {
               LOG.error("Registration failed:", result);
               setIsLoading(false);
@@ -224,7 +220,7 @@ const RegisterScreen = () => {
           </Input>
         </FormControl>
         {isLoading ? (
-          <ButtonSpinner size={'large'}  mt="$10" color={'$red900'}/>
+          <ButtonSpinner size={"large"} mt="$10" color={"$red900"} />
         ) : (
           <Button
             mt="$10"

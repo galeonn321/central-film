@@ -26,6 +26,7 @@ import { useModal } from "../components/modal/ModalContext";
 import { loginUser } from "../helpers/auth";
 import { useDispatch } from "react-redux";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
+import { setTokenToUser } from "../services/user.services";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -65,7 +66,7 @@ const LoginScreen = () => {
           loginUser(userData)
             .then((result) => {
               // Handle successful registration
-              LOG.info("entre al primer result wtf", result);
+              
               resolve(result);
               setIsLoading(false);
             })
@@ -78,17 +79,28 @@ const LoginScreen = () => {
         });
 
         userValidation.then((result: any) => {
-          LOG.info("entre al segundo result wtf", result);
+          LOG.debug("entre al segundo then :");
           if (result.ok) {
-            LOG.info("resultado esta ok", result);
-            setMessage(result.message);
-            showModal(result.message, false);
+            LOG.debug("resultado esta ok", result);
 
-            setTimeout(() => {
-              dispatch(setAuthStatus({ isAuthenticated: true, user: result.data }));
-            }, 3000);
+            setTokenToUser(result.data.token)
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+            // setMessage(result.message);
+            // showModal(result.message, false);
+            // setTimeout(() => {
+            //   dispatch(setAuthStatus({ isAuthenticated: true, user: result.data }));
+            // }, 3000);
           } else {
-            LOG.info("entre al segundo else wtf");
+            LOG.info("No sirvio result error:", result.message);
             setMessage(result.message);
             showModal(result.message, false);
           }
