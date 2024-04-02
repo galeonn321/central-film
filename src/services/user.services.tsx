@@ -15,6 +15,7 @@ export const setTokenToUser = async (token: string) => {
 export const getTokenFromUser = async () => {
   try {
     const value = await AsyncStorage.getItem(TOKEN_KEY);
+    LOG.debug(value, 'from gettokenfromuser')
 
     if (value !== null) {
       return value;

@@ -66,7 +66,7 @@ const LoginScreen = () => {
           loginUser(userData)
             .then((result) => {
               // Handle successful registration
-              
+
               resolve(result);
               setIsLoading(false);
             })
@@ -83,22 +83,18 @@ const LoginScreen = () => {
           if (result.ok) {
             LOG.debug("resultado esta ok", result);
 
-            setTokenToUser(result.data.token)
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-            // setMessage(result.message);
-            // showModal(result.message, false);
-            // setTimeout(() => {
-            //   dispatch(setAuthStatus({ isAuthenticated: true, user: result.data }));
-            // }, 3000);
+            setTokenToUser(result.data.token);
+            setMessage(result.message);
+            showModal(result.message, false);
+
+            setTimeout(() => {
+              dispatch(
+                setAuthStatus({
+                  isAuthenticated: true,
+                  //  user: result.data
+                })
+              );
+            }, 3000);
           } else {
             LOG.info("No sirvio result error:", result.message);
             setMessage(result.message);

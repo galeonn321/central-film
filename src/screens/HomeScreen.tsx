@@ -20,17 +20,6 @@ const HomeScreen = () => {
     >
       <Box>
         <Box alignSelf="center">
-          {/* <LottieView
-            autoPlay
-            resizeMode="cover"
-            loop={false}
-            style={{
-              width: 200,
-              height: 200,
-              backgroundColor: "#000",
-            }}
-            source={require("../../assets/lottie/cinema.json")}
-          /> */}
           
         </Box>
         <SearchContent />
