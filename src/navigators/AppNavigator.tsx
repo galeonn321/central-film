@@ -15,7 +15,7 @@ const AppNavigator: React.FC = () => {
   }, []);
 
   const removeToken = async () => {
-    LOG.error(TOKEN_KEY, "THIS IS ABOUT TO BE REMOVED.");
+    // LOG.error(TOKEN_KEY, "THIS IS ABOUT TO BE REMOVED.");
     await AsyncStorage.removeItem(TOKEN_KEY);
   };
 
@@ -25,7 +25,7 @@ const AppNavigator: React.FC = () => {
 
   const hasUserAccount = async () => {
     const token = await getTokenFromUser();
-    LOG.debug(`is token validated: ${token}`);
+    // LOG.debug(`this is the token getting from phone: ${token}`);
 
     if (token) {
       dispatch(setAuthStatus({ isAuthenticated: true }));
@@ -37,9 +37,9 @@ const AppNavigator: React.FC = () => {
     (state: any) => state.auth.isAuthenticated
   );
 
-  useEffect(() => {
-    LOG.info(`isUser authenticated: ${isUserAuthenticated}`);
-  }, [isUserAuthenticated]);
+  // useEffect(() => {
+    // LOG.info(`isUser authenticated to proceed to homescreen: ${isUserAuthenticated}`);
+  // }, [isUserAuthenticated]);
 
   return isUserAuthenticated ? <MainNavigator /> : <AuthNavigator />;
 };

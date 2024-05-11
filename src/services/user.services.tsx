@@ -14,11 +14,11 @@ export const setTokenToUser = async (token: string) => {
 
 export const getTokenFromUser = async () => {
   try {
-    const value = await AsyncStorage.getItem(TOKEN_KEY);
-    LOG.debug(value, 'from gettokenfromuser')
+    const keyToken = await AsyncStorage.getItem(TOKEN_KEY);
+    LOG.debug(`this is the key token  from getTokenFromUser: ${keyToken} ${TOKEN_KEY}`);
 
-    if (value !== null) {
-      return value;
+    if (keyToken !== null) {
+      return keyToken;
     }
   } catch (error) {
     LOG.error(`Error in getTokenToUser, error: ${error}`);

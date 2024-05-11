@@ -22,7 +22,7 @@ const WelcomeScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
 
   const handleContinueAsGuest = () => {
-    dispatch(setAuthStatus({ isAuthenticated: true, user: null }));
+    dispatch(setAuthStatus({ isAuthenticated: true }));
   };
 
   return (
