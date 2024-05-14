@@ -8,11 +8,20 @@ import SearchContent from "../components/searchContent/SearchContent";
 import { Image, Box, Button, ButtonText } from "@gluestack-ui/themed";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AntDesign } from '@expo/vector-icons';
+import { Text } from "@gluestack-ui/themed";
+import { getTokenFromUser } from "../services/user.services";
 // import LottieView from "lottie-react-native";
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<any>>();
+
+  useEffect(() => {
+    getTokenFromUser();
+  
+    LOG.info()
+  }, [])
+  
 
   return (
     <ScrollView
@@ -23,6 +32,7 @@ const HomeScreen = () => {
           
         </Box>
         <SearchContent />
+        <Text>queso</Text>
       </Box>
     </ScrollView>
   );

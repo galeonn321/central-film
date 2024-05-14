@@ -4,9 +4,10 @@ import { TOKEN_KEY } from "@env";
 
 export const setTokenToUser = async (token: string) => {
   try {
-    await AsyncStorage.setItem(token, TOKEN_KEY);
+    const jsonToken = JSON.stringify(token);
+    await AsyncStorage.setItem(TOKEN_KEY, jsonToken);
 
-    LOG.debug(token, 'Token stored successfully')
+    LOG.debug(token, "Token stored successfully");
   } catch (error) {
     LOG.error(`Error in setTokenToUser, error: ${error}`);
   }
@@ -15,12 +16,12 @@ export const setTokenToUser = async (token: string) => {
 export const getTokenFromUser = async () => {
   try {
     const keyToken = await AsyncStorage.getItem(TOKEN_KEY);
-    LOG.debug(`this is the key token  from getTokenFromUser: ${keyToken} ${TOKEN_KEY}`);
 
     if (keyToken !== null) {
+      LOG.debug(`This is the key token from getTokenFromUser: ${keyToken}`);
       return keyToken;
     }
   } catch (error) {
-    LOG.error(`Error in getTokenToUser, error: ${error}`);
+    LOG.error(`Error in getTokenFromUser, error: ${error}`);
   }
 };

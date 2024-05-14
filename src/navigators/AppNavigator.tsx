@@ -25,7 +25,6 @@ const AppNavigator: React.FC = () => {
 
   const hasUserAccount = async () => {
     const token = await getTokenFromUser();
-    // LOG.debug(`this is the token getting from phone: ${token}`);
 
     if (token) {
       dispatch(setAuthStatus({ isAuthenticated: true }));
