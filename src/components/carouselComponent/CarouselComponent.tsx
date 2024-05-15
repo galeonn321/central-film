@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { LOG } from "../../config/logger";
 import { Dimensions } from "react-native";
 import useMovieDB from "../../hooks/useMovieDB";
-import Icon from "react-native-vector-icons/Ionicons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { Movie } from "../../types/movieInterface";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -76,7 +76,7 @@ const CarouselComponent: React.FC<CarouselComponentProps> = ({ path }) => {
           {item.title}
         </Text>
         <HStack position="absolute" w={50} h={30} top={10} right={15} bgColor={'$red900'} alignItems="center" justifyContent="center" rounded={'$xl'}>
-          <Icon name={"star"} color={'yellow'}/> 
+          <Ionicons name={"star"}  color={'yellow'}/> 
           <Text color="#fff" bold>{roundedNumber}</Text>
         </HStack>
       </Pressable>

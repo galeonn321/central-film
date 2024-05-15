@@ -15,12 +15,6 @@ import { getTokenFromUser } from "../services/user.services";
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<any>>();
-
-  useEffect(() => {
-    getTokenFromUser();
-  
-    LOG.info()
-  }, [])
   
 
   return (

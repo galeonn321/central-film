@@ -24,4 +24,4 @@ export const getTokenFromUser = async () => {
   } catch (error) {
     LOG.error(`Error in getTokenFromUser, error: ${error}`);
   }
-};
+}

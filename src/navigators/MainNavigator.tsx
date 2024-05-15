@@ -10,11 +10,12 @@ function MainNavigator() {
     <MainStack.Navigator initialRouteName="HomeScreen">
       <MainStack.Screen
         options={{
-          title: "",
-          headerBackTitle: "",
-          headerShadowVisible: false,
-          headerTintColor: "#fff",
-          headerStyle: { backgroundColor: "#000" },
+          // title: "",
+          // headerBackTitle: "",
+          // headerShadowVisible: false,
+          // headerTintColor: "#fff",
+          // headerStyle: { backgroundColor: "#000" },
+          headerShown: false
         }}
         name="DetailMovie"
         component={MovieDetailScreen}

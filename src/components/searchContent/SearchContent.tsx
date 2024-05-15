@@ -11,7 +11,6 @@ import {
   Spinner,
   Divider,
 } from "@gluestack-ui/themed";
-import Icon from "react-native-vector-icons/Ionicons";
 import { LOG } from "../../config/logger";
 import searchMovieDB from "../../api/searchMovieDB";
 import { FlashList } from "@shopify/flash-list";
@@ -20,6 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Dimensions, View } from "react-native";
 import { Movie } from "../../types/movieInterface";
 import { AntDesign } from "@expo/vector-icons";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const { height, width } = Dimensions.get("screen");
 
@@ -131,7 +131,7 @@ const SearchContent = () => {
         />
         {inputText.length > 0 && (
           <Pressable onPress={() => setInputText("")}>
-            <Icon name={"close-outline"} size={25} color={"#fff"} />
+            <Ionicons name={"close-outline"} size={25} color={"#fff"} />
           </Pressable>
         )}
       </Input>

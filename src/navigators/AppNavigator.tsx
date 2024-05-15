@@ -1,34 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MainNavigator from "./MainNavigator";
 import AuthNavigator from "./AuthNavigator";
 import { useDispatch, useSelector } from "react-redux";
 import { LOG } from "../config/logger";
 import { getTokenFromUser } from "../services/user.services";
 import { setAuthStatus } from "../lib/redux/slices/authSlice";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { TOKEN_KEY } from "@env";
+import LoadingScreen from "../screens/LoadingScreen";
 
 const AppNavigator: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const dispatch = useDispatch();
   useEffect(() => {
     hasUserAccount();
   }, []);
 
-  const removeToken = async () => {
-    // LOG.error(TOKEN_KEY, "THIS IS ABOUT TO BE REMOVED.");
-    await AsyncStorage.removeItem(TOKEN_KEY);
-  };
-
-  // useEffect(() => {
-  //   removeToken();
-  // }, []);
-
   const hasUserAccount = async () => {
+    setIsLoading(true)
     const token = await getTokenFromUser();
 
     if (token) {
       dispatch(setAuthStatus({ isAuthenticated: true }));
+      setIsLoading(false);
       return;
+    }else{
+      setIsLoading(false);
     }
   };
 
@@ -36,9 +31,9 @@ const AppNavigator: React.FC = () => {
     (state: any) => state.auth.isAuthenticated
   );
 
-  // useEffect(() => {
-    // LOG.info(`isUser authenticated to proceed to homescreen: ${isUserAuthenticated}`);
-  // }, [isUserAuthenticated]);
+  if(isLoading){
+    return <LoadingScreen />;
+  }
 
   return isUserAuthenticated ? <MainNavigator /> : <AuthNavigator />;
 };
