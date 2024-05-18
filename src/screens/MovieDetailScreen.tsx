@@ -1,11 +1,22 @@
-import { Dimensions,  } from "react-native";
+import { Dimensions } from "react-native";
 import { useEffect, useState } from "react";
-import { Box, Button, Divider, HStack, Image, ImageBackground, ScrollView, Text } from "@gluestack-ui/themed";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import {
+  Box,
+  Button,
+  Divider,
+  HStack,
+  Image,
+  ImageBackground,
+  ScrollView,
+  Text,
+  VStack,
+} from "@gluestack-ui/themed";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { FlashList } from "@shopify/flash-list";
 import CommentItem from "../components/commentSectionComponent/CommentItem";
 import FilmCommentInput from "../components/filmCommentInput/FilmCommentInput";
 import { LOG } from "../config/logger";
+import { ButtonText } from "@gluestack-ui/themed";
 
 const { width, height } = Dimensions.get("window");
 
@@ -14,10 +25,36 @@ const MovieDetailScreen = ({ route }: any) => {
   const [isTruncated, setIsTruncated] = useState(true);
   const roundedNumber = parseFloat(filmItem.item.vote_average.toFixed(1));
   const Data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77];
+  const genresList = [
+    { id: 28, name: "Action" },
+    { id: 12, name: "Adventure" },
+    { id: 16, name: "Animation" },
+    { id: 35, name: "Comedy" },
+    { id: 80, name: "Crime" },
+    { id: 99, name: "Documentary" },
+    { id: 18, name: "Drama" },
+    { id: 10751, name: "Family" },
+    { id: 14, name: "Fantasy" },
+    { id: 36, name: "History" },
+    { id: 27, name: "Horror" },
+    { id: 10402, name: "Music" },
+    { id: 9648, name: "Mystery" },
+    { id: 10749, name: "Romance" },
+    { id: 878, name: "Science Fiction" },
+    { id: 10770, name: "TV Movie" },
+    { id: 53, name: "Thriller" },
+    { id: 10752, name: "War" },
+    { id: 37, name: "Western" },
+  ];
 
   useEffect(() => {
-    LOG.info(filmItem.item, "item");
+    LOG.debug(filmItem.item, "item");
   }, []);
+
+  const genreNames = filmItem.item.genre_ids.map((genreId: any) => {
+    const genre = genresList.find((g) => g.id === genreId);
+    return genre ? genre.name : null;
+  });
 
   const seeMore = () => {
     setIsTruncated(!isTruncated);
@@ -28,7 +65,7 @@ const MovieDetailScreen = ({ route }: any) => {
   };
 
   return (
-    <Box backgroundColor="#000">
+    <Box backgroundColor="#fff">
       <ImageBackground
         source={{
           uri: filmItem.item?.poster_path
@@ -36,17 +73,23 @@ const MovieDetailScreen = ({ route }: any) => {
             : "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1728&q=80",
         }}
         alt="background image"
-        h={height /1.55}
-        w={'$full'}
+        h={height / 1.55}
+        w={"$full"}
         flex={1}
       />
-      <ScrollView backgroundColor="transparent" paddingTop={height / 1.65} opacity={1}>
+      <ScrollView
+        backgroundColor="transparent"
+        paddingTop={height / 1.65}
+        opacity={1}
+        overScrollMode="never"
+        bounces={false}
+      >
         <Box
-          backgroundColor="#151212"
-          borderWidth={4}
+          backgroundColor="#FFF"
           borderTopEndRadius={20}
           borderTopStartRadius={20}
           opacity={1}
+          px={"$4"}
         >
           <Divider
             mt={"$4"}
@@ -55,96 +98,69 @@ const MovieDetailScreen = ({ route }: any) => {
             w={50}
             alignSelf="center"
           />
-          <Text
-            fontWeight="900"
-            textAlign="center"
-            fontStyle="italic"
-            color="#fff"
-            fontSize="$4xl"
-            p="$4"
-          >
-            {filmItem.item.title}
-          </Text>
-          <HStack
-            alignItems="center"
-            justifyContent="center"
-            mb="$6"
-          >
-            <Button
-              bgColor="$darkBlue800"
-              rounded="$full"
-              elevation={"$1"}
-              shadowColor="black"
+          <HStack justifyContent="space-between" alignItems="center" pt="$4">
+            <Text
+              fontWeight="700"
+              color="#000"
+              fontSize="$2xl"
+              maxWidth={width / 1.5}
             >
-              <Ionicons name={"thumbs-up-outline"} size={32} color={"#fff"} />
-            </Button>
-            <Box
-              bgColor="$darkBlue800"
-              rounded="$full"
-              mx="$3"
-              p="$3"
-            >
-              <Ionicons name={"thumbs-down-outline"} size={32} color={"#fff"} />
-            </Box>
-            <Box
-              bgColor="$darkBlue800"
-              rounded="$full"
-              mx="$3"
-              p="$3"
-            >
-              <Ionicons name={"heart-outline"} size={32} color={"#fff"} />
-            </Box>
+              {filmItem.item.title}
+            </Text>
+            <Ionicons name={"bookmark-outline"} size={24} color={"#000"} />
           </HStack>
-          <Box flexDirection="row" alignItems="center" mx="$4" mb="$2">
-            <Text color="#fff" fontWeight="800" fontSize={"$xl"}>
-              IMDB Rating
+          <HStack mt={"$2"} alignItems="center" space="sm" mb={"$2"}>
+            <Text bold color="#000">
+              ⭐{roundedNumber}/10 IMDB
             </Text>
-            <Box
-              bgColor="$darkBlue800"
-              rounded="$full"
-              flexDirection="column"
-              mx="$3"
-              p="$2"
-            >
-              <Text
-                color="#fff"
-                mx="$4"
-                fontWeight="900"
-                p="$2"
-                fontSize={"$xl"}
-              >
-                {roundedNumber}/10
-              </Text>
-            </Box>
-          </Box>
-          <Box flexDirection="row" alignItems="center" mx="$4">
-            <Text color="#fff" fontWeight="800" fontSize={"$xl"}>
-              Central Film Rating
+          </HStack>
+          <HStack mt={"$2"} alignItems="center" space="sm" mb={"$2"}>
+            <Text bold color="#000">
+              ⭐{roundedNumber}/10 Central Film
             </Text>
-            <Box
-              bgColor="$darkBlue800"
-              rounded="$full"
-              flexDirection="column"
-              mx="$3"
-              p="$2"
-            >
-              <Text
-                color="#fff"
-                mx="$4"
-                fontWeight="900"
-                p="$2"
-                fontSize={"$xl"}
+            {roundedNumber > 7 ? (
+              <Box px={"$2"} py={"$1"} backgroundColor="#000" rounded={"$full"}>
+                <Text fontSize={"$xs"} color="#fff">
+                  Recommended🔥
+                </Text>
+              </Box>
+            ) : (
+              <></>
+            )}
+          </HStack>
+          <HStack space="lg" mt={"$4"} maxWidth={width} flexWrap="wrap">
+            {genreNames.map((genre: string, index: number) => (
+              <Box
+                backgroundColor="#DBE3FF"
+                key={index}
+                py={"$0.5"}
+                px={"$3"}
+                rounded={"$full"}
               >
-                {roundedNumber}/10
-              </Text>
-            </Box>
-          </Box>
-          <Box mx="$4" mt="$4">
-            <Text mb="$4" color={"$blue700"} fontWeight="800">
-              Release date : {filmItem.item.release_date}
+                <Text color="#88A4E8" fontWeight={400} fontSize={"$2xs"}>
+                  {genre}
+                </Text>
+              </Box>
+            ))}
+          </HStack>
+
+          <HStack mt="$4" space="4xl">
+            <VStack>
+              <Text color="#979797">Main Language</Text>
+              <Text color="#000">{filmItem.item.original_language}</Text>
+            </VStack>
+            <VStack>
+              <Text color="#979797">Release Date</Text>
+              <Text color="#000">{filmItem.item.release_date}</Text>
+            </VStack>
+          </HStack>
+
+          <Box mt="$4">
+            <Text mb="$1" color={"#000"} fontWeight="800">
+              Description
             </Text>
             <Text
-              color="#fff"
+              color="#000"
               fontFamily="$heading"
               numberOfLines={isTruncated ? 2 : undefined}
             >
@@ -153,7 +169,7 @@ const MovieDetailScreen = ({ route }: any) => {
             {isTruncated && (
               <Text
                 mb="$4"
-                color="#fff"
+                color="#000"
                 fontWeight="800"
                 onPress={seeMore}
                 textAlign="right"
@@ -162,10 +178,11 @@ const MovieDetailScreen = ({ route }: any) => {
               </Text>
             )}
           </Box>
-          <Box mx="$4" pt="$6" minHeight={200}>
+
+          <Box pt="$6">
             <FilmCommentInput />
-            <Text color="#fff" fontWeight="$bold" fontSize={"$xl"}>
-              Comments (1)
+            <Text mt='$6' color="#000"  fontSize={"$md"}>
+              Comments {Data.length}
             </Text>
             <FlashList
               data={Data}
@@ -175,7 +192,6 @@ const MovieDetailScreen = ({ route }: any) => {
           </Box>
         </Box>
       </ScrollView>
-      
     </Box>
   );
 };

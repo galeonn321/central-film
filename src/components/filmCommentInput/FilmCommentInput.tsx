@@ -1,42 +1,62 @@
-import { Input, InputField, Pressable } from '@gluestack-ui/themed'
-import React, { useState } from 'react'
+import {
+  Button,
+  FormControlLabelText,
+  Input,
+  InputField,
+  Pressable,
+  Textarea,
+  TextareaInput,
+} from "@gluestack-ui/themed";
+import React, { useState } from "react";
 
-import { EvilIcons, AntDesign } from '@expo/vector-icons';
+import { EvilIcons, AntDesign, FontAwesome } from "@expo/vector-icons";
+import { FormControlLabel } from "@gluestack-ui/themed";
+import { ButtonText } from "@gluestack-ui/themed";
+import { LOG } from "../../config/logger";
 
 const FilmCommentInput = () => {
+  const [inputText, setInputText] = useState<string>("");
 
-    const [inputText, setInputText] = useState<string>("");
-
-
-    return (
-        <Input
-        bgColor={"$warmGray700"}
-        borderColor="#fff"
-        borderWidth={0.5}
-        borderRadius={"$full"}
-        mx="$2"
-        my="$2"
-        alignItems="center"
-        px={"$2"}
-        
-      >
-        <EvilIcons name="comment" size={30} color="white" />
-        <InputField
+  return (
+    <>
+      <FormControlLabel>
+        <FormControlLabelText>
+          Add your thought about the film
+        </FormControlLabelText>
+      </FormControlLabel>
+      <Textarea bgColor={"#fff"} borderColor="#000" mb="$2">
+        <TextareaInput
           onChangeText={(text: string) => setInputText(text)}
           value={inputText}
-          color="#fff"
-          placeholder="Write your review here.."
-          selectionColor={"#fff"}
-          multiline={true}
+          placeholder="comment..."
+          mr={'$8'}
         />
+
         {inputText.length > 0 && (
-          <Pressable onPress={() => setInputText("")}>
-            <AntDesign name="close" size={25} color={"#fff"} />
+          <Pressable
+            onPress={() => setInputText("")}
+            mr="$2"
+            position="absolute"
+            right={"$0"}
+            top={"$1"}
+          >
+            <AntDesign name="closesquare" size={25} color={"#000"} />
           </Pressable>
         )}
-      </Input>
+      </Textarea>
+      <Button
+        size="sm"
+        variant="solid"
+        action="primary"
+        isDisabled={false}
+        isFocusVisible={false}
+        bgColor="#000"
+      >
+        <ButtonText mr='$2'>Send Comment</ButtonText>
+        <FontAwesome name="send" size={12} color={"#fff"} />
+      </Button>
+    </>
+  );
+};
 
-    )
-}
-
-export default FilmCommentInput
+export default FilmCommentInput;
