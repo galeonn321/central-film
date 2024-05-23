@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get("window");
 const MovieDetailScreen = ({ route }: any) => {
   const { filmItem } = route.params;
   const [isTruncated, setIsTruncated] = useState(true);
-  const roundedNumber = parseFloat(filmItem.item.vote_average.toFixed(1));
+  const roundedNumber = parseFloat(filmItem.vote_average.toFixed(1));
   const Data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77];
   const genresList = [
     { id: 28, name: "Action" },
@@ -48,10 +48,10 @@ const MovieDetailScreen = ({ route }: any) => {
   ];
 
   useEffect(() => {
-    LOG.debug(filmItem.item, "item");
+    LOG.debug(filmItem, "item");
   }, []);
 
-  const genreNames = filmItem.item.genre_ids.map((genreId: any) => {
+  const genreNames = filmItem.genre_ids.map((genreId: any) => {
     const genre = genresList.find((g) => g.id === genreId);
     return genre ? genre.name : null;
   });
@@ -60,16 +60,12 @@ const MovieDetailScreen = ({ route }: any) => {
     setIsTruncated(!isTruncated);
   };
 
-  const renderItem = () => {
-    return <CommentItem />;
-  };
-
   return (
-    <Box backgroundColor="#fff">
+    <Box backgroundColor="#fff" >
       <ImageBackground
         source={{
-          uri: filmItem.item?.poster_path
-            ? `https://image.tmdb.org/t/p/w500${filmItem.item?.poster_path}`
+          uri: filmItem.poster_path
+            ? `https://image.tmdb.org/t/p/w500${filmItem.poster_path}`
             : "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1728&q=80",
         }}
         alt="background image"
@@ -105,16 +101,16 @@ const MovieDetailScreen = ({ route }: any) => {
               fontSize="$2xl"
               maxWidth={width / 1.5}
             >
-              {filmItem.item.title}
+              {filmItem.title}
             </Text>
             <Ionicons name={"bookmark-outline"} size={24} color={"#000"} />
           </HStack>
-          <HStack mt={"$2"} alignItems="center" space="sm" mb={"$2"}>
+          <HStack mt={"$4"} alignItems="center" space="sm" mb={"$2"}>
             <Text bold color="#000">
               ⭐{roundedNumber}/10 IMDB
             </Text>
           </HStack>
-          <HStack mt={"$2"} alignItems="center" space="sm" mb={"$2"}>
+          <HStack mt={"$1"} alignItems="center" space="sm">
             <Text bold color="#000">
               ⭐{roundedNumber}/10 Central Film
             </Text>
@@ -137,7 +133,7 @@ const MovieDetailScreen = ({ route }: any) => {
                 px={"$3"}
                 rounded={"$full"}
               >
-                <Text color="#88A4E8" fontWeight={400} fontSize={"$2xs"}>
+                <Text color="#88A4E8" fontWeight={400} fontSize={"$sm"}>
                   {genre}
                 </Text>
               </Box>
@@ -147,11 +143,11 @@ const MovieDetailScreen = ({ route }: any) => {
           <HStack mt="$4" space="4xl">
             <VStack>
               <Text color="#979797">Main Language</Text>
-              <Text color="#000">{filmItem.item.original_language}</Text>
+              <Text color="#000">{filmItem.original_language}</Text>
             </VStack>
             <VStack>
               <Text color="#979797">Release Date</Text>
-              <Text color="#000">{filmItem.item.release_date}</Text>
+              <Text color="#000">{filmItem.release_date}</Text>
             </VStack>
           </HStack>
 
@@ -164,7 +160,7 @@ const MovieDetailScreen = ({ route }: any) => {
               fontFamily="$heading"
               numberOfLines={isTruncated ? 2 : undefined}
             >
-              {filmItem.item.overview}
+              {filmItem.overview}
             </Text>
             {isTruncated && (
               <Text

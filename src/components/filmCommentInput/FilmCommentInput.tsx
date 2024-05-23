@@ -4,6 +4,7 @@ import {
   Input,
   InputField,
   Pressable,
+  Text,
   Textarea,
   TextareaInput,
 } from "@gluestack-ui/themed";
@@ -24,12 +25,12 @@ const FilmCommentInput = () => {
           Add your thought about the film
         </FormControlLabelText>
       </FormControlLabel>
-      <Textarea bgColor={"#fff"} borderColor="#000" mb="$2">
+      <Textarea bgColor={"#fff"} borderColor="#000">
         <TextareaInput
           onChangeText={(text: string) => setInputText(text)}
           value={inputText}
           placeholder="comment..."
-          mr={'$8'}
+          mr={"$8"}
         />
 
         {inputText.length > 0 && (
@@ -44,17 +45,28 @@ const FilmCommentInput = () => {
           </Pressable>
         )}
       </Textarea>
+      <Text alignSelf="flex-end">{inputText.length}/300</Text>
       <Button
+        mt="$2"
         size="sm"
         variant="solid"
         action="primary"
-        isDisabled={false}
-        isFocusVisible={false}
+        isDisabled={
+          inputText.length < 0 || inputText.length === 301 ? true : false
+        }
+        elevation={"$1"}
         bgColor="#000"
       >
-        <ButtonText mr='$2'>Send Comment</ButtonText>
+        <ButtonText mr="$2">Send Comment</ButtonText>
         <FontAwesome name="send" size={12} color={"#fff"} />
       </Button>
+      {inputText.length < 0 || inputText.length === 301 ? (
+        <Text fontSize="$xs" color="red">
+          Cannot write comments longer that 300
+        </Text>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

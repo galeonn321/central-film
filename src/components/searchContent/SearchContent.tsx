@@ -19,7 +19,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Dimensions, View } from "react-native";
 import { Movie } from "../../types/movieInterface";
 import { AntDesign } from "@expo/vector-icons";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { createMovie } from "../../helpers/addHelpers";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -45,15 +46,31 @@ const SearchContent = () => {
     movieSearch();
   }, [inputText]);
 
-  // useEffect(() => {
-  //   // if (searchResults.length > 2) {
-  //   //     LOG.debug(searchResults.length)
-  //   // } else {
-  //   //     LOG.info(searchResults.length)
-  //   // }
-  //   // LOG.error(searchResults.length)
-  //   // LOG.error(inputText);
-  // }, [inputText]);
+  const verifyMovieExists = async (filmItem: Movie) => {
+    try {
+      const findMovie = new Promise((resolve, reject) => {
+        createMovie(filmItem)
+          .then((result) => {
+            resolve(result);
+          })
+          .catch((error: any) => {
+            LOG.info("entre al primer catch de error wtf", error);
+            setIsLoading(false);
+            reject(error);
+          });
+      });
+
+      findMovie.then((result: any) => {
+        if (result.ok) {
+          LOG.debug("resultado esta ok", result, filmItem);
+
+          navigation.navigate("DetailMovie", { filmItem: filmItem });
+        }
+      });
+    } catch (error) {
+      LOG.error(error);
+    }
+  };
 
   const renderItem = (item: any, index: any) => {
     const uri = item.item?.poster_path
@@ -61,13 +78,7 @@ const SearchContent = () => {
       : "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1728&q=80";
 
     return (
-      <Pressable
-        onPress={() =>
-          navigation.navigate("DetailMovie", {
-            filmItem: item,
-          })
-        }
-      >
+      <Pressable onPress={() => verifyMovieExists(item.item)}>
         <Image
           height={300}
           size={"2xl"}
@@ -121,7 +132,6 @@ const SearchContent = () => {
         px={"$2"}
       >
         <AntDesign name="search1" size={20} color="white" />
-
         <InputField
           onChangeText={(text: string) => setInputText(text)}
           value={inputText}

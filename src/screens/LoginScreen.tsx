@@ -10,8 +10,7 @@ import {
   Input,
   InputField,
   Pressable,
-  Text,
-  set,
+  Text
 } from "@gluestack-ui/themed";
 import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
@@ -94,7 +93,7 @@ const LoginScreen = () => {
                   //  user: result.data
                 })
               );
-            }, 3000);
+            }, 2000);
           } else {
             LOG.info("No sirvio result error:", result.message);
             setMessage(result.message);

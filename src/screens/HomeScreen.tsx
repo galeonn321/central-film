@@ -23,10 +23,8 @@ const HomeScreen = () => {
     >
       <Box>
         <Box alignSelf="center">
-          
         </Box>
         <SearchContent />
-        <Text>queso</Text>
       </Box>
     </ScrollView>
   );
