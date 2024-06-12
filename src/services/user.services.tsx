@@ -6,8 +6,6 @@ export const setTokenToUser = async (token: string) => {
   try {
     const jsonToken = JSON.stringify(token);
     await AsyncStorage.setItem(TOKEN_KEY, jsonToken);
-
-    LOG.debug(token, "Token stored successfully");
   } catch (error) {
     LOG.error(`Error in setTokenToUser, error: ${error}`);
   }

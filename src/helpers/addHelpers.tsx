@@ -7,7 +7,6 @@ const API_URL_RATE_MOVIE = "http://192.168.1.180:3000/api/movies/rateMovie";
 
 export const createMovie = async (movie: Movie) => {
   try {
-    LOG.debug("entro correctamente al createMovie", movie);
     const resp: any = await fetch(API_URL_CREATE_MOVIE, {
       method: "POST",
       headers: {
@@ -18,7 +17,6 @@ export const createMovie = async (movie: Movie) => {
 
     const data: any = await resp.json();
 
-    LOG.error(data)
     return data;
   } catch (error) {
     LOG.error(`Error in registerUser: ${error}`);

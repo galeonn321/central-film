@@ -47,10 +47,6 @@ const MovieDetailScreen = ({ route }: any) => {
     { id: 37, name: "Western" },
   ];
 
-  useEffect(() => {
-    LOG.debug(filmItem, "item");
-  }, []);
-
   const genreNames = filmItem.genre_ids.map((genreId: any) => {
     const genre = genresList.find((g) => g.id === genreId);
     return genre ? genre.name : null;

@@ -1,16 +1,9 @@
-import { SafeAreaView, ScrollView } from "react-native";
-import React, { useEffect } from "react";
+import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import PlayingNowComponent from "../components/carouselComponent/CarouselComponent";
-import { LOG } from "../config/logger";
 import SearchContent from "../components/searchContent/SearchContent";
-import { Image, Box, Button, ButtonText } from "@gluestack-ui/themed";
+import { Box } from "@gluestack-ui/themed";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { AntDesign } from '@expo/vector-icons';
-import { Text } from "@gluestack-ui/themed";
-import { getTokenFromUser } from "../services/user.services";
-// import LottieView from "lottie-react-native";
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
